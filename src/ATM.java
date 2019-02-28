@@ -1,5 +1,6 @@
 public class ATM {
    private boolean userAuthenticated; // whether user is authenticated
+   private boolean adminAuthenticated;//whether user is admin
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
    private Keypad keypad; // ATM's keypad
@@ -16,6 +17,7 @@ public class ATM {
    // no-argument ATM constructor initializes instance variables
    public ATM() {
       userAuthenticated = false; // user is not authenticated to start
+      adminAuthenticated = false; // user is not admin to start
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad 
@@ -48,6 +50,8 @@ public class ATM {
       int pin = keypad.getInput(); // input PIN
       
       // set userAuthenticated to boolean value returned by database
+      adminAuthenticated = 
+         bankDatabase.authenticateAdmin(accountNumber, pin);
       userAuthenticated = 
          bankDatabase.authenticateUser(accountNumber, pin);
       
