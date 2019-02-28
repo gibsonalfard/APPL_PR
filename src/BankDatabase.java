@@ -57,5 +57,13 @@ public class BankDatabase {
 
    public void debit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).debit(amount);
-   } 
+   }
+   
+   public void changeAccountPIN(int userAccountNumber, int curPIN, int newPIN){
+       if(authenticateUser(userAccountNumber, curPIN)){
+           getAccount(userAccountNumber).changePIN(newPIN);
+       }else{
+           System.out.println("Sorry, Can't Change PIN");
+       }
+   }
 } 

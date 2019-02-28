@@ -45,4 +45,8 @@ public class Account {
    public int getAccountNumber() {
       return accountNumber;  
    }
+   
+   public void changePIN(int thePIN){
+       this.pin = thePIN;
+   }
 } 
