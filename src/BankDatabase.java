@@ -4,7 +4,7 @@ public class BankDatabase {
    public BankDatabase() {
       accounts = new Account[2]; // just 2 accounts for testing
       accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
-      accounts[1] = new Account(8765, 5678, 200.0, 200.0);  
+      accounts[1] = new Account(8765, 5678, 200.0, 200.0); 
    }
    
    private Account getAccount(int accountNumber) {
@@ -43,5 +43,13 @@ public class BankDatabase {
 
    public void debit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).debit(amount);
-   } 
+   }
+   
+   public void changeAccountPIN(int userAccountNumber, int curPIN, int newPIN){
+       if(authenticateUser(userAccountNumber, curPIN)){
+           getAccount(userAccountNumber).changePIN(newPIN);
+       }else{
+           System.out.println("Sorry, Can't Change PIN");
+       }
+   }
 } 
