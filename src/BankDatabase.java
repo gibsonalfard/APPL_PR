@@ -35,13 +35,22 @@ public class BankDatabase {
       Admin userAccount = getAccount(userAccountNumber);
 
 //      if account exists, return result of Account method validatePIN
-      if (userAccount != null) {
+      if (userAccount != null && !userAccount.isUserBlocked()) {
          return userAccount.validatePIN(userPIN);
       }
       else {
          return false; // account number not found, so return false
       }
    } 
+   
+   public boolean seekAccountNumber(int accountNumber){
+       for(Account ak : accounts){
+          if(accountNumber == ak.getAccountNumber()){
+              return true;
+          }
+      }
+      return false;
+}
 
    public double getAvailableBalance(int userAccountNumber) {
       return getAccount(userAccountNumber).getAvailableBalance();
@@ -50,6 +59,10 @@ public class BankDatabase {
    public double getTotalBalance(int userAccountNumber) {
       return getAccount(userAccountNumber).getTotalBalance();
    } 
+
+   public void transfer(int userAccountNumber, double amount){
+       getAccount(userAccountNumber).transfer(amount);
+}
 
    public void credit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).credit(amount);
@@ -65,5 +78,24 @@ public class BankDatabase {
        }else{
            System.out.println("Sorry, Can't Change PIN");
        }
+   } 
+   
+   public void blockAccount(int userAccountNumber){
+      getAccount(userAccountNumber).blockUser();
+   }
+   
+   public void unblockAccount(int userAccountNumber){
+      getAccount(userAccountNumber).unblockUser();
+   }
+   
+   public boolean isAccountBlocked(int userAccountNumber){
+       if(getAccount(userAccountNumber) != null) 
+           return getAccount(userAccountNumber).isUserBlocked();
+       else 
+           return false;
+   }
+   
+   public boolean isUserExist(int userAccountNumber){
+       return getAccount(userAccountNumber) != null;
    }
 } 

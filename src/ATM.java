@@ -7,6 +7,7 @@ public class ATM {
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private DepositSlot depositSlot;
    private BankDatabase bankDatabase; // account information database
+   private int loginAttempt = 0;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -35,21 +36,28 @@ public class ATM {
    // start ATM 
    public void run() {
       // welcome and authenticate user; perform transactions
-      while (true) {
+      while (true) {        
+         screen.displayMessageLine("\nWelcome!"); 
          // loop while user is not yet authenticated
-         while (!userAuthenticated) {
-            screen.displayMessageLine("\nWelcome!");       
+         while (!userAuthenticated && loginAttempt<3) {      
             authenticateUser(); // authenticate user
-         }
+         }           
          
          if(adminAuthenticated){
              performAdmins();
          }else{
-             performTransactions(); // user is now authenticated
+            if(loginAttempt == 3){
+            screen.displayMessageLine("Your account has been blocked, please contact the bank");
+            bankDatabase.blockAccount(currentAccountNumber); //blokir acconut
+         } else {
+            performTransactions(); // user is now authenticated
+            userAuthenticated = false; // reset before next ATM session
+         }
+         currentAccountNumber = 0; // reset before next ATM session
          }
          userAuthenticated = false; // reset before next ATM session
-         currentAccountNumber = 0; // reset before next ATM session
          screen.displayMessageLine("\nThank you! Goodbye!");
+         loginAttempt = 0;
       }
    }
 
@@ -60,6 +68,8 @@ public class ATM {
       screen.displayMessage("\nEnter your PIN: "); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
       
+      currentAccountNumber = accountNumber;
+      
       // set userAuthenticated to boolean value returned by database
       adminAuthenticated = 
          bankDatabase.authenticateAdmin(accountNumber, pin);
@@ -69,12 +79,25 @@ public class ATM {
       // check whether authentication succeeded
       if (userAuthenticated) {
          currentAccountNumber = accountNumber; // save user's account #
-      } 
-      else {
+         loginAttempt = 0;
+      } else if(bankDatabase.isAccountBlocked(accountNumber) && !isAdmin(accountNumber)){
+         screen.displayMessageLine("Your Account has been blocked, please contact the bank.");
+      } else if(!bankDatabase.isUserExist(accountNumber) && !isAdmin(accountNumber)){
+          screen.displayMessageLine("Invalid user Account Number");
+          loginAttempt = 0;
+      } else if(!isAdmin(accountNumber)){
+          if(loginAttempt<2 && !isAdmin(accountNumber))
          screen.displayMessageLine(
-            "Invalid account number or PIN. Please try again.");
-      } 
+            "Invalid PIN. Please try again. You have " + (2-loginAttempt) + " attempt(s) remaining.");
+         loginAttempt++;
+      } else if(isAdmin(accountNumber)){
+          screen.displayMessageLine("Invalid PIN");
+      }
    } 
+   
+   private boolean isAdmin(int adminAccountNumber){
+       return adminAccountNumber == 0;
+   }
 
    // display the main menu and perform transactions
    private void performTransactions() {
@@ -138,7 +161,6 @@ public class ATM {
          switch (mainMenuSelection) {
             // user chose to perform one of three transaction types
             case ADD_NASABAH:         
-            case UNBLOCK:
             case VALIDATE:
                // initialize as new object of chosen type
                currentTransaction = 
@@ -146,6 +168,7 @@ public class ATM {
 
                currentTransaction.execute(); // execute transaction
                break;
+            case UNBLOCK: cashDispenser.showUnblockMenu(keypad, bankDatabase, screen); break;
             case MONEY_DISPEN:
                 cashDispenser.showCashDispenser();
                 break;
@@ -200,7 +223,7 @@ public class ATM {
              temp = new Deposit(currentAccountNumber, screen, bankDatabase, keypad, depositSlot);
              break;
          case TRANSFER:
-             
+             temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
              break;
       }
 
