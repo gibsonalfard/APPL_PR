@@ -140,13 +140,15 @@ public class ATM {
             case ADD_NASABAH:         
             case UNBLOCK:
             case VALIDATE:
-            case MONEY_DISPEN:
                // initialize as new object of chosen type
                currentTransaction = 
                   createTransaction(mainMenuSelection);
 
                currentTransaction.execute(); // execute transaction
                break;
+            case MONEY_DISPEN:
+                cashDispenser.showCashDispenser();
+                break;
             case EXIT: // user chose to terminate session
                screen.displayMessageLine("\nExiting the system...");
                userExited = true; // this ATM session should end

@@ -25,4 +25,8 @@ public class CashDispenser {
          return false; // not enough bills available
       }
    }
+   
+   public void showCashDispenser(){
+       System.out.println("Money in Dispenser is : $"+(this.count*20)+".\n");
+   }
 } 
