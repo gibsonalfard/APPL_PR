@@ -42,6 +42,15 @@ public class BankDatabase {
          return false; // account number not found, so return false
       }
    } 
+   
+   public boolean seekAccountNumber(int accountNumber){
+       for(Account ak : accounts){
+          if(accountNumber == ak.getAccountNumber()){
+              return true;
+          }
+      }
+      return false;
+}
 
    public double getAvailableBalance(int userAccountNumber) {
       return getAccount(userAccountNumber).getAvailableBalance();
@@ -50,6 +59,10 @@ public class BankDatabase {
    public double getTotalBalance(int userAccountNumber) {
       return getAccount(userAccountNumber).getTotalBalance();
    } 
+
+   public void transfer(int userAccountNumber, double amount){
+       getAccount(userAccountNumber).transfer(amount);
+}
 
    public void credit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).credit(amount);

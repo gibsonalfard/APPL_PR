@@ -31,8 +31,13 @@ public class Account {
    // returns the total balance
    public double getTotalBalance() {
       return totalBalance;
-   } 
-
+   }
+   
+   public void transfer(double amount){
+       this.availableBalance += amount;
+       this.totalBalance += amount;
+}
+   
    public void credit(double amount) {
        this.availableBalance -= amount;
        this.totalBalance -= amount;
