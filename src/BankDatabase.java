@@ -64,5 +64,24 @@ public class BankDatabase {
        }else{
            System.out.println("Sorry, Can't Change PIN");
        }
+   } 
+   
+   public void blockAccount(int userAccountNumber){
+      getAccount(userAccountNumber).blockUser();
+   }
+   
+   public void unblockAccount(int userAccountNumber){
+      getAccount(userAccountNumber).unblockUser();
+   }
+   
+   public boolean isAccountBlocked(int userAccountNumber){
+       if(getAccount(userAccountNumber) != null) 
+           return getAccount(userAccountNumber).isUserBlocked();
+       else 
+           return false;
+   }
+   
+   public boolean isUserExist(int userAccountNumber){
+       return getAccount(userAccountNumber) != null;
    }
 } 
