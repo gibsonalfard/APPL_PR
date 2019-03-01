@@ -1,24 +1,38 @@
 public class BankDatabase {
-   private Account[] accounts; // array of Accounts
+   private Admin[] accounts; // array of Accounts
    
    public BankDatabase() {
-      accounts = new Account[2]; // just 2 accounts for testing
-      accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
-      accounts[1] = new Account(8765, 5678, 200.0, 200.0); 
+      accounts = new Admin[3]; // just 2 accounts for testing
+      accounts[0] = new Admin(1234, 4321, 1000.0, 1200.0, false);
+      accounts[1] = new Admin(8765, 5678, 200.0, 200.0, false); 
+      accounts[2] = new Admin(00000, 00000, 200.0, 200.0, true);
    }
    
-   private Account getAccount(int accountNumber) {
-      for(Account ak : accounts){
+   private Admin getAccount(int accountNumber) {
+      for(Admin ak : accounts){
           if(accountNumber == ak.getAccountNumber()){
               return ak;
           }
       }
       return null;
    } 
+   
+   public boolean authenticateAdmin(int userAccountNumber, int userPIN) {
+      // attempt to retrieve the account with the account number
+      Admin userAccount = getAccount(userAccountNumber);
 
+//      if account exists, return result of Account method validatePIN
+      if (userAccount != null) {
+         return (userAccount.validatePIN(userPIN) && userAccount.isAdmin() );
+      }
+      else {
+         return false; // account number not found, so return false
+      }
+   } 
+   
    public boolean authenticateUser(int userAccountNumber, int userPIN) {
       // attempt to retrieve the account with the account number
-      Account userAccount = getAccount(userAccountNumber);
+      Admin userAccount = getAccount(userAccountNumber);
 
 //      if account exists, return result of Account method validatePIN
       if (userAccount != null) {
