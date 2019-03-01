@@ -31,6 +31,7 @@ public class Withdrawal extends Transaction {
            System.out.println("Canceling transaction...");
        }else{
            bankDatabase.credit(super.getAccountNumber(), amount);
+           cashDispenser.dispenseCash(amount);
            System.out.println("Your cash has been dispensed. Please take your cash now.");
        }
    } 
