@@ -94,7 +94,7 @@ public class Transfer extends Transaction{
         if (bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
             bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
             bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
-            screen.displayMessage("\nDone...\n");
+            screen.displayMessage("\nDone!\n");
         }else{
             screen.displayMessage("\n The amount you transfer is more than your available balance");
             screen.displayMessage("\nCanceling Transfer.....\n");
