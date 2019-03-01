@@ -21,7 +21,7 @@ public class AddNasabah extends Transaction {
     @Override
     public void execute() {
         boolean Admin = false, accAvail = false;
-        double theTotalBalance, theAvailableBalance;
+        double theTotalBalance = 0, theAvailableBalance = 0;
         int theAccountNumber;
         // get references to bank database and screen
         BankDatabase bankDatabase = getBankDatabase();
@@ -46,7 +46,7 @@ public class AddNasabah extends Transaction {
             screen.displayMessage("\nPlease input new user account number : ");
             theAccountNumber = keypad.getInput();
             boolean avail = bankDatabase.checkAvail(theAccountNumber);
-            if (!avail) {
+            if (avail) {
                 accAvail = true;
             } else {
                 screen.displayMessageLine("\nFailed! Account number is already in use.");
@@ -56,13 +56,15 @@ public class AddNasabah extends Transaction {
         screen.displayMessage("\nPlease input new user pin : ");
         int thePIN = keypad.getInput();
         
-        do {
-            screen.displayMessageLine("\nPlease input new user starting balance : ");
-            theTotalBalance = theAvailableBalance = keypad.getInput();
-            if (theTotalBalance<0) {
-                screen.displayMessageLine("\nStarting balance cannot be negative!");
-            }
-        } while (theTotalBalance >= 0);        
+        if (!Admin) {
+            do {
+                screen.displayMessageLine("\nPlease input new user starting balance : ");
+                theTotalBalance = theAvailableBalance = keypad.getInput();
+                if (theTotalBalance<0) {
+                    screen.displayMessageLine("\nStarting balance cannot be negative!");
+                }
+            } while (theTotalBalance < 0);       
+        }
         
         bankDatabase.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, Admin);
     }
