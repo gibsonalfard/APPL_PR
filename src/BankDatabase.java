@@ -15,6 +15,15 @@ public class BankDatabase {
       }
       return null;
    } 
+   
+   public boolean seekAccountNumber(int accountNumber){
+       for(Account ak : accounts){
+          if(accountNumber == ak.getAccountNumber()){
+              return true;
+          }
+      }
+      return false;
+   }
 
    public boolean authenticateUser(int userAccountNumber, int userPIN) {
       // attempt to retrieve the account with the account number
@@ -36,7 +45,9 @@ public class BankDatabase {
    public double getTotalBalance(int userAccountNumber) {
       return getAccount(userAccountNumber).getTotalBalance();
    } 
-
+   public void transfer(int userAccountNumber, double amount){
+       getAccount(userAccountNumber).transfer(amount);
+   }
    public void credit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).credit(amount);
    }

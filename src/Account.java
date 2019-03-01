@@ -37,6 +37,10 @@ public class Account {
        this.availableBalance -= amount;
        this.totalBalance -= amount;
    }
+   public void transfer(double amount){
+       this.availableBalance += amount;
+       this.totalBalance += amount;
+   }
 
    public void debit(double amount) {
        this.totalBalance += amount;
