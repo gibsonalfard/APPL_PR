@@ -48,6 +48,10 @@ public class Account {
       return accountNumber;  
    }
    
+   public void changePIN(int thePIN){
+       this.pin = thePIN;
+   }
+   
    public void blockUser(){
        this.isBlocked = true;
    }
