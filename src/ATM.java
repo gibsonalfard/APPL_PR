@@ -138,7 +138,10 @@ public class ATM {
          // decide how to proceed based on user's menu selection
          switch (mainMenuSelection) {
             // user chose to perform one of three transaction types
-            case ADD_NASABAH:         
+            case ADD_NASABAH:   
+                currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);
+                currentTransaction.execute();
+                break;
             case UNBLOCK:
             case VALIDATE:
                // initialize as new object of chosen type
