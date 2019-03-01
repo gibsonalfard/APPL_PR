@@ -116,7 +116,7 @@ public class ATM {
       screen.displayMessageLine("2 - Withdraw cash");
       screen.displayMessageLine("3 - Deposit funds");
       screen.displayMessageLine("4 - Transfer");
-      screen.displayMessageLine("5 - Change Password");
+      screen.displayMessageLine("5 - Change PIN");
       screen.displayMessageLine("0 - Exit\n");
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
