@@ -28,7 +28,7 @@ public class ATM {
       adminAuthenticated = false; // user is not admin to start
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
-      keypad = new Keypad(); // create keypad 
+      keypad = new Keypad(); // create keypad
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
    }
@@ -80,6 +80,7 @@ public class ATM {
       if (userAuthenticated) {
          currentAccountNumber = accountNumber; // save user's account #
          loginAttempt = 0;
+         depositSlot = new DepositSlot(currentAccountNumber, 0, false);
       } else if(bankDatabase.isAccountBlocked(accountNumber) && !isAdmin(accountNumber)){
          screen.displayMessageLine("Your Account has been blocked, please contact the bank.");
       } else if(!bankDatabase.isUserExist(accountNumber) && !isAdmin(accountNumber)){
@@ -87,11 +88,14 @@ public class ATM {
           loginAttempt = 0;
       } else if(!isAdmin(accountNumber)){
           if(loginAttempt<2 && !isAdmin(accountNumber))
+         depositSlot = new DepositSlot(currentAccountNumber, 0, false);
+      }  else if(isAdmin(accountNumber)){
+          screen.displayMessageLine("Invalid PIN");
+      }
+      else {
          screen.displayMessageLine(
             "Invalid PIN. Please try again. You have " + (2-loginAttempt) + " attempt(s) remaining.");
          loginAttempt++;
-      } else if(isAdmin(accountNumber)){
-          screen.displayMessageLine("Invalid PIN");
       }
    } 
    
