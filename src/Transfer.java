@@ -21,27 +21,39 @@ public class Transfer extends Transaction{
         Screen screen = getScreen(); // get reference to screen
   
         processTransfer = 1;
+        accountTrans = 1;
         amount = 1;
-        while(amount!=0){
+        while(amount!=0 && accountTrans!=0){
             accountTrans = getAccountForTransfer();
             amount = getAmountForTransfer();
-            if(bankDatabase.seekAccountNumber(accountTrans)){
+            if(bankDatabase.seekAccountNumber(accountTrans) && amount!=0 && super.getAccountNumber() != accountTrans){
                 screen.displayMessage("\nAccount number : "+accountTrans);
                 screen.displayMessage("\nAmount : "+amount);
                 screen.displayMessage("\n\nProcess the transfer " + "(1 for yes, 0 for no) : ");
                 processTransfer = keypad.getInput(); 
                 if (processTransfer==1){
-                    screen.displayMessage("\nProcessing Transfer......");
+                    screen.displayMessage("\nProcessing Transfer......\n");
                     promptTransfer(accountTrans,amount);
-                    amount=0;//for cancelling the transfer
+                    amount = 0;//for cancelling the transfer
                 }else{
-                    screen.displayMessage("\nCanceling Transfer.....");
-                    amount=0; //for canceling the transfer
+                    screen.displayMessage("\nCanceling Transfer.....\n");
+                    amount = 0; //for canceling the transfer
                 }
             }else {
-                screen.displayMessage("\nSorry we can't find the account number");
-                screen.displayMessage("Canceling Transfer.....");
-                amount = 0; //for canceling the transfer
+                if (super.getAccountNumber() == accountTrans){
+                    screen.displayMessage("\nYou can't transfer to yourself!");
+                    screen.displayMessage("\nCanceling Transfer.....\n");
+                    amount = 0; //for canceling the transfer
+                }else{
+                    if(amount != 0){
+                        screen.displayMessage("\nSorry we can't find the account number");
+                        screen.displayMessage("\nCanceling Transfer.....\n");
+                        amount = 0; //for canceling the transfer
+                    }else{
+                        screen.displayMessage("\nCanceling Transfer.....\n");
+                        amount = 0; //for canceling the transfer
+                    }
+                }
             }
         }
     }
