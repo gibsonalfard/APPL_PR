@@ -37,6 +37,10 @@ public class BankDatabase {
       return getAccount(userAccountNumber).getTotalBalance();
    } 
 
+   public void transfer(int userAccountNumber, double amount){
+       getAccount(userAccountNumber).transfer(amount);
+}
+
    public void credit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).credit(amount);
    }

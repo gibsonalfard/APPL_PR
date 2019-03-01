@@ -137,7 +137,7 @@ public class ATM {
              temp = new Deposit(currentAccountNumber, screen, bankDatabase, keypad, depositSlot);
              break;
          case TRANSFER:
-             
+    
              break;
       }
 
