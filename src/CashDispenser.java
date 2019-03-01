@@ -30,11 +30,5 @@ public class CashDispenser {
        System.out.println("Money in Dispenser is : $"+(this.count*20)+".\n");
    }
    
-   public void showUnblockMenu(Keypad keypad, BankDatabase bankDatabase, Screen screen){
-       screen.displayMessage("Insert account number to unblock : ");
-       int accNum = keypad.getInput();
-       
-       bankDatabase.unblockAccount(accNum);
-       screen.displayMessageLine("Account number "+accNum+" has been ublocked");
-   }
+   
 } 
