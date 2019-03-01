@@ -1,8 +1,10 @@
 public class Deposit extends Transaction {
    private double amount; // amount to deposit
    private Keypad keypad; // reference to keypad
-   private DepositSlot depositSlot; // reference to deposit slot
+   private static DepositSlot[] depositSlot; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
+   
+   private int numberOfDeposit;
 
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 
@@ -12,8 +14,9 @@ public class Deposit extends Transaction {
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
       
+      numberOfDeposit = depositSlot.length + 1;
       keypad = atmKeypad;
-      depositSlot = atmDepositSlot;
+      depositSlot[numberOfDeposit] = atmDepositSlot;
    } 
 
    // perform transaction
@@ -32,6 +35,7 @@ public class Deposit extends Transaction {
                                  "until we verify the amount of any enclosed cash and your checks clear.\n");
             
             bankDatabase.debit(super.getAccountNumber(), amount);
+            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
        }
    }
 

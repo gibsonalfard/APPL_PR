@@ -15,6 +15,11 @@ public class ATM {
    private static final int TRANSFER = 4;
    private static final int PASSWORD = 5;
    private static final int EXIT = 0;
+   
+   private static final int ADD_NASABAH = 1;
+   private static final int UNBLOCK = 2;
+   private static final int VALIDATE = 3;
+   private static final int MONEY_DISPEN = 4;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
@@ -37,7 +42,11 @@ public class ATM {
             authenticateUser(); // authenticate user
          }
          
-         performTransactions(); // user is now authenticated
+         if(adminAuthenticated){
+             performAdmins();
+         }else{
+             performTransactions(); // user is now authenticated
+         }
          userAuthenticated = false; // reset before next ATM session
          adminAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
@@ -112,7 +121,46 @@ public class ATM {
                break;
          }
       } 
-   } 
+   }
+   
+   // display the main menu and perform transactions
+   private void performAdmins() {
+      // local variable to store transaction currently being processed
+      Transaction currentTransaction = null;
+      
+      boolean userExited = false; // user has not chosen to exit
+
+      // loop while user has not chosen option to exit system
+      while (!userExited) {
+         // show main menu and get user selection
+         int mainMenuSelection = displayAdminMenu();
+
+         // decide how to proceed based on user's menu selection
+         switch (mainMenuSelection) {
+            // user chose to perform one of three transaction types
+            case ADD_NASABAH:         
+            case UNBLOCK:
+            case VALIDATE:
+               // initialize as new object of chosen type
+               currentTransaction = 
+                  createTransaction(mainMenuSelection);
+
+               currentTransaction.execute(); // execute transaction
+               break;
+            case MONEY_DISPEN:
+                cashDispenser.showCashDispenser();
+                break;
+            case EXIT: // user chose to terminate session
+               screen.displayMessageLine("\nExiting the system...");
+               userExited = true; // this ATM session should end
+               break;
+            default: // 
+               screen.displayMessageLine(
+                  "\nYou did not enter a valid selection. Try again.");
+               break;
+         }
+      } 
+   }
 
    // display the main menu and return an input selection
    private int displayMainMenu() {
@@ -121,11 +169,22 @@ public class ATM {
       screen.displayMessageLine("2 - Withdraw cash");
       screen.displayMessageLine("3 - Deposit funds");
       screen.displayMessageLine("4 - Transfer");
-      screen.displayMessageLine("5 - Change Password");
+      screen.displayMessageLine("5 - Change PIN");
       screen.displayMessageLine("0 - Exit\n");
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
-   } 
+   }
+   
+   private int displayAdminMenu() {
+      screen.displayMessageLine("\nAdmin menu:");
+      screen.displayMessageLine("1 - Add Nasabah");
+      screen.displayMessageLine("2 - Unblock Nasabah");
+      screen.displayMessageLine("3 - Validate Deposit");
+      screen.displayMessageLine("4 - See Money Dispenser");
+      screen.displayMessageLine("0 - Exit\n");
+      screen.displayMessage("Enter a choice: ");
+      return keypad.getInput(); // return user's selection
+   }
          
    private Transaction createTransaction(int type) {
       Transaction temp = null; 
