@@ -69,7 +69,7 @@ public class ATM {
       } else if(!bankDatabase.isUserExist(accountNumber)){
           screen.displayMessageLine("Invalid user Account Number");
           loginAttempt = 0;
-      } else if(loginAttempt!=2){
+      } else{
          screen.displayMessageLine(
             "Invalid PIN. Please try again. You have " + (2-loginAttempt) + " attempt(s) remaining.");
          loginAttempt++;
