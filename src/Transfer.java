@@ -91,7 +91,7 @@ public class Transfer extends Transaction{
         BankDatabase bankDatabase = getBankDatabase();
         Screen screen = getScreen(); // get reference to screen
         
-        if (bankDatabase.getAvailableBalance(super.getAccountNumber())<=amount){
+        if (bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
             bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
             bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
             screen.displayMessage("\nDone...\n");
