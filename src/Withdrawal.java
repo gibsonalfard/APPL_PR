@@ -31,10 +31,12 @@ public class Withdrawal extends Transaction {
            System.out.println("Canceling transaction...");
        }else{
            if(cashDispenser.isSufficientCashAvailable(amount) && 
-             (bankDatabase.getAvailableBalance(super.getAccountNumber()) > amount)){
+             (bankDatabase.getAvailableBalance(super.getAccountNumber()) >= amount)){
                 bankDatabase.credit(super.getAccountNumber(), amount);
                 cashDispenser.dispenseCash(amount);
                 System.out.println("Your cash has been dispensed. Please take your cash now.");
+           }else{
+               System.out.println("Sorry, Cash Dispenser is Empty or Your Balace not sufficient\n");
            }
        }
    } 
