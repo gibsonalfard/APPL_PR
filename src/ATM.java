@@ -27,7 +27,7 @@ public class ATM {
       adminAuthenticated = false; // user is not admin to start
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
-      keypad = new Keypad(); // create keypad 
+      keypad = new Keypad(); // create keypad
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
    }
@@ -69,6 +69,7 @@ public class ATM {
       // check whether authentication succeeded
       if (userAuthenticated) {
          currentAccountNumber = accountNumber; // save user's account #
+         depositSlot = new DepositSlot(currentAccountNumber, 0, false);
       } 
       else {
          screen.displayMessageLine(
