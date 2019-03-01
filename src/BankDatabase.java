@@ -21,7 +21,7 @@ public class BankDatabase {
       Account userAccount = getAccount(userAccountNumber);
 
 //      if account exists, return result of Account method validatePIN
-      if (userAccount != null) {
+      if (userAccount != null && !userAccount.isUserBlocked()) {
          return userAccount.validatePIN(userPIN);
       }
       else {
@@ -44,4 +44,23 @@ public class BankDatabase {
    public void debit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).debit(amount);
    } 
+   
+   public void blockAccount(int userAccountNumber){
+      getAccount(userAccountNumber).blockUser();
+   }
+   
+   public void unblockAccount(int userAccountNumber){
+      getAccount(userAccountNumber).unblockUser();
+   }
+   
+   public boolean isAccountBlocked(int userAccountNumber){
+       if(getAccount(userAccountNumber) != null) 
+           return getAccount(userAccountNumber).isUserBlocked();
+       else 
+           return false;
+   }
+   
+   public boolean isUserExist(int userAccountNumber){
+       return getAccount(userAccountNumber) != null;
+   }
 } 
