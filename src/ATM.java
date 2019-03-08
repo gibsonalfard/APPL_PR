@@ -48,6 +48,7 @@ public class ATM {
              performTransactions(); // user is now authenticated
          }
          userAuthenticated = false; // reset before next ATM session
+         adminAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
          screen.displayMessageLine("\nThank you! Goodbye!");
       }
@@ -137,16 +138,21 @@ public class ATM {
          // decide how to proceed based on user's menu selection
          switch (mainMenuSelection) {
             // user chose to perform one of three transaction types
-            case ADD_NASABAH:         
+            case ADD_NASABAH:   
+                currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);
+                currentTransaction.execute();
+                break;
             case UNBLOCK:
             case VALIDATE:
-            case MONEY_DISPEN:
                // initialize as new object of chosen type
                currentTransaction = 
                   createTransaction(mainMenuSelection);
 
                currentTransaction.execute(); // execute transaction
                break;
+            case MONEY_DISPEN:
+                cashDispenser.showCashDispenser();
+                break;
             case EXIT: // user chose to terminate session
                screen.displayMessageLine("\nExiting the system...");
                userExited = true; // this ATM session should end

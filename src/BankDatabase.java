@@ -1,21 +1,34 @@
 public class BankDatabase {
    private Admin[] accounts; // array of Accounts
+   private int accAmount;
    
    public BankDatabase() {
-      accounts = new Admin[3]; // just 2 accounts for testing
+      accAmount = 3;
+      accounts = new Admin[100]; // just 2 accounts for testing
       accounts[0] = new Admin(1234, 4321, 1000.0, 1200.0, false);
       accounts[1] = new Admin(8765, 5678, 200.0, 200.0, false); 
-      accounts[2] = new Admin(00000, 00000, 200.0, 200.0, true);
+      accounts[2] = new Admin(00000, 00000, 200.0, 200.0, true); 
    }
    
    private Admin getAccount(int accountNumber) {
-      for(Admin ak : accounts){
-          if(accountNumber == ak.getAccountNumber()){
-              return ak;
+      int ak;
+      for(ak=0; ak<accAmount; ak++){
+          if(accountNumber == accounts[ak].getAccountNumber()){
+              return accounts[ak];
           }
       }
       return null;
    } 
+   
+   public boolean checkAvail(int accountNumber) {
+       int ak;
+      for(ak=0; ak<accAmount; ak++){
+          if(accountNumber == accounts[ak].getAccountNumber()){
+              return false;
+          }
+      }
+      return true;
+   }
    
    public boolean authenticateAdmin(int userAccountNumber, int userPIN) {
       // attempt to retrieve the account with the account number
@@ -78,5 +91,10 @@ public class BankDatabase {
        }else{
            System.out.println("Sorry, Can't Change PIN");
        }
+   }
+   
+   public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance, boolean Admin) {
+       accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, Admin);
+       accAmount++;
    }
 } 
