@@ -65,8 +65,4 @@ public class AccountTest {
          
          assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
      }
-     
-     public static void main (String [] args){
-         LoginAccount();
-     }
 }

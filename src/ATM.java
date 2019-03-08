@@ -1,3 +1,8 @@
+
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ATM {
    private boolean userAuthenticated; // whether user is authenticated
    private boolean adminAuthenticated;//whether user is admin
@@ -23,13 +28,13 @@ public class ATM {
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
-      userAuthenticated = false; // user is not authenticated to start
-      adminAuthenticated = false; // user is not admin to start
-      currentAccountNumber = 0; // no current account number to start
-      screen = new Screen(); // create screen
-      keypad = new Keypad(); // create keypad 
-      cashDispenser = new CashDispenser(); // create cash dispenser
-      bankDatabase = new BankDatabase(); // create acct info database
+       userAuthenticated = false; // user is not authenticated to start
+       adminAuthenticated = false; // user is not admin to start
+       currentAccountNumber = 0; // no current account number to start
+       screen = new Screen(); // create screen
+       keypad = new Keypad(); // create keypad
+       cashDispenser = new CashDispenser(); // create cash dispenser
+       bankDatabase = new BankDatabase(); // create acct info database
    }
 
    // start ATM 
