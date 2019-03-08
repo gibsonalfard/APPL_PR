@@ -21,11 +21,7 @@ public class Account {
 
     // determines whether a user-specified PIN matches PIN in Account
     public boolean validatePIN(int userPIN) {
-        if (userPIN == pin) {
-            return true;
-        } else {
-            return false;
-        }
+        return userPIN == pin;
     }
 
     // returns available balance
@@ -101,8 +97,9 @@ public class Account {
         screen.displayMessageLine("4 - Change PIN");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
+        int input = keypad.getInput(); 
         
-        return keypad.getInput() == 4 ? 5 : keypad.getInput(); // return user's selection
+        return input == 4 ? 5 : input; // return user's selection
     }
 } 
 
