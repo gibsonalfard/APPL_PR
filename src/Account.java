@@ -3,6 +3,11 @@ public class Account {
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
    private double totalBalance; // funds available & pending deposits
+   
+   //every type of account hep dis
+    public static final int MAXWITHDRAW = 100;
+    public static final int MAXTRANSFER = 0;
+    public static final int TRANSACT_ADM = 0;
 
    // Account constructor initializes attributes
    public Account(int theAccountNumber, int thePIN, 
@@ -53,5 +58,9 @@ public class Account {
    
    public void changePIN(int thePIN){
        this.pin = thePIN;
+   }
+   
+   public String getAccountType() {
+       return this.getClass().toString().substring(6);
    }
 } 
