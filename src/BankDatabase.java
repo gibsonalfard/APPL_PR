@@ -6,7 +6,7 @@ public class BankDatabase {
       accAmount = 4;
       accounts = new Account[10]; // just 2 accounts for testing
       accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
-      accounts[1] = new Student(8765, 5678, 200.0, 200.0); 
+      accounts[1] = new Deposito(8765, 5678, 200.0, 200.0); 
       accounts[2] = new Student(6665, 1234, 700.0, 900.0); 
       accounts[3] = new Admin(00000, 00000, 0.0, 0.0); 
    }
@@ -19,7 +19,7 @@ public class BankDatabase {
           }
       }
       return null;
-   } 
+   }
    
    public boolean checkAvail(int accountNumber) {
        int ak;
@@ -29,6 +29,17 @@ public class BankDatabase {
           }
       }
       return true;
+   }
+   
+   public Account getSpecificAccount(int userAccountNumber, int userPIN){
+        Account userAccount = getAccount(userAccountNumber);
+       
+        if (userAccount != null && userAccount.validatePIN(userPIN) && !userAccount.isUserBlocked()) {
+            return userAccount;
+        }
+        else {
+           return null; // account number not found, so return false
+        }
    }
    
    public boolean authenticateAdmin(int userAccountNumber, int userPIN) {
