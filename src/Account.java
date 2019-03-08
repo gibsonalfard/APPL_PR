@@ -68,4 +68,8 @@ public class Account {
    public boolean isUserBlocked(){
        return this.isBlocked;
    }
+   
+   public String getAccountType(){
+       return this.getClass().toString().substring(6);
+   }
 } 
