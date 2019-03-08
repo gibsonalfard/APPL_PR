@@ -18,4 +18,8 @@ public class Tanggal {
                 + " - " + (now.get(Calendar.MONTH)+1)
                 + " - " + now.get(Calendar.YEAR));
     }
+    
+    public void menuTanggal(){
+        
+    }
 }
