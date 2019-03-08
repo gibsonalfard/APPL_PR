@@ -8,8 +8,12 @@
  *
  * @author Tio
  */
-public class Admin extends Account {           
-    public Admin(int theAccountNumber, int thePIN, 
+public class Business extends Account {    
+    public static final int MAXWITHDRAW = 1000;
+    public static final int MAXTRANSFER = 10000;
+    public static final int MONTHLY_ADM = 5;
+    
+    public Business(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
         super(theAccountNumber, thePIN,
             theAvailableBalance, theTotalBalance);

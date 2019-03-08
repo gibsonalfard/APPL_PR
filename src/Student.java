@@ -8,11 +8,16 @@
  *
  * @author Tio
  */
-public class Admin extends Account {           
-    public Admin(int theAccountNumber, int thePIN, 
+public class Student extends Account {    
+    public static final int MAXWITHDRAW = 20;
+    public static final int MAXTRANSFER = 0;
+    public static final int TRANSACT_ADM = 0;
+    
+    public Student(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
         super(theAccountNumber, thePIN,
             theAvailableBalance, theTotalBalance);
     }
+    
     
 }

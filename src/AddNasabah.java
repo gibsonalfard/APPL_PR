@@ -55,7 +55,7 @@ public class AddNasabah extends Transaction {
         
         screen.displayMessage("\nPlease input new user pin : ");
         int thePIN = keypad.getInput();
-        
+        /* TODO : periksa apakah admin*/
         if (!Admin) {
             do {
                 screen.displayMessageLine("\nPlease input new user starting balance : ");
@@ -66,6 +66,6 @@ public class AddNasabah extends Transaction {
             } while (theTotalBalance < 0);       
         }
         
-        bankDatabase.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, Admin);
+        bankDatabase.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
     }
 }
