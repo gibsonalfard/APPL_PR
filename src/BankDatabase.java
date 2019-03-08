@@ -1,16 +1,17 @@
 public class BankDatabase {
-   private Admin[] accounts; // array of Accounts
+   private Account[] accounts; // array of Accounts
    private int accAmount;
    
    public BankDatabase() {
-      accAmount = 3;
-      accounts = new Admin[100]; // just 2 accounts for testing
-      accounts[0] = new Admin(1234, 4321, 1000.0, 1200.0, false);
-      accounts[1] = new Admin(8765, 5678, 200.0, 200.0, false); 
-      accounts[2] = new Admin(00000, 00000, 200.0, 200.0, true); 
+      accAmount = 4;
+      accounts = new Account[10]; // just 2 accounts for testing
+      accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
+      accounts[1] = new Student(8765, 5678, 200.0, 200.0); 
+      accounts[2] = new Student(6665, 1234, 700.0, 900.0); 
+      accounts[3] = new Admin(00000, 00000, 0.0, 0.0); 
    }
    
-   private Admin getAccount(int accountNumber) {
+   private Account getAccount(int accountNumber) {
       int ak;
       for(ak=0; ak<accAmount; ak++){
           if(accountNumber == accounts[ak].getAccountNumber()){
@@ -32,11 +33,11 @@ public class BankDatabase {
    
    public boolean authenticateAdmin(int userAccountNumber, int userPIN) {
       // attempt to retrieve the account with the account number
-      Admin userAccount = getAccount(userAccountNumber);
+      Account userAccount = getAccount(userAccountNumber);
 
 //      if account exists, return result of Account method validatePIN
       if (userAccount != null) {
-         return (userAccount.validatePIN(userPIN) && userAccount.isAdmin() );
+         return (userAccount.validatePIN(userPIN) && userAccount.getClass().toString()=="Admin" );
       }
       else {
          return false; // account number not found, so return false
@@ -45,7 +46,7 @@ public class BankDatabase {
    
    public boolean authenticateUser(int userAccountNumber, int userPIN) {
       // attempt to retrieve the account with the account number
-      Admin userAccount = getAccount(userAccountNumber);
+      Account userAccount = getAccount(userAccountNumber);
 
 //      if account exists, return result of Account method validatePIN
       if (userAccount != null) {
@@ -93,8 +94,12 @@ public class BankDatabase {
        }
    }
    
-   public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance, boolean Admin) {
-       accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, Admin);
+   public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
+       accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
        accAmount++;
+   }
+   
+   public String someCode(){
+       return (accounts[0].getClass().toString() + " - " + accounts[1].getClass().toString() + " - " + accounts[2].getClass().toString() + " - " + accounts[2].getClass().toString() );
    }
 } 
