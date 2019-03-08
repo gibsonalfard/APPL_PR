@@ -68,4 +68,8 @@ public class Account {
    public int displayMainMenu() {
        return keypad.getInput(); // return user's selection
    }
+   
+   public int displayWithdrawalMenu() {
+       return keypad.getInput(); // return user's selection
+   }
 } 

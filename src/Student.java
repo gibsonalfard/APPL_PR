@@ -12,8 +12,8 @@ public class Student extends Account {
     public static final int MAXWITHDRAW = 20;
     public static final int MAXTRANSFER = 0;
     public static final int TRANSACT_ADM = 0;
-    private Screen screen; // ATM's screen
-    private Keypad keypad; 
+    private Screen screen = new Screen(); // ATM's screen
+    private Keypad keypad = new Keypad(); 
     
     public Student(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -32,5 +32,14 @@ public class Student extends Account {
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
    }
-    
+   
+   public int displayWithdrawalMenu(){
+       screen.displayMessageLine("\nWithdrawal Menu:");
+         screen.displayMessageLine("1 - $20");
+         screen.displayMessageLine("0 - Cancel transaction");
+         screen.displayMessage("\nChoose a withdrawal amount: ");
+
+         return keypad.getInput(); // get user input through keypad
+           
+   }
 }

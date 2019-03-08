@@ -8,7 +8,7 @@ public class BankDatabase {
       accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
       accounts[1] = new Student(8765, 5678, 200.0, 200.0); 
       accounts[2] = new Student(6665, 1234, 700.0, 900.0); 
-      accounts[3] = new Admin(00000, 00000, 0.0, 0.0); 
+      accounts[3] = new Admin(00000, 00000, 0.0, 0.0);
    }
    
    private Account getAccount(int accountNumber) {
@@ -106,5 +106,10 @@ public class BankDatabase {
    public int getAccountStatus(int userAccountNumber){
        Account userAccount= getAccount(userAccountNumber);
        return userAccount.displayMainMenu();
+   }
+   
+   public int getWithdrawal(int userAccountNumber){
+       Account userAccount= getAccount(userAccountNumber);
+       return userAccount.displayWithdrawalMenu();
    }
 } 
