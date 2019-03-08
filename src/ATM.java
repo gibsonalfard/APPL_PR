@@ -3,6 +3,7 @@ public class ATM {
 
     private boolean userAuthenticated; // whether user is authenticated
     private boolean adminAuthenticated;//whether user is admin
+    private boolean userExited;
     private int currentAccountNumber; // current user's account number
     private Screen screen; // ATM's screen
     private Keypad keypad; // ATM's keypad
@@ -10,6 +11,7 @@ public class ATM {
     private DepositSlot depositSlot;
     private BankDatabase bankDatabase; // account information database
     private int loginAttempt = 0;
+    int curPin, newPin;
 
     // constants corresponding to main menu options
     private static final int BALANCE_INQUIRY = 1;
@@ -125,7 +127,7 @@ public class ATM {
                     // initialize as new object of chosen type
                     currentTransaction
                             = createTransaction(mainMenuSelection);
-
+                    
                     currentTransaction.execute(); // execute transaction
                     break;
                 case PASSWORD:
@@ -133,23 +135,33 @@ public class ATM {
                     int curPin = keypad.getInput(); // input account number
                     screen.displayMessage("\nPlease Enter Your New Pin: ");
                     int newPin = keypad.getInput(); // input account number
-
-                    bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
-
-                    break;
-                case EXIT: // user chose to terminate session
-                    screen.displayMessageLine("\nExiting the system...");
-                    userExited = true; // this ATM session should end
-                    break;
-                default: // 
-                    screen.displayMessageLine(
-                            "\nYou did not enter a valid selection. Try again.");
-                    break;
             }
         }
     }
+//   // start ATM 
+//   public void run() {
+//      // welcome and authenticate user; perform transactions
+//      while (true) {
+//         // loop while user is not yet authenticated
+//         while (!userAuthenticated) {
+//            screen.displayMessageLine("\nWelcome!");       
+//            authenticateUser(); // authenticate user
+//         }
+//         
+//         if(adminAuthenticated){
+//             performAdmins();
+//         }else{
+//             performTransactions(); // user is now authenticated
+//         }
+//         userAuthenticated = false; // reset before next ATM session
+//         adminAuthenticated = false; // reset before next ATM session
+//         currentAccountNumber = 0; // reset before next ATM session
+//         screen.displayMessageLine("\nThank you! Goodbye!");
+//      }
+//   }
+                    
 
-    // display the main menu and perform transactions
+     //display the main menu and perform transactions
     private void performAdmins() {
         // local variable to store transaction currently being processed
         Transaction currentTransaction = null;
@@ -165,15 +177,17 @@ public class ATM {
             switch (mainMenuSelection) {
                 // user chose to perform one of three transaction types
                 case ADD_NASABAH:
+                    currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);
+                    currentTransaction.execute();
+                case UNBLOCK:
+                    showUnblockMenu(keypad, bankDatabase, screen);
+                    break;
                 case VALIDATE:
                     // initialize as new object of chosen type
                     currentTransaction
                             = createTransaction(mainMenuSelection);
 
                     currentTransaction.execute(); // execute transaction
-                    break;
-                case UNBLOCK:
-                    showUnblockMenu(keypad, bankDatabase, screen);
                     break;
                 case MONEY_DISPEN:
                     cashDispenser.showCashDispenser();
@@ -231,10 +245,54 @@ public class ATM {
             case TRANSFER:
                 temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
                 break;
-        }
-
+            case PASSWORD:
+                bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
+                break;
+            case EXIT: // user chose to terminate session
+                screen.displayMessageLine("\nExiting the system...");
+                userExited = true; // this ATM session should end
+                break;
+            default: // 
+                screen.displayMessageLine(
+                        "\nYou did not enter a valid selection. Try again.");
+                break;
+         }
         return temp;
-    }
+   }
+   
+   // display the main menu and perform transactions
+//   private void performAdmins() {
+//      // local variable to store transaction currently being processed
+//      Transaction currentTransaction = null;
+//      
+//      boolean userExited = false; // user has not chosen to exit
+//
+//      // loop while user has not chosen option to exit system
+//      while (!userExited) {
+//         // show main menu and get user selection
+//         int mainMenuSelection = displayAdminMenu();
+//
+//         // decide how to proceed based on user's menu selection
+//         switch (mainMenuSelection) {
+//            // user chose to perform one of three transaction types
+//            case ADD_NASABAH:   
+//                currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);
+//                currentTransaction.execute();
+//                break;
+//            case UNBLOCK:
+//            case VALIDATE:
+//               // initialize as new object of chosen type
+//               currentTransaction = 
+//                  createTransaction(mainMenuSelection);
+//
+//               currentTransaction.execute(); // execute transaction
+//               break;
+//            case MONEY_DISPEN:
+//                cashDispenser.showCashDispenser();
+//                break;
+//        }
+//    }
+//   }
     
     public void showUnblockMenu(Keypad keypad, BankDatabase bankDatabase, Screen screen){
        screen.displayMessage("Insert account number to unblock : ");
