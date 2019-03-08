@@ -7,6 +7,7 @@ public class ATM {
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private DepositSlot depositSlot;
    private BankDatabase bankDatabase; // account information database
+   private Tanggal tanggal = new Tanggal();
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -20,6 +21,7 @@ public class ATM {
    private static final int UNBLOCK = 2;
    private static final int VALIDATE = 3;
    private static final int MONEY_DISPEN = 4;
+   private static final int ADD_TANGGAL = 5;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
@@ -153,6 +155,10 @@ public class ATM {
             case MONEY_DISPEN:
                 cashDispenser.showCashDispenser();
                 break;
+            case ADD_TANGGAL:
+                tanggal.tanggalSekarang();
+                tanggal.addTanggal(1);
+                break;
             case EXIT: // user chose to terminate session
                screen.displayMessageLine("\nExiting the system...");
                userExited = true; // this ATM session should end
@@ -184,6 +190,7 @@ public class ATM {
       screen.displayMessageLine("2 - Unblock Nasabah");
       screen.displayMessageLine("3 - Validate Deposit");
       screen.displayMessageLine("4 - See Money Dispenser");
+      screen.displayMessageLine("5 - Add Account");
       screen.displayMessageLine("0 - Exit\n");
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
