@@ -83,12 +83,13 @@ public class ATM {
       Transaction currentTransaction = null;
       
       boolean userExited = false; // user has not chosen to exit
-
+      
       // loop while user has not chosen option to exit system
       while (!userExited) {
+         
          // show main menu and get user selection
-         int mainMenuSelection = displayMainMenu();
-
+         int mainMenuSelection = bankDatabase.getAccountStatus(currentAccountNumber);
+         
          // decide how to proceed based on user's menu selection
          switch (mainMenuSelection) {
             // user chose to perform one of three transaction types

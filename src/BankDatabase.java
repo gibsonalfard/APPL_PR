@@ -102,4 +102,9 @@ public class BankDatabase {
    public String someCode(){
        return (accounts[0].getClass().toString() + " - " + accounts[1].getClass().toString() + " - " + accounts[2].getClass().toString() + " - " + accounts[2].getClass().toString() );
    }
+   
+   public int getAccountStatus(int userAccountNumber){
+       Account userAccount= getAccount(userAccountNumber);
+       return userAccount.displayMainMenu();
+   }
 } 

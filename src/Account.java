@@ -3,7 +3,8 @@ public class Account {
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
    private double totalBalance; // funds available & pending deposits
-   
+       private Screen screen; // ATM's screen
+    private Keypad keypad; 
    //every type of account hep dis
     public static final int MAXWITHDRAW = 100;
     public static final int MAXTRANSFER = 0;
@@ -62,5 +63,9 @@ public class Account {
    
    public String getAccountType() {
        return this.getClass().toString().substring(6);
+   }
+   
+   public int displayMainMenu() {
+       return keypad.getInput(); // return user's selection
    }
 } 
