@@ -3,7 +3,8 @@ public class Account {
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
    private double totalBalance; // funds available & pending deposits
-
+   private String status;
+   
    // Account constructor initializes attributes
    public Account(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -53,5 +54,9 @@ public class Account {
    
    public void changePIN(int thePIN){
        this.pin = thePIN;
+   }
+   
+   public String status(){
+       return status;
    }
 } 

@@ -14,7 +14,7 @@ public class Admin extends Account {
     public Admin(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance, boolean Admin) {
         super(theAccountNumber, thePIN,
-            theAvailableBalance, theTotalBalance);
+            theAvailableBalance, theTotalBalance );
         this.isAdmin = Admin;
     }
        

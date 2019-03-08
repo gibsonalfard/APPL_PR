@@ -44,7 +44,8 @@ public class ATM {
          
          if(adminAuthenticated){
              performAdmins();
-         }else{
+         }
+         else{
              performTransactions(); // user is now authenticated
          }
          userAuthenticated = false; // reset before next ATM session
@@ -132,6 +133,50 @@ public class ATM {
       // loop while user has not chosen option to exit system
       while (!userExited) {
          // show main menu and get user selection
+         int mainMenuSelection = displayStudentMenu();
+
+         // decide how to proceed based on user's menu selection
+         switch (mainMenuSelection) {
+            // user chose to perform one of three transaction types
+            case BALANCE_INQUIRY:         
+            case WITHDRAWAL:
+            case DEPOSIT:
+               // initialize as new object of chosen type
+               currentTransaction = 
+                  createTransaction(mainMenuSelection);
+
+               currentTransaction.execute(); // execute transaction
+               break;
+            case PASSWORD:
+                screen.displayMessage("\nPlease Enter Your Current Pin: ");
+                int curPin = keypad.getInput(); // input account number
+                screen.displayMessage("\nPlease Enter Your New Pin: ");
+                int newPin = keypad.getInput(); // input account number
+      
+                bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
+                
+                break;
+            case EXIT: // user chose to terminate session
+               screen.displayMessageLine("\nExiting the system...");
+               userExited = true; // this ATM session should end
+               break;
+            default: // 
+               screen.displayMessageLine(
+                  "\nYou did not enter a valid selection. Try again.");
+               break;
+         }
+      } 
+   }
+
+   private void performStudent() {
+      // local variable to store transaction currently being processed
+      Transaction currentTransaction = null;
+      
+      boolean userExited = false; // user has not chosen to exit
+
+      // loop while user has not chosen option to exit system
+      while (!userExited) {
+         // show main menu and get user selection
          int mainMenuSelection = displayAdminMenu();
 
          // decide how to proceed based on user's menu selection
@@ -158,7 +203,6 @@ public class ATM {
          }
       } 
    }
-
    // display the main menu and return an input selection
    private int displayMainMenu() {
       screen.displayMessageLine("\nMain menu:");
@@ -182,7 +226,17 @@ public class ATM {
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
    }
-         
+   
+   private int displayStudentMenu() {
+      screen.displayMessageLine("\nMain menu:");
+      screen.displayMessageLine("1 - View my balance");
+      screen.displayMessageLine("2 - Withdraw cash");
+      screen.displayMessageLine("3 - Deposit funds");
+      screen.displayMessageLine("4 - Change PIN");
+      screen.displayMessageLine("0 - Exit\n");
+      screen.displayMessage("Enter a choice: ");
+      return keypad.getInput();
+   }
    private Transaction createTransaction(int type) {
       Transaction temp = null; 
           
