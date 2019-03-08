@@ -207,8 +207,7 @@ public class ATM {
                     cashDispenser.showCashDispenser();
                     break;
                 case ADD_TANGGAL:
-                    tanggal.tanggalSekarang();
-                    tanggal.addTanggal(1);
+                    tanggal.menuTanggal();
                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");
