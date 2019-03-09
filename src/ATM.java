@@ -29,6 +29,7 @@ public class ATM {
     
     Tanggal tanggal = new Tanggal();
 
+//<<<<<<< HEAD
     // no-argument ATM constructor initializes instance variables
     public ATM() {
         userAuthenticated = false; // user is not authenticated to start

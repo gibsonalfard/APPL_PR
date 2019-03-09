@@ -12,13 +12,14 @@ public class Deposito extends Account {
     public static final int MAXWITHDRAW = 100;
     public static final int MAXTRANSFER = 500;
     public static final int MONTHLY_ADM = 1;
+    private Screen screen = new Screen(); // ATM's screen
+    private Keypad keypad = new Keypad(); 
     
     public Deposito(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
         super(theAccountNumber, thePIN,
             theAvailableBalance, theTotalBalance);
     }
-    
     
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
@@ -33,4 +34,18 @@ public class Deposito extends Account {
         
         return keypad.getInput(); // return user's selection
     }
+    
+    public int displayWithdrawalMenu(){
+       screen.displayMessageLine("\nWithdrawal Menu:");
+         screen.displayMessageLine("1 - $20");
+         screen.displayMessageLine("2 - $40");
+         screen.displayMessageLine("3 - $60");
+         screen.displayMessageLine("4 - $100");
+         screen.displayMessageLine("0 - Cancel transaction");
+         screen.displayMessage("\nChoose a withdrawal amount: ");
+
+         return keypad.getInput(); // get user input through keypad
+           
+   }
 }
+

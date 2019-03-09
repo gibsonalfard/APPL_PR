@@ -1,4 +1,3 @@
-
 public class Account {
 
     private int accountNumber; // account number
@@ -8,6 +7,7 @@ public class Account {
     private boolean isBlocked;
     private int transferToday = 0;
     private int WithdrawToday = 0;
+    private Keypad keypad;
 
     // Account constructor initializes attributes
     public Account(int theAccountNumber, int thePIN,
@@ -89,6 +89,10 @@ public class Account {
         this.WithdrawToday += WithdrawToday;
     }
     
+    public int displayWithdrawalMenu() {
+       return keypad.getInput(); // return user's selection
+    }
+    
     public int displayMainMenu(Screen screen, Keypad keypad) {
         screen.displayMessageLine("\nMain menu:");
         screen.displayMessageLine("1 - View my balance");
@@ -102,4 +106,3 @@ public class Account {
         return input == 4 ? 5 : input; // return user's selection
     }
 } 
-

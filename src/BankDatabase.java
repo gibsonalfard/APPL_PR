@@ -140,4 +140,14 @@ public class BankDatabase {
         return getAccount(theAccountNumber).getWithdrawToday();
     }
     
+//    public int getAccountStatus(int userAccountNumber){
+//       Account userAccount= getAccount(userAccountNumber);
+//       return userAccount.displayMainMenu();
+//   }
+   
+   public int getWithdrawal(int userAccountNumber){
+       Account userAccount= getAccount(userAccountNumber);
+       return userAccount.displayWithdrawalMenu();
+   }
+    
 }
