@@ -144,6 +144,17 @@ public class BankDatabase {
     public boolean isAvailableWithdraw(int theAccountNumber, double amount){
         return getAccount(theAccountNumber).isAvailableForWithdraw(amount);
     }
+    
+    public void monthlyTax(){
+        int ak;
+         for (ak = 0; ak < (accAmount-1); ak++) {
+             if(accounts[ak] == null){break;}
+             
+             if(!"Student".equals(accounts[ak].getAccountType())){
+                 accounts[ak].payTax();
+             }
+         }
+    }
    
     public int getWithdrawal(int userAccountNumber){
         Account userAccount= getAccount(userAccountNumber);

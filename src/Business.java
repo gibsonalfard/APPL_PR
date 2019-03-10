@@ -36,6 +36,16 @@ public class Business extends Account {
     }
     
     @Override
+    public void payTax(){
+        if((getTotalBalance()-Business.MONTHLY_ADM) >= 0){
+            credit(Business.MONTHLY_ADM);
+        }else{
+            credit(this.getTotalBalance());
+            this.setAvailableBalance(this.getAvailableBalance()+(getTotalBalance()-Deposito.MONTHLY_ADM));
+        }
+    }
+    
+    @Override
     public int displayWithdrawalMenu(){
         screen.displayMessageLine("\nLimit Withdraw for Today is : $"+(Business.MAXWITHDRAW-getWithdrawToday())+".");
         screen.displayMessageLine("\nWithdrawal Menu:");

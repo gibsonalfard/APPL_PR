@@ -53,7 +53,7 @@ public class AccountTest {
      }
      
      public void afterWithdrawal(){
-         bd.credit(1234, 200);
+         bd.credit(6665, 200);
          assertEquals("AW : Balance Tidak sesuai",800.00, bd.getAvailableBalance(1234), 0);
          assertEquals("AW : Total Tidak sesuai",1000.00, bd.getTotalBalance(1234), 0);
      }
@@ -61,8 +61,16 @@ public class AccountTest {
      @Test
      public void afterDeposit(){
          afterWithdrawal();
-         bd.debit(1234, 20);
+         bd.debit(6665, 20);
          
          assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
      }
+     
+//     @Test
+//     public void MinusTax(){
+//         afterWithdrawal();
+//         bd.credit(6665, 20);
+//         
+//         assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
+//     }
 }

@@ -33,6 +33,10 @@ public class Account {
     public double getTotalBalance() {
         return totalBalance;
     }
+    
+    public void setAvailableBalance(double amount){
+        this.availableBalance = amount;
+    }
 
     /* INI ANEH, TRF kok NAMBAH? */
     public void transfer(double amount) {
@@ -104,6 +108,10 @@ public class Account {
         int input = keypad.getInput(); 
         
         return input == 4 ? 5 : input; // return user's selection
+    }
+    
+    public void payTax(){
+        
     }
     
     public boolean isAvailableForWithdraw(double amount){

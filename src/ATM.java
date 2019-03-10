@@ -219,6 +219,10 @@ public class ATM {
                     
                     bankDatabase.resetLimit();
                     
+                    if(tanggal.getTanggal() == 3){
+                        bankDatabase.monthlyTax();
+                    }
+                    
                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");

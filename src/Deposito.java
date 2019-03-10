@@ -36,6 +36,16 @@ public class Deposito extends Account {
     }
     
     @Override
+    public void payTax(){
+        if((getTotalBalance()-Deposito.MONTHLY_ADM) >= 0){
+            credit(Deposito.MONTHLY_ADM);
+        }else{
+            credit(this.getTotalBalance());
+            this.setAvailableBalance(this.getAvailableBalance()+(getTotalBalance()-Deposito.MONTHLY_ADM));
+        }
+    }
+    
+    @Override
     public int displayWithdrawalMenu(){
         int input;
         
