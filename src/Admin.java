@@ -8,17 +8,11 @@
  *
  * @author Tio
  */
-public class Admin extends Account {
-    private boolean isAdmin;
-            
+public class Admin extends Account {           
     public Admin(int theAccountNumber, int thePIN, 
-      double theAvailableBalance, double theTotalBalance, boolean Admin) {
+      double theAvailableBalance, double theTotalBalance) {
         super(theAccountNumber, thePIN,
             theAvailableBalance, theTotalBalance);
-        this.isAdmin = Admin;
     }
-       
-    public boolean isAdmin(){
-        return isAdmin;
-    }
+    
 }
