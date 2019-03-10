@@ -13,13 +13,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Gibran
+ * @author ahmadajinaufalali
  */
 public class AccountTest {
-    BankDatabase bd;
     
     public AccountTest() {
-        bd = new BankDatabase();
     }
     
     @BeforeClass
@@ -38,56 +36,289 @@ public class AccountTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-     @Test
-     public void LoginAccount() {
-         assert(bd.authenticateUser(1234, 4321));
-         assert(bd.authenticateUser(8765, 5678));
-         assert(bd.authenticateUser(00000, 00000));
-         assert(bd.authenticateUser(12345, 54321) == false);
-         assert(bd.authenticateUser(87612312, 51231236) == false);
-         assert(bd.authenticateUser(-87612312, -51231236) == false);
-         assert(bd.authenticateUser(-0, -1) == false);
-//         assert(bd.authenticateUser(-0, -0) == false); //EROR
-//         assertTrue("Login Gagal",bd.authenticateUser(1234, 4321));
-//         assertFalse("Login Sukses",bd.authenticateUser(1234, 42321));
-     }
-     
-     @Test
-     public void getBalance(){
-         assert(bd.getAvailableBalance(1234) == 1000.0);
-         assert(bd.getAvailableBalance(8765) == 200.0);
-         assert(bd.getAvailableBalance(00000) == 200.0);
-         System.out.println(bd.getAvailableBalance(12345));
-         assert(bd.getAvailableBalance(12345) == 0.0);
-//           assert.assertNull(bd.getAvailableBalance(12345));
-//         assert(bd.getAvailableBalance(12345) == 0.0);
-//         assert(bd.getAvailableBalance(-10) = 0.0);
-         
-         
-//         assertEquals("Balance Tidak Sesuai", 999.5, bd.getAvailableBalance(1234), 0.5);
-     }
-     
-     public void afterWithdrawal(){
-         bd.credit(1234, 200);
-         assertEquals("AW : Balance Tidak sesuai",800.00, bd.getAvailableBalance(1234), 0);
-         assertEquals("AW : Total Tidak sesuai",1000.00, bd.getTotalBalance(1234), 0);
-     }
-     
-     @Test
-     public void afterDeposit(){
-         afterWithdrawal();
-         bd.debit(1234, 20);
-         assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
-     }
-     
-     @Test
-     public void MinusTax(){
-         afterWithdrawal();
-         bd.credit(6665, 20);
-         
-         assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
-     }
+    /**
+     * Test of validatePIN method, of class Account.
+     */
+    @Test
+    public void testValidatePIN() {
+        System.out.println("validatePIN");
+        int userPIN = 0;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.validatePIN(userPIN);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAvailableBalance method, of class Account.
+     */
+    @Test
+    public void testGetAvailableBalance() {
+        System.out.println("getAvailableBalance");
+        Account instance = null;
+        double expResult = 0.0;
+        double result = instance.getAvailableBalance();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getTotalBalance method, of class Account.
+     */
+    @Test
+    public void testGetTotalBalance() {
+        System.out.println("getTotalBalance");
+        Account instance = null;
+        double expResult = 0.0;
+        double result = instance.getTotalBalance();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setAvailableBalance method, of class Account.
+     */
+    @Test
+    public void testSetAvailableBalance() {
+        System.out.println("setAvailableBalance");
+        double amount = 0.0;
+        Account instance = null;
+        instance.setAvailableBalance(amount);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of transfer method, of class Account.
+     */
+    @Test
+    public void testTransfer() {
+        System.out.println("transfer");
+        double amount = 0.0;
+        Account instance = null;
+        instance.transfer(amount);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of credit method, of class Account.
+     */
+    @Test
+    public void testCredit() {
+        System.out.println("credit");
+        double amount = 0.0;
+        Account instance = null;
+        instance.credit(amount);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of debit method, of class Account.
+     */
+    @Test
+    public void testDebit() {
+        System.out.println("debit");
+        double amount = 0.0;
+        Account instance = null;
+        instance.debit(amount);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAccountNumber method, of class Account.
+     */
+    @Test
+    public void testGetAccountNumber() {
+        System.out.println("getAccountNumber");
+        Account instance = null;
+        int expResult = 0;
+        int result = instance.getAccountNumber();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of changePIN method, of class Account.
+     */
+    @Test
+    public void testChangePIN() {
+        System.out.println("changePIN");
+        int thePIN = 0;
+        Account instance = null;
+        instance.changePIN(thePIN);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of blockUser method, of class Account.
+     */
+    @Test
+    public void testBlockUser() {
+        System.out.println("blockUser");
+        Account instance = null;
+        instance.blockUser();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of unblockUser method, of class Account.
+     */
+    @Test
+    public void testUnblockUser() {
+        System.out.println("unblockUser");
+        Account instance = null;
+        instance.unblockUser();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isUserBlocked method, of class Account.
+     */
+    @Test
+    public void testIsUserBlocked() {
+        System.out.println("isUserBlocked");
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.isUserBlocked();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAccountType method, of class Account.
+     */
+    @Test
+    public void testGetAccountType() {
+        System.out.println("getAccountType");
+        Account instance = null;
+        String expResult = "";
+        String result = instance.getAccountType();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getTransferToday method, of class Account.
+     */
+    @Test
+    public void testGetTransferToday() {
+        System.out.println("getTransferToday");
+        Account instance = null;
+        int expResult = 0;
+        int result = instance.getTransferToday();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setTransferToday method, of class Account.
+     */
+    @Test
+    public void testSetTransferToday() {
+        System.out.println("setTransferToday");
+        double transferToday = 0.0;
+        Account instance = null;
+        instance.setTransferToday(transferToday);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getWithdrawToday method, of class Account.
+     */
+    @Test
+    public void testGetWithdrawToday() {
+        System.out.println("getWithdrawToday");
+        Account instance = null;
+        int expResult = 0;
+        int result = instance.getWithdrawToday();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setWithdrawToday method, of class Account.
+     */
+    @Test
+    public void testSetWithdrawToday() {
+        System.out.println("setWithdrawToday");
+        double WithdrawToday = 0.0;
+        Account instance = null;
+        instance.setWithdrawToday(WithdrawToday);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of displayWithdrawalMenu method, of class Account.
+     */
+    @Test
+    public void testDisplayWithdrawalMenu() {
+        System.out.println("displayWithdrawalMenu");
+        Account instance = null;
+        int expResult = 0;
+        int result = instance.displayWithdrawalMenu();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of displayMainMenu method, of class Account.
+     */
+    @Test
+    public void testDisplayMainMenu() {
+        System.out.println("displayMainMenu");
+        Screen screen = null;
+        Keypad keypad = null;
+        Account instance = null;
+        int expResult = 0;
+        int result = instance.displayMainMenu(screen, keypad);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of payTax method, of class Account.
+     */
+    @Test
+    public void testPayTax() {
+        System.out.println("payTax");
+        Account instance = null;
+        instance.payTax();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isAvailableForWithdraw method, of class Account.
+     */
+    @Test
+    public void testIsAvailableForWithdraw() {
+        System.out.println("isAvailableForWithdraw");
+        double amount = 0.0;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.isAvailableForWithdraw(amount);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
 }

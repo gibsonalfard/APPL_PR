@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Deposit.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BrandNew_ATM&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Deposit.java</span></div><h1>Deposit.java</h1><pre class="source lang-java linenums">public class Deposit extends Transaction {
+   private double amount; // amount to deposit
+   private Keypad keypad; // reference to keypad
+<span class="nc" id="L4">   private static DepositSlot[] depositSlot = new DepositSlot[100]; // reference to deposit slot</span>
+   private final static int CANCELED = 0; // constant for cancel option
+   
+<span class="nc" id="L7">   private int numberOfDeposit = 0;</span>
+
+   // Deposit constructor
+   public Deposit(int userAccountNumber, Screen atmScreen, 
+      BankDatabase atmBankDatabase, Keypad atmKeypad, 
+      DepositSlot atmDepositSlot) {
+
+      // initialize superclass variables
+<span class="nc" id="L15">      super(userAccountNumber, atmScreen, atmBankDatabase);</span>
+      
+<span class="nc" id="L17">      keypad = atmKeypad;</span>
+      
+<span class="nc bnc" id="L19" title="All 2 branches missed.">      if(numberOfDeposit == 0){</span>
+<span class="nc" id="L20">          depositSlot[0] = atmDepositSlot;</span>
+<span class="nc" id="L21">          numberOfDeposit += 1;</span>
+      }else{
+<span class="nc" id="L23">          depositSlot[numberOfDeposit] = atmDepositSlot;</span>
+<span class="nc" id="L24">          numberOfDeposit = depositSlot.length + 1;</span>
+      }
+<span class="nc" id="L26">   } </span>
+   
+//   public void showByAccount(int accountNumber){
+//       
+//   }
+
+   // perform transaction
+   @Override
+   public void execute() {
+<span class="nc" id="L35">       BankDatabase bankDatabase = getBankDatabase();</span>
+       
+<span class="nc" id="L37">       this.amount = promptForDepositAmount();</span>
+       
+<span class="nc bnc" id="L39" title="All 2 branches missed.">       if(this.amount == CANCELED){</span>
+<span class="nc" id="L40">            System.out.println(&quot;Canceling transaction...&quot;);</span>
+       }else{
+<span class="nc" id="L42">            System.out.println(&quot;Please insert a deposit envelope containing $&quot;+this.amount+&quot;.\n&quot;);</span>
+<span class="nc" id="L43">            System.out.println(&quot;Your envelope has been received.\n&quot; +</span>
+                                 &quot;NOTE: The money just deposited will not be available&quot;+
+                                 &quot;until we verify the amount of any enclosed cash and your checks clear.\n&quot;);
+            
+<span class="nc" id="L47">            bankDatabase.debit(super.getAccountNumber(), amount);</span>
+<span class="nc" id="L48">            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);</span>
+       }
+<span class="nc" id="L50">   }</span>
+
+   // prompt user to enter a deposit amount in cents 
+   private double promptForDepositAmount() {
+<span class="nc" id="L54">      Screen screen = getScreen(); // get reference to screen</span>
+
+      // display the prompt
+<span class="nc" id="L57">      screen.displayMessage(&quot;\nPlease enter a deposit amount in &quot; + </span>
+         &quot;CENTS (or 0 to cancel): &quot;);
+<span class="nc" id="L59">      int input = keypad.getInput(); // receive input of deposit amount</span>
+      
+      // check whether the user canceled or entered a valid amount
+<span class="nc bnc" id="L62" title="All 2 branches missed.">      if (input == CANCELED) {</span>
+<span class="nc" id="L63">         return CANCELED;</span>
+      }
+      else {
+<span class="nc" id="L66">         return (double) input / 100; // return dollar amount</span>
+      }
+   }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
