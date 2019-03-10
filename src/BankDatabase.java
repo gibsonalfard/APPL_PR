@@ -16,6 +16,7 @@ public class BankDatabase {
     private Account getAccount(int accountNumber) {
         int ak;
         for (ak = 0; ak < accAmount; ak++) {
+            if (accounts[ak] == null){break;}
             if (accountNumber == accounts[ak].getAccountNumber()) {
                 return accounts[ak];
             }
