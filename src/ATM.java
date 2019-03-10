@@ -216,6 +216,9 @@ public class ATM {
                 case ADD_TANGGAL:
                     tanggal.tanggalSekarang();
                     tanggal.addTanggal(1);
+                    
+                    bankDatabase.resetLimit();
+                    
                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");

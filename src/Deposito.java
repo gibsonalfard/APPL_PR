@@ -35,17 +35,28 @@ public class Deposito extends Account {
         return keypad.getInput(); // return user's selection
     }
     
+    @Override
     public int displayWithdrawalMenu(){
-       screen.displayMessageLine("\nWithdrawal Menu:");
-         screen.displayMessageLine("1 - $20");
-         screen.displayMessageLine("2 - $40");
-         screen.displayMessageLine("3 - $60");
-         screen.displayMessageLine("4 - $100");
-         screen.displayMessageLine("0 - Cancel transaction");
-         screen.displayMessage("\nChoose a withdrawal amount: ");
-
-         return keypad.getInput(); // get user input through keypad
+        int input;
+        
+        screen.displayMessageLine("\nLimit Withdraw for Today is : $"+(Deposito.MAXWITHDRAW-getWithdrawToday())+".");
+        screen.displayMessageLine("\nWithdrawal Menu:");
+        screen.displayMessageLine("1 - $20");
+        screen.displayMessageLine("2 - $40");
+        screen.displayMessageLine("3 - $60");
+        screen.displayMessageLine("4 - $100");
+        screen.displayMessageLine("0 - Cancel transaction");
+        screen.displayMessage("\nChoose a withdrawal amount: ");
+        
+        input = keypad.getInput();
+        
+        return (input > 4) ? displayWithdrawalMenu() : input; // get user input through keypad   
            
-   }
+    }
+    
+    @Override
+    public boolean isAvailableForWithdraw(double amount){
+       return Deposito.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
+    }
 }
 

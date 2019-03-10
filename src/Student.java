@@ -35,13 +35,22 @@ public class Student extends Account {
         return input == 4 ? 5 : input; // return user's selection
     }
    
-   public int displayWithdrawalMenu(){
+    @Override
+    public int displayWithdrawalMenu(){
+        int input;
+        screen.displayMessageLine("\nLimit Withdraw for Today is : $"+(Student.MAXWITHDRAW-getWithdrawToday())+".");
         screen.displayMessageLine("\nWithdrawal Menu:");
         screen.displayMessageLine("1 - $20");
         screen.displayMessageLine("0 - Cancel transaction");
         screen.displayMessage("\nChoose a withdrawal amount: ");
-
-        return keypad.getInput(); // get user input through keypad
-           
+        
+        input = keypad.getInput();
+        
+        return (input > 1) ? displayWithdrawalMenu() : input; // get user input through keypad      
+    }
+   
+   @Override
+   public boolean isAvailableForWithdraw(double amount){
+       return Student.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
    }
 }

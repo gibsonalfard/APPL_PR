@@ -105,4 +105,8 @@ public class Account {
         
         return input == 4 ? 5 : input; // return user's selection
     }
+    
+    public boolean isAvailableForWithdraw(double amount){
+       return true;
+    }
 } 

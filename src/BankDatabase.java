@@ -140,14 +140,24 @@ public class BankDatabase {
         return getAccount(theAccountNumber).getWithdrawToday();
     }
     
-//    public int getAccountStatus(int userAccountNumber){
-//       Account userAccount= getAccount(userAccountNumber);
-//       return userAccount.displayMainMenu();
-//   }
+    public boolean isAvailableWithdraw(int theAccountNumber, double amount){
+        return getAccount(theAccountNumber).isAvailableForWithdraw(amount);
+    }
    
-   public int getWithdrawal(int userAccountNumber){
-       Account userAccount= getAccount(userAccountNumber);
-       return userAccount.displayWithdrawalMenu();
-   }
+    public int getWithdrawal(int userAccountNumber){
+        Account userAccount= getAccount(userAccountNumber);
+        return userAccount.displayWithdrawalMenu();
+    }
+
+    public void resetLimit(){
+         int ak;
+         for (ak = 0; ak < (accAmount-1); ak++) {
+             if(accounts[ak] != null){
+                 accounts[ak].setWithdrawToday((-1*accounts[ak].getWithdrawToday()));
+             }else{
+                 break;
+             }
+         }
+    }
     
 }

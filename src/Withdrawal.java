@@ -32,9 +32,14 @@ public class Withdrawal extends Transaction {
        }else{
            if(cashDispenser.isSufficientCashAvailable(amount) && 
              (bankDatabase.getAvailableBalance(super.getAccountNumber()) >= amount)){
-                bankDatabase.credit(super.getAccountNumber(), amount);
-                cashDispenser.dispenseCash(amount);
-                System.out.println("Your cash has been dispensed. Please take your cash now.");
+                if(bankDatabase.isAvailableWithdraw(super.getAccountNumber(), amount)){
+                    bankDatabase.credit(super.getAccountNumber(), amount);
+                    cashDispenser.dispenseCash(amount);
+                    System.out.println("Your cash has been dispensed. Please take your cash now.");
+                }else{
+                    System.out.println("You Exceeded Your Withdraw Limit For Today.");
+                }
+                
            }else{
                System.out.println("Sorry, Cash Dispenser is Empty or Your Balace not sufficient\n");
            }
