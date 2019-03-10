@@ -8,7 +8,9 @@
  *
  * @author Tio
  */
-public class Deposito extends Account {    
+public class Deposito extends Account {
+    Screen screen = new Screen();
+    
     public static final int MAXWITHDRAW = 100;
     public static final int MAXTRANSFER = 500;
     public static final int MONTHLY_ADM = 1;
@@ -19,4 +21,11 @@ public class Deposito extends Account {
             theAvailableBalance, theTotalBalance);
     }
     
+    private void displayWithdrawalMenu(){
+         screen.displayMessageLine("1 - $20");
+         screen.displayMessageLine("2 - $40");
+         screen.displayMessageLine("3 - $60");
+         screen.displayMessageLine("4 - $100");
+         screen.displayMessageLine("0 - Cancel transaction");
+    }
 }
