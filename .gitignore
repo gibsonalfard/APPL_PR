@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.com
 *.class
 *.dll
@@ -5,3 +6,15 @@
 *.o
 *.properties
 *.so
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+/nbproject/private/
+=======
+/nbproject/private/
+>>>>>>> Imanda
+/build/
+=======
+/dist/
+>>>>>>> ffc8f403688b7588f033accc5eb67bfcb416356e
+>>>>>>> newGibran

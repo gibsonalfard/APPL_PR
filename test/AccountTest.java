@@ -83,5 +83,11 @@ public class AccountTest {
          assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
      }
      
-     
+     @Test
+     public void MinusTax(){
+         afterWithdrawal();
+         bd.credit(6665, 20);
+         
+         assertEquals("AD : Total Tidak sesuai",1020.00, bd.getTotalBalance(1234), 0);
+     }
 }

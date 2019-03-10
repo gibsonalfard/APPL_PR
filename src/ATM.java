@@ -28,6 +28,7 @@ public class ATM {
     
     Tanggal tanggal = new Tanggal();
 
+//<<<<<<< HEAD
     // no-argument ATM constructor initializes instance variables
     public ATM() {
         userAuthenticated = false; // user is not authenticated to start
@@ -214,6 +215,13 @@ public class ATM {
                 case ADD_TANGGAL:
                     tanggal.tanggalSekarang();
                     tanggal.addTanggal(1);
+                    
+                    bankDatabase.resetLimit();
+                    
+                    if(tanggal.getTanggal() == 3){
+                        bankDatabase.monthlyTax();
+                    }
+                    
                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");
