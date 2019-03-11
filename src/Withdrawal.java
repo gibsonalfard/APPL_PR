@@ -25,6 +25,7 @@ public class Withdrawal extends Transaction {
    @Override
    public void execute() {
        BankDatabase bankDatabase = getBankDatabase();
+       
        this.amount = displayMenuOfAmounts();
        
        if(this.amount == 6){
@@ -35,6 +36,8 @@ public class Withdrawal extends Transaction {
                 bankDatabase.credit(super.getAccountNumber(), amount);
                 cashDispenser.dispenseCash(amount);
                 System.out.println("Your cash has been dispensed. Please take your cash now.");
+                bankDatabase.setTransactionLog(getAccountNumber(), "Withdrawal", 0, amount, 0);
+                bankDatabase.displayTransactionLog(getAccountNumber());
            }else{
                System.out.println("Sorry, Cash Dispenser is Empty or Your Balace not sufficient\n");
            }

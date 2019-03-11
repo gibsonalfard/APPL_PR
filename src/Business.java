@@ -31,4 +31,18 @@ public class Business extends Account {
          screen.displayMessageLine("8 - $1000");
          screen.displayMessageLine("0 - Cancel transaction");
     }
+    
+    @Override
+    public int displayMainMenu(Screen screen, Keypad keypad) {
+        screen.displayMessageLine("\nMain menu:");
+        screen.displayMessageLine("1 - View my balance");
+        screen.displayMessageLine("2 - Withdraw cash");
+        screen.displayMessageLine("3 - Deposit funds");
+        screen.displayMessageLine("4 - Transfer");
+        screen.displayMessageLine("5 - Change PIN");
+        screen.displayMessageLine("0 - Exit\n");
+        screen.displayMessage("Enter a choice: ");
+        
+        return keypad.getInput(); // return user's selection
+    }
 }

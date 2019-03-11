@@ -23,21 +23,24 @@ public class Student extends Account {
     }
     
     // display the main menu and return an input selection
-    private int displayMainMenu() {
+    @Override
+    public int displayMainMenu(Screen screen, Keypad keypad) {
         screen.displayMessageLine("\nMain menu:");
         screen.displayMessageLine("1 - View my balance");
         screen.displayMessageLine("2 - Withdraw cash");
         screen.displayMessageLine("3 - Deposit funds");
-        screen.displayMessageLine("5 - Change PIN");
+        screen.displayMessageLine("4 - Change PIN");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
-        return keypad.getInput(); // return user's selection
+        int input = keypad.getInput(); 
+        
+        return input == 4 ? 5 : input; // return user's selection
     }
     
     private void displayWithdrawalMenu(){
          screen.displayMessageLine("1 - $20");
          screen.displayMessageLine("0 - Cancel transaction");
-    }
+    }    
     
     
 }

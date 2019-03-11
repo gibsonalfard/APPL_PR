@@ -4,6 +4,7 @@ public class ATM {
     private boolean adminAuthenticated;//whether user is admin
     private boolean userExited;
     private int currentAccountNumber; // current user's account number
+    private int currentPIN;
     private Screen screen; // ATM's screen
     private Keypad keypad; // ATM's keypad
     private CashDispenser cashDispenser; // ATM's cash dispenser
@@ -45,7 +46,7 @@ public class ATM {
         while (true) {
             screen.displayMessageLine("\nWelcome!");
             // loop while user is not yet authenticated
-            while (!userAuthenticated && loginAttempt < 3) {
+            while ((!userAuthenticated) && loginAttempt < 3) {
                 authenticateUser(); // authenticate user
             }
 
@@ -61,7 +62,8 @@ public class ATM {
                 }
                 currentAccountNumber = 0; // reset before next ATM session
             }
-            userAuthenticated = false; // reset before next ATM session
+            userAuthenticated = false;
+            adminAuthenticated = false; // reset before next ATM session
             screen.displayMessageLine("\nThank you! Goodbye!");
             loginAttempt = 0;
         }
@@ -75,7 +77,8 @@ public class ATM {
         int pin = keypad.getInput(); // input PIN
 
         currentAccountNumber = accountNumber;
-
+        currentPIN = pin;
+        
         // set userAuthenticated to boolean value returned by database
         adminAuthenticated
                 = bankDatabase.authenticateAdmin(accountNumber, pin);
@@ -87,6 +90,8 @@ public class ATM {
             currentAccountNumber = accountNumber; // save user's account #
             loginAttempt = 0;
             depositSlot = new DepositSlot(currentAccountNumber, 0, false);
+//        } else if (adminAuthenticated){
+//            performAdmins();
         } else if (bankDatabase.isAccountBlocked(accountNumber) && !isAdmin(accountNumber)) {
             screen.displayMessageLine("Your Account has been blocked, please contact the bank.");
         } else if (!bankDatabase.isUserExist(accountNumber) && !isAdmin(accountNumber)) {
@@ -117,7 +122,8 @@ public class ATM {
         // loop while user has not chosen option to exit system
         while (!userExited) {
             // show main menu and get user selection
-            int mainMenuSelection = displayMainMenu();
+            int mainMenuSelection = bankDatabase.getSpecificAccount(currentAccountNumber, currentPIN)
+                    .displayMainMenu(screen, keypad);
 
             // decide how to proceed based on user's menu selection
             switch (mainMenuSelection) {
