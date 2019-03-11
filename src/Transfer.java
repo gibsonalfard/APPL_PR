@@ -34,6 +34,7 @@ public class Transfer extends Transaction{
                 if (processTransfer==1){
                     screen.displayMessage("\nProcessing Transfer......\n");
                     promptTransfer(accountTrans,amount);
+                    bankDatabase.setTransactionLog(getAccountNumber(), "Transfer", accountTrans, 0, (int) amount);
                     amount = 0;//for cancelling the transfer
                 }else{
                     screen.displayMessage("\nCanceling Transfer.....\n");
