@@ -1,3 +1,7 @@
+
+import java.io.IOException;
+import java.util.List;
+
 public class Deposit extends Transaction {
    private double amount; // amount to deposit
    private Keypad keypad = new Keypad(); // reference to keypad
@@ -45,7 +49,7 @@ public class Deposit extends Transaction {
                                  "until we verify the amount of any enclosed cash and your checks clear.\n");
             
             bankDatabase.debit(super.getAccountNumber(), amount);
-//            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
+            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
             
             bankDatabase.setBankStatement(getAccountNumber(), "Deposit", 0,0,(int)amount,"No");
             
@@ -68,5 +72,40 @@ public class Deposit extends Transaction {
       else {
          return (double) input / 100; // return dollar amount
       }
+   }
+   
+   public void displayDepVal() throws IOException{
+       BankDatabase bankDatabase = new BankDatabase();
+       List<BankStatement> subList = bankDatabase.getList();
+       
+       if(subList != null){
+           int size = subList.size();
+           
+           System.out.println();
+           System.out.println("=========================================================================================================");
+           System.out.println("Id Statement\tAccount Number\tDate\t\tDescription\tDeposit");
+           System.out.println("=========================================================================================================");
+           
+           for(int i = 0; i < size ; i++){
+               if(subList.get(i).getDepositValidate().equals("No")){
+                   System.out.print(subList.get(i).getIdStatement()+"\t\t");
+                   System.out.print(subList.get(i).getAccount()+"\t");
+                   System.out.print(subList.get(i).getDate());
+                   System.out.print(subList.get(i).getDescription());
+                   System.out.print(subList.get(i).getDeposit());
+                   
+               }
+           }
+       
+           System.out.println("Enter Id Statement to validate :");
+           int input = keypad.getInput();
+           
+           if (input == CANCELED) {
+                System.out.println("Canceling Validation...");
+           }
+           else {
+               bankDatabase.updateDepVal(input);
+           }
+       }
    }
 } 

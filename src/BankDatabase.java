@@ -149,6 +149,14 @@ public class BankDatabase {
     public double getWithdrawalToday(int theAccountNumber) {
         return getAccount(theAccountNumber).getWithdrawToday();
     }
+    
+    public List<BankStatement> getList() throws IOException {
+        if (this.list.isEmpty()) {
+            return null;
+        }
+        return this.list;
+    }
+    
     private int generateIdStatement(){
         int size = this.list.size();
         if (size != 0){
