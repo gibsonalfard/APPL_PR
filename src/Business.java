@@ -64,4 +64,8 @@ public class Business extends Account {
     public boolean isAvailableForWithdraw(double amount){
        return Business.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
     }
+    @Override
+    public boolean isAvailableForTransfer(double amount){
+       return Business.MAXTRANSFER >= (this.getTransferToday()+amount);
+    }
 }

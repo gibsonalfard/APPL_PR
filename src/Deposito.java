@@ -68,5 +68,9 @@ public class Deposito extends Account {
     public boolean isAvailableForWithdraw(double amount){
        return Deposito.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
     }
+    @Override
+    public boolean isAvailableForTransfer(double amount){
+       return Business.MAXTRANSFER >= (this.getTransferToday()+amount);
+    }
 }
 

@@ -8,6 +8,10 @@ public class Account {
     private int transferToday = 0;
     private int WithdrawToday = 0;
     private Keypad keypad;
+    
+    public static int MAXWITHDRAW;
+    public int MAXTRANSFER;
+    public int MONTHLY_ADM = 1;
 
     // Account constructor initializes attributes
     public Account(int theAccountNumber, int thePIN,
@@ -115,6 +119,10 @@ public class Account {
     }
     
     public boolean isAvailableForWithdraw(double amount){
+       return true;
+    }
+    
+    public boolean isAvailableForTransfer(double amount){
        return true;
     }
 } 

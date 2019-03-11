@@ -7,13 +7,13 @@ public class BankDatabase {
         accounts = new Account[10]; // just 2 accounts for testing
         accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
         accounts[1] = new Student(8765, 5678, 200.0, 200.0);
-        accounts[2] = new Business(6665, 1234, 700.0, 900.0);
+        accounts[2] = new Business(6665, 1234, 111700.0, 111900.0);
         accounts[3] = new Deposito(6666, 1234, 1700.0, 1900.0);
         accounts[4] = new Admin(00000, 00000, 0.0, 0.0);
         accAmount = accounts.length;
     }
 
-    private Account getAccount(int accountNumber) {
+    public Account getAccount(int accountNumber) {
         int ak;
         for (ak = 0; ak < accAmount; ak++) {
             if (accounts[ak] == null){break;}

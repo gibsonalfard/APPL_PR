@@ -94,15 +94,19 @@ public class Transfer extends Transaction{
         
         if (bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount && bankDatabase.getTransferToday(super.getAccountNumber())<=Deposito.MAXTRANSFER){
             bankDatabase.credit(super.getAccountNumber(), (amount + (amount*(1.5/100)))); //decrease the money of transfer user
-            bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
+            bankDatabase.transfer(accountTrans, amount);//increase the money of receiveramount you transfer is more than your available balance"
             bankDatabase.setTransferToday(super.getAccountNumber(), amount);
             screen.displayMessage("\nDone!\n");
-        }else if (bankDatabase.getTransferToday(super.getAccountNumber())<=Business.MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
+        }else if (bankDatabase.getTransferToday(super.getAccountNumber())<=bankDatabase.getAccount(super.getAccountNumber()).MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
                 bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
                 bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
                 bankDatabase.setTransferToday(super.getAccountNumber(), amount);
                 screen.displayMessage("\nDone!\n");
-            }else{
+            }else if (bankDatabase.getTransferToday(super.getAccountNumber())>=bankDatabase.getAccount(super.getAccountNumber()).MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
+                screen.displayMessage("\n You Exceeded Your Transfer Limit For Today.");
+                screen.displayMessage("\nCanceling Transfer.....\n");
+            } 
+            else{
                 screen.displayMessage("\n The amount you transfer is more than your available balance");
                 screen.displayMessage("\nCanceling Transfer.....\n");
             }
