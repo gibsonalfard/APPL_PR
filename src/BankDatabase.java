@@ -166,10 +166,18 @@ public class BankDatabase {
          for (ak = 0; ak < (accAmount-1); ak++) {
              if(accounts[ak] != null){
                  accounts[ak].setWithdrawToday((-1*accounts[ak].getWithdrawToday()));
+                 accounts[ak].setTransferToday((-1*accounts[ak].getTransferToday()));
              }else{
                  break;
              }
          }
     }
-    
+    public String getAccountType(int userAccountNumber){
+        Account userAccount= getAccount(userAccountNumber);
+        return userAccount.getAccountType();
+    }
+    public void setTransferToday(int userAccountNumber, double transferToday) {
+        Account userAccount= getAccount(userAccountNumber);
+        userAccount.setTransferToday(transferToday);
+    }
 }

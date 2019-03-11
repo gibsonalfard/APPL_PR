@@ -8,6 +8,7 @@ public class Transfer extends Transaction{
     private Keypad keypad; // reference to keypad
     private int processTransfer; //actually boolean for confirm the prosese
     private final static int CANCELED = 0; // constant for cancel option
+    private Tanggal date;
 
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase,
             Keypad atmKeypad) {
@@ -89,8 +90,23 @@ public class Transfer extends Transaction{
 
     private void promptTransfer(int accountTrans, double amount) {
         BankDatabase bankDatabase = getBankDatabase();
-        bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
-        bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
+        Screen screen = getScreen(); // get reference to screen
+        
+        if (bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount && bankDatabase.getTransferToday(super.getAccountNumber())<=Deposito.MAXTRANSFER){
+            bankDatabase.credit(super.getAccountNumber(), (amount + (amount*(1.5/100)))); //decrease the money of transfer user
+            bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
+            bankDatabase.setTransferToday(super.getAccountNumber(), amount);
+            screen.displayMessage("\nDone!\n");
+        }else if (bankDatabase.getTransferToday(super.getAccountNumber())<=Business.MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
+                bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
+                bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
+                bankDatabase.setTransferToday(super.getAccountNumber(), amount);
+                screen.displayMessage("\nDone!\n");
+            }else{
+                screen.displayMessage("\n The amount you transfer is more than your available balance");
+                screen.displayMessage("\nCanceling Transfer.....\n");
+            }
+        
     }
     
 }
