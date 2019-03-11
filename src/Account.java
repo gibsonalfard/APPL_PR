@@ -1,4 +1,3 @@
-
 public class Account {
 
     private int accountNumber; // account number
@@ -8,6 +7,7 @@ public class Account {
     private boolean isBlocked;
     private int transferToday = 0;
     private int WithdrawToday = 0;
+    private Keypad keypad;
 
     // Account constructor initializes attributes
     public Account(int theAccountNumber, int thePIN,
@@ -32,6 +32,10 @@ public class Account {
     // returns the total balance
     public double getTotalBalance() {
         return totalBalance;
+    }
+    
+    public void setAvailableBalance(double amount){
+        this.availableBalance = amount;
     }
 
     /* INI ANEH, TRF kok NAMBAH? */
@@ -89,17 +93,29 @@ public class Account {
         this.WithdrawToday += WithdrawToday;
     }
     
+    public int displayWithdrawalMenu() {
+       return keypad.getInput(); // return user's selection
+    }
+    
     public int displayMainMenu(Screen screen, Keypad keypad) {
         screen.displayMessageLine("\nMain menu:");
         screen.displayMessageLine("1 - View my balance");
         screen.displayMessageLine("2 - Withdraw cash");
         screen.displayMessageLine("3 - Deposit funds");
         screen.displayMessageLine("4 - Change PIN");
+        screen.displayMessageLine("5 - Bank Statement");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         int input = keypad.getInput(); 
         
-        return input == 4 ? 5 : input; // return user's selection
+        return input == 4 ? 5 : (input == 5 ? 6 : input); // return user's selection
+    }
+    
+    public void payTax(){
+        
+    }
+    
+    public boolean isAvailableForWithdraw(double amount){
+       return true;
     }
 } 
-

@@ -8,13 +8,14 @@
  *
  * @author ACER
  */
-public class TransactionLog {
+public class BankStatement {
     private int account;
     private String date;
     private String description;
     private int ref;
-    private int withdrawal;
-    private int deposit;
+    private double withdrawal;
+    private double deposit;
+    private String DepositValidate;
     private double balance;
     
     public int getAccount() {
@@ -49,22 +50,30 @@ public class TransactionLog {
         this.ref = ref;
     }
 
-    public int getWithdrawal() {
+    public double getWithdrawal() {
         return withdrawal;
     }
 
-    public void setWithdrawal(int withdrawal) {
+    public void setWithdrawal(double withdrawal) {
         this.withdrawal = withdrawal;
     }
 
-    public int getDeposit() {
+    public double getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(int deposit) {
+    public void setDeposit(double deposit) {
         this.deposit = deposit;
     }
 
+    public String getDepositValidate() {
+        return DepositValidate;
+    }
+
+    public void setDepositValidate(String DepositValidate) {
+        this.DepositValidate = DepositValidate;
+    }
+    
     public double getBalance() {
         return balance;
     }

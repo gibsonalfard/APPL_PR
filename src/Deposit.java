@@ -1,6 +1,6 @@
 public class Deposit extends Transaction {
    private double amount; // amount to deposit
-   private Keypad keypad; // reference to keypad
+   private Keypad keypad = new Keypad(); // reference to keypad
    private static DepositSlot[] depositSlot = new DepositSlot[100]; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
    
@@ -46,6 +46,7 @@ public class Deposit extends Transaction {
             
             bankDatabase.debit(super.getAccountNumber(), amount);
             this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
+            bankDatabase.setBankStatement(getAccountNumber(), "Deposit", 0,0,(int)amount,"No");
        }
    }
 

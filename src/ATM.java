@@ -19,6 +19,7 @@ public class ATM {
     private static final int DEPOSIT = 3;
     private static final int TRANSFER = 4;
     private static final int PASSWORD = 5;
+    private static final int BANK_STATEMENT =6;
     private static final int EXIT = 0;
 
     private static final int ADD_NASABAH = 1;
@@ -29,6 +30,7 @@ public class ATM {
     
     Tanggal tanggal = new Tanggal();
 
+//<<<<<<< HEAD
     // no-argument ATM constructor initializes instance variables
     public ATM() {
         userAuthenticated = false; // user is not authenticated to start
@@ -147,6 +149,9 @@ public class ATM {
                     bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
 
                     break;
+                case BANK_STATEMENT:
+                    bankDatabase.displayBankStatement(currentAccountNumber);
+                    break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");
                     userExited = true; // this ATM session should end
@@ -208,6 +213,8 @@ public class ATM {
                             = createTransaction(mainMenuSelection);
 
 //                    currentTransaction.(); // execute transaction
+                    
+                    
                     break;
                 case MONEY_DISPEN:
                     cashDispenser.showCashDispenser();
@@ -215,6 +222,13 @@ public class ATM {
                 case ADD_TANGGAL:
                     tanggal.tanggalSekarang();
                     tanggal.addTanggal(1);
+                    
+                    bankDatabase.resetLimit();
+                    
+                    if(tanggal.getTanggal() == 3){
+                        bankDatabase.monthlyTax();
+                    }
+                    
                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");

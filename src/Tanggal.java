@@ -19,6 +19,10 @@ public class Tanggal {
                 + " - " + now.get(Calendar.YEAR));
     }
     
+    public int getTanggal(){
+        return Tanggal.now.get(Calendar.DATE);
+    }
+    
     public void menuTanggal(){
         
     }

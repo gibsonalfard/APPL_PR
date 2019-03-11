@@ -1,12 +1,14 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class BankDatabase {
     private Account[] accounts; // array of Accounts    
     private int accAmount;
-    private List<TransactionLog> list = new ArrayList<>();
+    private List<BankStatement> list = new ArrayList<>();
     
     public BankDatabase() {
       
@@ -22,6 +24,7 @@ public class BankDatabase {
     private Account getAccount(int accountNumber) {
         int ak;
         for (ak = 0; ak < accAmount; ak++) {
+            if (accounts[ak] == null){break;}
             if (accountNumber == accounts[ak].getAccountNumber()) {
                 return accounts[ak];
             }
@@ -146,12 +149,14 @@ public class BankDatabase {
         return getAccount(theAccountNumber).getWithdrawToday();
     }
     
-    public void setTransactionLog (int account, String description, int ref, int withdrawal, int deposit) {
-       TransactionLog tr = new TransactionLog();
+
+    public void setBankStatement(int account, String description, int ref, double withdrawal, double deposit, String depVal) {
+       BankStatement tr = new BankStatement();
        Tanggal tgl = new Tanggal();
        tr.setAccount(account);
        tr.setDate(tgl.dateNow());
        tr.setDeposit(deposit);
+       tr.setDepositValidate(depVal);
        tr.setDescription(description);
        tr.setRef(ref);
        tr.setWithdrawal(withdrawal);
@@ -159,46 +164,53 @@ public class BankDatabase {
        this.list.add(tr);
     }
 
-    public void displayTransactionLog(int accountNumber){
-      List<TransactionLog> subList = this.list;
-        
-      if(!subList.isEmpty()){
+    public void displayBankStatement(int accountNumber){
+      
+      if(!list.isEmpty()){
         int size;
         
-        size = subList.size();
+        size = list.size();
+        
         System.out.println();
-        System.out.println("====================================================================================================");
-        System.out.println("No\tDate\t\tDescription\t\tRef\tWithdrawal\tDeposit\t\tBalance");
-        System.out.println("====================================================================================================");
+        System.out.println("=========================================================================================================");
+        System.out.println("Date\t\tDescription\tRef\tWithdrawal\tDeposit \tDeposit Valid\tBalance");
+        System.out.println("=========================================================================================================");
         
         for(int i = 0;i < size;i++){
-            if(subList.get(i).getAccount() == accountNumber){
-                System.out.print((i+1)+"\t");
-                System.out.print(subList.get(i).getDate()+"\t");
-                System.out.print(subList.get(i).getDescription()+"\t");
+            if(list.get(i).getAccount() == accountNumber){
+               
+                System.out.print(list.get(i).getDate()+"\t");
+                System.out.print(list.get(i).getDescription()+"\t");
                 
-                int Ref = subList.get(i).getRef();
+                int Ref = list.get(i).getRef();
                 if(Ref != 0){
-                    System.out.print(Ref+"\t");
+                    System.out.print(Ref);
                 }else{
-                    System.out.print("\t\t");
+                    System.out.print("\t");
                 }
                 
-                int Withdrawal = subList.get(i).getWithdrawal();
+                double Withdrawal = list.get(i).getWithdrawal();
                 if(Withdrawal != 0){
-                    System.out.print(Withdrawal+"\t");
-                }else{
-                    System.out.print("\t\t");
-                }
-                
-                int Deposit = subList.get(i).getDeposit();
-                if(Deposit != 0){
-                    System.out.print(Deposit+"\t");
+                    System.out.print(Withdrawal+"\t\t");
                 }else{
                     System.out.print("\t\t\t");
                 }
                 
-                System.out.print(subList.get(i).getBalance()+"\t");
+                double Deposit = list.get(i).getDeposit();
+                if(Deposit != 0){
+                    System.out.print(Deposit+"\t\t");
+                }else{
+                    System.out.print("\t\t");
+                }
+                
+                String depVal = list.get(i).getDepositValidate();
+                if(depVal != null){
+                    System.out.print(depVal+"\t\t");
+                }else{
+                    System.out.print("\t\t");
+                }
+                
+                System.out.print(list.get(i).getBalance());
                 System.out.println();
             }
         }
@@ -207,4 +219,37 @@ public class BankDatabase {
         }
         
     }
+
+    public boolean isAvailableWithdraw(int theAccountNumber, double amount){
+        return getAccount(theAccountNumber).isAvailableForWithdraw(amount);
+    }
+    
+    public void monthlyTax(){
+        int ak;
+         for (ak = 0; ak < (accAmount-1); ak++) {
+             if(accounts[ak] == null){break;}
+             
+             if(!"Student".equals(accounts[ak].getAccountType())){
+                 accounts[ak].payTax();
+             }
+         }
+    }
+   
+    public int getWithdrawal(int userAccountNumber){
+        Account userAccount= getAccount(userAccountNumber);
+        return userAccount.displayWithdrawalMenu();
+    }
+
+    public void resetLimit(){
+         int ak;
+         for (ak = 0; ak < (accAmount-1); ak++) {
+             if(accounts[ak] != null){
+                 accounts[ak].setWithdrawToday((-1*accounts[ak].getWithdrawToday()));
+             }else{
+                 break;
+             }
+         }
+    }
+    
+
 }

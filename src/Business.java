@@ -9,10 +9,12 @@
  * @author Tio
  */
 public class Business extends Account {    
-    Screen screen = new Screen();
+    
     public static final int MAXWITHDRAW = 1000;
     public static final int MAXTRANSFER = 10000;
     public static final int MONTHLY_ADM = 5;
+    private Screen screen = new Screen(); // ATM's screen
+    private Keypad keypad = new Keypad(); 
     
     public Business(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -20,17 +22,6 @@ public class Business extends Account {
             theAvailableBalance, theTotalBalance);
     }
     
-    public void displayWithdrawalMenu(){
-         screen.displayMessageLine("1 - $20");
-         screen.displayMessageLine("2 - $40");
-         screen.displayMessageLine("3 - $60");
-         screen.displayMessageLine("4 - $100");
-         screen.displayMessageLine("5 - $200");         
-         screen.displayMessageLine("6 - $400");
-         screen.displayMessageLine("7 - $800");
-         screen.displayMessageLine("8 - $1000");
-         screen.displayMessageLine("0 - Cancel transaction");
-    }
     
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
@@ -45,5 +36,35 @@ public class Business extends Account {
         screen.displayMessage("Enter a choice: ");
         
         return keypad.getInput(); // return user's selection
+    }
+    
+    @Override
+    public void payTax(){
+        if((getTotalBalance()-Business.MONTHLY_ADM) >= 0){
+            credit(Business.MONTHLY_ADM);
+        }else{
+            credit(this.getTotalBalance());
+            this.setAvailableBalance(this.getAvailableBalance()+(getTotalBalance()-Deposito.MONTHLY_ADM));
+        }
+    }
+    
+    @Override
+    public int displayWithdrawalMenu(){
+        screen.displayMessageLine("\nLimit Withdraw for Today is : $"+(Business.MAXWITHDRAW-getWithdrawToday())+".");
+        screen.displayMessageLine("\nWithdrawal Menu:");
+        screen.displayMessageLine("1 - $20");
+        screen.displayMessageLine("2 - $40");
+        screen.displayMessageLine("3 - $60");
+        screen.displayMessageLine("4 - $100");
+        screen.displayMessageLine("5 - $200");
+        screen.displayMessageLine("0 - Cancel transaction");
+        screen.displayMessage("\nChoose a withdrawal amount: ");
+         
+        return keypad.getInput(); // get user input through keypad   
+    }
+    
+    @Override
+    public boolean isAvailableForWithdraw(double amount){
+       return Business.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
     }
 }
