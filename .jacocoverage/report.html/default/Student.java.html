@@ -23,26 +23,26 @@ public class Student extends Account {
     
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
-<span class="nc" id="L26">        screen.displayMessageLine(&quot;\nMain menu:&quot;);</span>
-<span class="nc" id="L27">        screen.displayMessageLine(&quot;1 - View my balance&quot;);</span>
-<span class="nc" id="L28">        screen.displayMessageLine(&quot;2 - Withdraw cash&quot;);</span>
-<span class="nc" id="L29">        screen.displayMessageLine(&quot;3 - Deposit funds&quot;);</span>
-<span class="nc" id="L30">        screen.displayMessageLine(&quot;4 - Change PIN&quot;);</span>
-<span class="nc" id="L31">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
-<span class="nc" id="L32">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
-<span class="nc" id="L33">        int input = keypad.getInput(); </span>
+<span class="fc" id="L26">        screen.displayMessageLine(&quot;\nMain menu:&quot;);</span>
+<span class="fc" id="L27">        screen.displayMessageLine(&quot;1 - View my balance&quot;);</span>
+<span class="fc" id="L28">        screen.displayMessageLine(&quot;2 - Withdraw cash&quot;);</span>
+<span class="fc" id="L29">        screen.displayMessageLine(&quot;3 - Deposit funds&quot;);</span>
+<span class="fc" id="L30">        screen.displayMessageLine(&quot;4 - Change PIN&quot;);</span>
+<span class="fc" id="L31">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
+<span class="fc" id="L32">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
+<span class="fc" id="L33">        int input = keypad.getInput(); </span>
         
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        return input == 4 ? 5 : input; // return user's selection</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        return input == 4 ? 5 : input; // return user's selection</span>
     }
    
     @Override
     public int displayWithdrawalMenu(){
         int input;
-<span class="nc" id="L41">        screen.displayMessageLine(&quot;\nLimit Withdraw for Today is : $&quot;+(Student.MAXWITHDRAW-getWithdrawToday())+&quot;.&quot;);</span>
-<span class="nc" id="L42">        screen.displayMessageLine(&quot;\nWithdrawal Menu:&quot;);</span>
-<span class="nc" id="L43">        screen.displayMessageLine(&quot;1 - $20&quot;);</span>
-<span class="nc" id="L44">        screen.displayMessageLine(&quot;0 - Cancel transaction&quot;);</span>
-<span class="nc" id="L45">        screen.displayMessage(&quot;\nChoose a withdrawal amount: &quot;);</span>
+<span class="fc" id="L41">        screen.displayMessageLine(&quot;\nLimit Withdraw for Today is : $&quot;+(Student.MAXWITHDRAW-getWithdrawToday())+&quot;.&quot;);</span>
+<span class="fc" id="L42">        screen.displayMessageLine(&quot;\nWithdrawal Menu:&quot;);</span>
+<span class="fc" id="L43">        screen.displayMessageLine(&quot;1 - $20&quot;);</span>
+<span class="fc" id="L44">        screen.displayMessageLine(&quot;0 - Cancel transaction&quot;);</span>
+<span class="fc" id="L45">        screen.displayMessage(&quot;\nChoose a withdrawal amount: &quot;);</span>
         
 <span class="nc" id="L47">        input = keypad.getInput();</span>
         

@@ -171,10 +171,10 @@
 <span class="fc" id="L171">            int mainMenuSelection = displayAdminMenu();</span>
 
             // decide how to proceed based on user's menu selection
-<span class="pc bpc" id="L174" title="1 of 7 branches missed.">            switch (mainMenuSelection) {</span>
+<span class="pc bpc" id="L174" title="2 of 7 branches missed.">            switch (mainMenuSelection) {</span>
                 // user chose to perform one of three transaction types
                 case ADD_NASABAH:
-<span class="fc" id="L177">                    currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);</span>
+<span class="nc" id="L177">                    currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);</span>
 <span class="nc" id="L178">                    currentTransaction.execute();</span>
                 case UNBLOCK:
 <span class="fc" id="L180">                    showUnblockMenu(keypad, bankDatabase, screen);</span>
@@ -240,14 +240,14 @@
     private Transaction createTransaction(int type) {
 <span class="fc" id="L241">        Transaction temp = null;</span>
 
-<span class="pc bpc" id="L243" title="5 of 7 branches missed.">        switch (type) {</span>
+<span class="pc bpc" id="L243" title="4 of 7 branches missed.">        switch (type) {</span>
             case BALANCE_INQUIRY:
 <span class="fc" id="L245">                temp = new BalanceInquiry(</span>
                         currentAccountNumber, screen, bankDatabase);
 <span class="fc" id="L247">                break;</span>
             case WITHDRAWAL:
-<span class="nc" id="L249">                temp = new Withdrawal(currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);</span>
-<span class="nc" id="L250">                break;</span>
+<span class="fc" id="L249">                temp = new Withdrawal(currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);</span>
+<span class="fc" id="L250">                break;</span>
             case DEPOSIT:
 <span class="fc" id="L252">                temp = new Deposit(currentAccountNumber, screen, bankDatabase, keypad, depositSlot);</span>
 <span class="fc" id="L253">                break;</span>
