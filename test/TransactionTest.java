@@ -46,8 +46,6 @@ public class TransactionTest {
         int expResult = 0;
         int result = instance.getAccountNumber();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -60,8 +58,6 @@ public class TransactionTest {
         Screen expResult = null;
         Screen result = instance.getScreen();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -74,8 +70,6 @@ public class TransactionTest {
         BankDatabase expResult = null;
         BankDatabase result = instance.getBankDatabase();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -86,8 +80,6 @@ public class TransactionTest {
         System.out.println("execute");
         Transaction instance = null;
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     public class TransactionImpl extends Transaction {

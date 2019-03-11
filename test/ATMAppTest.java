@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,13 +43,24 @@ public class ATMAppTest {
     /**
      * Test of main method, of class ATMApp.
      */
+    
+//    DINONAKTIFKAN SEMENTARA 
+//    @Test
+//    public void testMain() {
+//        System.out.println("main");
+//        String[] args = null;
+//        ATMApp.main(args);
+//    }
+    
+//    AKTIFKAN JIKA INGIN MENGAMBIL INPUT DARI FILE INPUT.IN
     @Test
-    public void testMain() {
+    public void testMain() throws IOException {
         System.out.println("main");
         String[] args = null;
+        final InputStream original = System.in;
+        final FileInputStream fips = new FileInputStream(new File("test/input.in"));
+        System.setIn(fips);
         ATMApp.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.setIn(original);
     }
-    
 }

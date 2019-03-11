@@ -46,8 +46,6 @@ public class DepositSlotTest {
         boolean expResult = false;
         boolean result = instance.isEnvelopeReceived();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -60,8 +58,6 @@ public class DepositSlotTest {
         double amount = 0.0;
         DepositSlot instance = null;
         instance.addDeposit(myAccount, amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,8 +68,6 @@ public class DepositSlotTest {
         System.out.println("validateDeposit");
         DepositSlot instance = null;
         instance.validateDeposit();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

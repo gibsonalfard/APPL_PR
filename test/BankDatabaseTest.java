@@ -49,16 +49,16 @@ public class BankDatabaseTest {
         BankDatabase instance = new BankDatabase();
         Account expResult = null;
         Account result = instance.getSpecificAccount(userAccountNumber, userPIN);
+        if(result == null){
+            System.out.println("result null");
+        }
         assert(expResult != result);
         
         //2. NULL EXPECTED
-        userAccountNumber = -0;
-        userPIN = -0;
+        userAccountNumber = -1234;
+        userPIN = -4321;
         result = instance.getSpecificAccount(userAccountNumber, userPIN);
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assert(expResult == result);
     }
 
     /**
@@ -67,13 +67,16 @@ public class BankDatabaseTest {
     @Test
     public void testCheckAvail() {
         System.out.println("checkAvail");
-        int accountNumber = 0;
+        
+        //1. FALSE EXPECTED
+        int accountNumber = 1234;
         BankDatabase instance = new BankDatabase();
         boolean expResult = false;
         boolean result = instance.checkAvail(accountNumber);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        //2. TRUE EXPECTED
+        assertTrue(instance.checkAvail(1234));
     }
 
     /**
@@ -82,14 +85,14 @@ public class BankDatabaseTest {
     @Test
     public void testAuthenticateAdmin() {
         System.out.println("authenticateAdmin");
-        int userAccountNumber = 0;
-        int userPIN = 0;
+        
+        //1. EXPECTED TRUE
+        int userAccountNumber = 00000;
+        int userPIN = 000000;
         BankDatabase instance = new BankDatabase();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.authenticateAdmin(userAccountNumber, userPIN);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -98,14 +101,14 @@ public class BankDatabaseTest {
     @Test
     public void testAuthenticateUser() {
         System.out.println("authenticateUser");
-        int userAccountNumber = 0;
-        int userPIN = 0;
+        
+        //1. EXPECTED TRUE
+        int userAccountNumber = 1234;
+        int userPIN = 4321;
         BankDatabase instance = new BankDatabase();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.authenticateUser(userAccountNumber, userPIN);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -114,13 +117,13 @@ public class BankDatabaseTest {
     @Test
     public void testSeekAccountNumber() {
         System.out.println("seekAccountNumber");
-        int accountNumber = 0;
+        
+        //1. EXPECTED TRUE
+        int accountNumber = 1234;
         BankDatabase instance = new BankDatabase();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.seekAccountNumber(accountNumber);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -129,13 +132,13 @@ public class BankDatabaseTest {
     @Test
     public void testGetAvailableBalance() {
         System.out.println("getAvailableBalance");
-        int userAccountNumber = 0;
+        
+        //1. EXPECTED TRUE
+        int userAccountNumber = 1234;
         BankDatabase instance = new BankDatabase();
-        double expResult = 0.0;
+        double expResult = 1000.0;
         double result = instance.getAvailableBalance(userAccountNumber);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -144,13 +147,13 @@ public class BankDatabaseTest {
     @Test
     public void testGetTotalBalance() {
         System.out.println("getTotalBalance");
-        int userAccountNumber = 0;
+        
+        //EXPECTED TRUE
+        int userAccountNumber = 1234;
         BankDatabase instance = new BankDatabase();
-        double expResult = 0.0;
+        double expResult = 1200.0;
         double result = instance.getTotalBalance(userAccountNumber);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -163,8 +166,6 @@ public class BankDatabaseTest {
         double amount = 0.0;
         BankDatabase instance = new BankDatabase();
         instance.transfer(userAccountNumber, amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -177,8 +178,6 @@ public class BankDatabaseTest {
         double amount = 0.0;
         BankDatabase instance = new BankDatabase();
         instance.credit(userAccountNumber, amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -191,8 +190,6 @@ public class BankDatabaseTest {
         double amount = 0.0;
         BankDatabase instance = new BankDatabase();
         instance.debit(userAccountNumber, amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -206,8 +203,6 @@ public class BankDatabaseTest {
         int newPIN = 0;
         BankDatabase instance = new BankDatabase();
         instance.changeAccountPIN(userAccountNumber, curPIN, newPIN);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -219,8 +214,6 @@ public class BankDatabaseTest {
         int userAccountNumber = 0;
         BankDatabase instance = new BankDatabase();
         instance.blockAccount(userAccountNumber);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -232,8 +225,6 @@ public class BankDatabaseTest {
         int userAccountNumber = 0;
         BankDatabase instance = new BankDatabase();
         instance.unblockAccount(userAccountNumber);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -247,8 +238,6 @@ public class BankDatabaseTest {
         boolean expResult = false;
         boolean result = instance.isAccountBlocked(userAccountNumber);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -262,8 +251,6 @@ public class BankDatabaseTest {
         boolean expResult = false;
         boolean result = instance.isUserExist(userAccountNumber);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -278,8 +265,6 @@ public class BankDatabaseTest {
         double theTotalBalance = 0.0;
         BankDatabase instance = new BankDatabase();
         instance.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -293,8 +278,6 @@ public class BankDatabaseTest {
         double expResult = 0.0;
         double result = instance.getTransferToday(theAccountNumber);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -308,8 +291,6 @@ public class BankDatabaseTest {
         double expResult = 0.0;
         double result = instance.getWithdrawalToday(theAccountNumber);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -324,8 +305,6 @@ public class BankDatabaseTest {
         boolean expResult = false;
         boolean result = instance.isAvailableWithdraw(theAccountNumber, amount);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -336,8 +315,6 @@ public class BankDatabaseTest {
         System.out.println("monthlyTax");
         BankDatabase instance = new BankDatabase();
         instance.monthlyTax();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -351,8 +328,6 @@ public class BankDatabaseTest {
         int expResult = 0;
         int result = instance.getWithdrawal(userAccountNumber);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -363,8 +338,6 @@ public class BankDatabaseTest {
         System.out.println("resetLimit");
         BankDatabase instance = new BankDatabase();
         instance.resetLimit();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

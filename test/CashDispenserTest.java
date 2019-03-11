@@ -45,8 +45,6 @@ public class CashDispenserTest {
         int amount = 0;
         CashDispenser instance = new CashDispenser();
         instance.dispenseCash(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -60,8 +58,6 @@ public class CashDispenserTest {
         boolean expResult = false;
         boolean result = instance.isSufficientCashAvailable(amount);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,8 +68,6 @@ public class CashDispenserTest {
         System.out.println("showCashDispenser");
         CashDispenser instance = new CashDispenser();
         instance.showCashDispenser();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

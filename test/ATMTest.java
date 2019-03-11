@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,11 +44,9 @@ public class ATMTest {
      */
     @Test
     public void testRun() {
-        System.out.println("run");
+        System.out.println("run");  
         ATM instance = new ATM();
         instance.run();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -59,8 +60,6 @@ public class ATMTest {
         Screen screen = null;
         ATM instance = new ATM();
         instance.showUnblockMenu(keypad, bankDatabase, screen);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

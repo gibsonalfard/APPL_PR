@@ -44,8 +44,6 @@ public class DepositTest {
         System.out.println("execute");
         Deposit instance = null;
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

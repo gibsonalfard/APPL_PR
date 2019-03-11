@@ -44,8 +44,6 @@ public class TransferTest {
         System.out.println("execute");
         Transfer instance = null;
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

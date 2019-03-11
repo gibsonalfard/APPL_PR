@@ -44,8 +44,6 @@ public class TanggalTest {
         System.out.println("tanggalSekarang");
         Tanggal instance = new Tanggal();
         instance.tanggalSekarang();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,8 +55,6 @@ public class TanggalTest {
         int tambahkanJumlahHari = 0;
         Tanggal instance = new Tanggal();
         instance.addTanggal(tambahkanJumlahHari);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -71,8 +67,6 @@ public class TanggalTest {
         int expResult = 0;
         int result = instance.getTanggal();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -83,8 +77,5 @@ public class TanggalTest {
         System.out.println("menuTanggal");
         Tanggal instance = new Tanggal();
         instance.menuTanggal();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-    
 }

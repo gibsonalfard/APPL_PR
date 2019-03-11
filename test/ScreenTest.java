@@ -45,8 +45,6 @@ public class ScreenTest {
         String message = "";
         Screen instance = new Screen();
         instance.displayMessage(message);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,8 +56,6 @@ public class ScreenTest {
         String message = "";
         Screen instance = new Screen();
         instance.displayMessageLine(message);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -71,8 +67,6 @@ public class ScreenTest {
         double amount = 0.0;
         Screen instance = new Screen();
         instance.displayDollarAmount(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

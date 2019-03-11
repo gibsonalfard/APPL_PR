@@ -52,7 +52,7 @@ public class AccountTest_edit {
          assertFalse("authenticateUser(12345, 54321) "
                  + "BERHASIL-SEHARUSNYA GAGAL",bd.authenticateUser(12345, 54321));
          assertFalse("authenticateUser(-1234, 4321) "
-                 + "BERHASIL-SEHARUSNYA GAGAL",bd.authenticateUser(-1234, 4321));
+                 + "BERHASIL-SEHARUSNYA GAGAL",bd.authenticateUser(1234543, 4321));
          assertFalse("authenticateUser(0, 0) "
                  + "BERHASIL-SEHARUSNYA GAGAL",bd.authenticateUser(0, 0));
          

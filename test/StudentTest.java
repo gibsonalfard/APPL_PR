@@ -48,8 +48,6 @@ public class StudentTest {
         int expResult = 0;
         int result = instance.displayMainMenu(screen, keypad);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -62,8 +60,6 @@ public class StudentTest {
         int expResult = 0;
         int result = instance.displayWithdrawalMenu();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -77,8 +73,6 @@ public class StudentTest {
         boolean expResult = false;
         boolean result = instance.isAvailableForWithdraw(amount);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
