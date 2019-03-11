@@ -9,6 +9,7 @@
  * @author ACER
  */
 public class BankStatement {
+    private int idStatement;
     private int account;
     private String date;
     private String description;
@@ -17,6 +18,14 @@ public class BankStatement {
     private double deposit;
     private String DepositValidate;
     private double balance;
+
+    public int getIdStatement() {
+        return idStatement;
+    }
+
+    public void setIdStatement(int idStatement) {
+        this.idStatement = idStatement;
+    }
     
     public int getAccount() {
         return account;

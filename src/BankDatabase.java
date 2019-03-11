@@ -6,10 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class BankDatabase {
-    private Account[] accounts; // array of Accounts    
+    private Account[] accounts; // array of Accounts  
     private int accAmount;
     private List<BankStatement> list = new ArrayList<>();
-    
+    private String[][] DepVal; 
+            
     public BankDatabase() {
       
         accounts = new Account[10]; // just 2 accounts for testing
@@ -148,11 +149,19 @@ public class BankDatabase {
     public double getWithdrawalToday(int theAccountNumber) {
         return getAccount(theAccountNumber).getWithdrawToday();
     }
-    
+    private int generateIdStatement(){
+        int size = this.list.size();
+        if (size != 0){
+            return size;
+        }else{
+            return 0;
+        }
+    }
 
     public void setBankStatement(int account, String description, int ref, double withdrawal, double deposit, String depVal) {
        BankStatement tr = new BankStatement();
        Tanggal tgl = new Tanggal();
+       tr.setIdStatement(generateIdStatement());
        tr.setAccount(account);
        tr.setDate(tgl.dateNow());
        tr.setDeposit(deposit);
@@ -163,7 +172,22 @@ public class BankDatabase {
        tr.setBalance(getAccount(account).getAvailableBalance());
        this.list.add(tr);
     }
-
+ 
+    public void updateDepVal(int idStatement){
+       BankStatement tr = new BankStatement();
+       
+       tr.setIdStatement(idStatement);
+       tr.setAccount(this.list.get(idStatement).getAccount());
+       tr.setDate(this.list.get(idStatement).getDate());
+       tr.setDescription(this.list.get(idStatement).getDescription());
+       tr.setRef(this.list.get(idStatement).getRef());
+       tr.setWithdrawal(this.list.get(idStatement).getWithdrawal());
+       tr.setDeposit(this.list.get(idStatement).getDeposit());
+       tr.setDepositValidate("Yes");
+       tr.setBalance(getTotalBalance(this.list.get(idStatement).getAccount()));
+       this.list.set(idStatement, tr);
+    }
+    
     public void displayBankStatement(int accountNumber){
       
       if(!list.isEmpty()){
@@ -178,7 +202,7 @@ public class BankDatabase {
         
         for(int i = 0;i < size;i++){
             if(list.get(i).getAccount() == accountNumber){
-               
+//               System.out.print(list.get(i).getIdStatement()+"\t");
                 System.out.print(list.get(i).getDate()+"\t");
                 System.out.print(list.get(i).getDescription()+"\t");
                 

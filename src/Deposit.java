@@ -45,8 +45,10 @@ public class Deposit extends Transaction {
                                  "until we verify the amount of any enclosed cash and your checks clear.\n");
             
             bankDatabase.debit(super.getAccountNumber(), amount);
-            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
+//            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
+            
             bankDatabase.setBankStatement(getAccountNumber(), "Deposit", 0,0,(int)amount,"No");
+            
        }
    }
 

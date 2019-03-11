@@ -83,7 +83,7 @@ public class Transfer extends Transaction{
 
         screen.displayMessage("\nPlease enter the account number : ");
         int input = keypad.getInput(); // receive input of account number
-            if (input == CANCELED) {
+        if (input == CANCELED) {
             return CANCELED;
         } else {
             return input; //return the accountNumber

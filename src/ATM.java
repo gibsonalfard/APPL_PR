@@ -209,12 +209,13 @@ public class ATM {
                     break;
                 case VALIDATE:
                     // initialize as new object of chosen type
-                    currentTransaction
-                            = createTransaction(mainMenuSelection);
+//                    currentTransaction
+//                            = createTransaction(mainMenuSelection);
 
 //                    currentTransaction.(); // execute transaction
                     
-                    
+                    //test method updateDepVal di BankStatement;
+                    bankDatabase.updateDepVal(0);
                     break;
                 case MONEY_DISPEN:
                     cashDispenser.showCashDispenser();
