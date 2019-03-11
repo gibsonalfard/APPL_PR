@@ -42,11 +42,13 @@ public class AccountTest {
     @Test
     public void testValidatePIN() {
         System.out.println("validatePIN");
-        int userPIN = 0;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.validatePIN(userPIN);
-        assertEquals(expResult, result);
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);
+        
+        //1. EXPECTED FALSE
+        assertFalse(instance.validatePIN(78909887));
+        
+        //2. EXPECTED TRUE
+        assertTrue(instance.validatePIN(4321));
     }
 
     /**
@@ -55,10 +57,13 @@ public class AccountTest {
     @Test
     public void testGetAvailableBalance() {
         System.out.println("getAvailableBalance");
-        Account instance = null;
-        double expResult = 0.0;
-        double result = instance.getAvailableBalance();
-        assertEquals(expResult, result, 0.0);
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);
+        
+        //1. EXPECTED TRUE
+        assert(instance.getAvailableBalance() != 9999);
+        
+        //2. EXPECTED TRUE
+        assert(instance.getAvailableBalance() == 1000.0);
     }
 
     /**
@@ -67,10 +72,13 @@ public class AccountTest {
     @Test
     public void testGetTotalBalance() {
         System.out.println("getTotalBalance");
-        Account instance = null;
-        double expResult = 0.0;
-        double result = instance.getTotalBalance();
-        assertEquals(expResult, result, 0.0);
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);
+        
+        //1. EXPECTED TRUE
+        assert(instance.getTotalBalance() != 1000.0);
+            
+        //2. EXPECTED TRUE
+        assert(instance.getTotalBalance() == 1200.0);
     }
 
     /**
@@ -79,8 +87,8 @@ public class AccountTest {
     @Test
     public void testSetAvailableBalance() {
         System.out.println("setAvailableBalance");
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);        
         double amount = 0.0;
-        Account instance = null;
         instance.setAvailableBalance(amount);
     }
 
@@ -91,7 +99,7 @@ public class AccountTest {
     public void testTransfer() {
         System.out.println("transfer");
         double amount = 0.0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.transfer(amount);
     }
 
@@ -102,7 +110,7 @@ public class AccountTest {
     public void testCredit() {
         System.out.println("credit");
         double amount = 0.0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.credit(amount);
     }
 
@@ -113,7 +121,7 @@ public class AccountTest {
     public void testDebit() {
         System.out.println("debit");
         double amount = 0.0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.debit(amount);
     }
 
@@ -123,8 +131,8 @@ public class AccountTest {
     @Test
     public void testGetAccountNumber() {
         System.out.println("getAccountNumber");
-        Account instance = null;
-        int expResult = 0;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
+        int expResult = 1234;
         int result = instance.getAccountNumber();
         assertEquals(expResult, result);
     }
@@ -136,7 +144,7 @@ public class AccountTest {
     public void testChangePIN() {
         System.out.println("changePIN");
         int thePIN = 0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.changePIN(thePIN);
     }
 
@@ -146,7 +154,7 @@ public class AccountTest {
     @Test
     public void testBlockUser() {
         System.out.println("blockUser");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.blockUser();
     }
 
@@ -156,7 +164,7 @@ public class AccountTest {
     @Test
     public void testUnblockUser() {
         System.out.println("unblockUser");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.unblockUser();
     }
 
@@ -166,7 +174,7 @@ public class AccountTest {
     @Test
     public void testIsUserBlocked() {
         System.out.println("isUserBlocked");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         boolean expResult = false;
         boolean result = instance.isUserBlocked();
         assertEquals(expResult, result);
@@ -178,7 +186,7 @@ public class AccountTest {
     @Test
     public void testGetAccountType() {
         System.out.println("getAccountType");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         String expResult = "";
         String result = instance.getAccountType();
         assertEquals(expResult, result);
@@ -190,7 +198,7 @@ public class AccountTest {
     @Test
     public void testGetTransferToday() {
         System.out.println("getTransferToday");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         int expResult = 0;
         int result = instance.getTransferToday();
         assertEquals(expResult, result);
@@ -203,7 +211,7 @@ public class AccountTest {
     public void testSetTransferToday() {
         System.out.println("setTransferToday");
         double transferToday = 0.0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.setTransferToday(transferToday);
     }
 
@@ -213,7 +221,7 @@ public class AccountTest {
     @Test
     public void testGetWithdrawToday() {
         System.out.println("getWithdrawToday");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         int expResult = 0;
         int result = instance.getWithdrawToday();
         assertEquals(expResult, result);
@@ -226,7 +234,7 @@ public class AccountTest {
     public void testSetWithdrawToday() {
         System.out.println("setWithdrawToday");
         double WithdrawToday = 0.0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.setWithdrawToday(WithdrawToday);
     }
 
@@ -236,7 +244,7 @@ public class AccountTest {
     @Test
     public void testDisplayWithdrawalMenu() {
         System.out.println("displayWithdrawalMenu");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         int expResult = 0;
         int result = instance.displayWithdrawalMenu();
         assertEquals(expResult, result);
@@ -250,7 +258,7 @@ public class AccountTest {
         System.out.println("displayMainMenu");
         Screen screen = null;
         Keypad keypad = null;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         int expResult = 0;
         int result = instance.displayMainMenu(screen, keypad);
         assertEquals(expResult, result);
@@ -262,7 +270,7 @@ public class AccountTest {
     @Test
     public void testPayTax() {
         System.out.println("payTax");
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         instance.payTax();
     }
 
@@ -273,10 +281,9 @@ public class AccountTest {
     public void testIsAvailableForWithdraw() {
         System.out.println("isAvailableForWithdraw");
         double amount = 0.0;
-        Account instance = null;
+        Account instance = new Account(1234, 4321, 1000.0, 1200.0);   
         boolean expResult = false;
         boolean result = instance.isAvailableForWithdraw(amount);
         assertEquals(expResult, result);
     }
-    
 }
