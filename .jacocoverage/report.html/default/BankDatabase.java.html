@@ -50,10 +50,10 @@ public class BankDatabase {
 <span class="fc" id="L50">        Account userAccount = getAccount(userAccountNumber);</span>
 
 //      if account exists, return result of Account method validatePIN
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (userAccount != null) {</span>
-<span class="pc bpc" id="L54" title="1 of 4 branches missed.">            return (userAccount.validatePIN(userPIN) &amp;&amp; getAccount(userAccountNumber).getAccountType().equals(&quot;Admin&quot;));</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (userAccount != null) {</span>
+<span class="fc bfc" id="L54" title="All 4 branches covered.">            return (userAccount.validatePIN(userPIN) &amp;&amp; getAccount(userAccountNumber).getAccountType().equals(&quot;Admin&quot;));</span>
         } else {
-<span class="nc" id="L56">            return false; // account number not found, so return false</span>
+<span class="fc" id="L56">            return false; // account number not found, so return false</span>
         }
     }
 
@@ -62,10 +62,10 @@ public class BankDatabase {
 <span class="fc" id="L62">        Account userAccount = getAccount(userAccountNumber);</span>
 
 //      if account exists, return result of Account method validatePIN
-<span class="pc bpc" id="L65" title="2 of 4 branches missed.">        if (userAccount != null &amp;&amp; !userAccount.isUserBlocked()) {</span>
+<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        if (userAccount != null &amp;&amp; !userAccount.isUserBlocked()) {</span>
 <span class="fc" id="L66">            return userAccount.validatePIN(userPIN);</span>
         } else {
-<span class="nc" id="L68">            return false; // account number not found, so return false</span>
+<span class="fc" id="L68">            return false; // account number not found, so return false</span>
         }
     }
 
@@ -117,15 +117,15 @@ public class BankDatabase {
 <span class="fc" id="L117">    }</span>
 
     public boolean isAccountBlocked(int userAccountNumber) {
-<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (getAccount(userAccountNumber) != null) {</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (getAccount(userAccountNumber) != null) {</span>
 <span class="fc" id="L121">            return getAccount(userAccountNumber).isUserBlocked();</span>
         } else {
-<span class="nc" id="L123">            return false;</span>
+<span class="fc" id="L123">            return false;</span>
         }
     }
 
     public boolean isUserExist(int userAccountNumber) {
-<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        return getAccount(userAccountNumber) != null;</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        return getAccount(userAccountNumber) != null;</span>
     }
 
     public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
