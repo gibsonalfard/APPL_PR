@@ -93,15 +93,27 @@ public class Transfer extends Transaction{
         Screen screen = getScreen(); // get reference to screen
         
         if (bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount && bankDatabase.getTransferToday(super.getAccountNumber())<=Deposito.MAXTRANSFER){
-            bankDatabase.credit(super.getAccountNumber(), (amount + (amount*(1.5/100)))); //decrease the money of transfer user
-            bankDatabase.transfer(accountTrans, amount);//increase the money of receiveramount you transfer is more than your available balance"
-            bankDatabase.setTransferToday(super.getAccountNumber(), amount);
-            screen.displayMessage("\nDone!\n");
+            if ( amount <= Business.MAXTRANSFER && amount <= Deposito.MAXTRANSFER){
+                bankDatabase.credit(super.getAccountNumber(), (amount + (amount*(1.5/100)))); //decrease the money of transfer user
+                bankDatabase.transfer(accountTrans, amount);//increase the money of receiveramount you transfer is more than your available balance"
+                bankDatabase.setTransferToday(super.getAccountNumber(), amount);
+                screen.displayMessage("\nDone!\n");
+            }
+            else{
+                screen.displayMessage("\n The amount you want to transfer is more than the limit.");
+                screen.displayMessage("\nCanceling Transfer.....\n");
+            }
         }else if (bankDatabase.getTransferToday(super.getAccountNumber())<=bankDatabase.getAccount(super.getAccountNumber()).MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
+            if ( amount <= Business.MAXTRANSFER && amount <= Deposito.MAXTRANSFER){
                 bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
                 bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
                 bankDatabase.setTransferToday(super.getAccountNumber(), amount);
                 screen.displayMessage("\nDone!\n");
+            }
+            else{
+                screen.displayMessage("\n The amount you want to transfer is more than the limit.");
+                screen.displayMessage("\nCanceling Transfer.....\n");
+            }
             }else if (bankDatabase.getTransferToday(super.getAccountNumber())>=bankDatabase.getAccount(super.getAccountNumber()).MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
                 screen.displayMessage("\n You Exceeded Your Transfer Limit For Today.");
                 screen.displayMessage("\nCanceling Transfer.....\n");
