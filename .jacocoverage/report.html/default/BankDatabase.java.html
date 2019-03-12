@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BankDatabase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BrandNew_ATM&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">BankDatabase.java</span></div><h1>BankDatabase.java</h1><pre class="source lang-java linenums">
+public class BankDatabase {
+    private Account[] accounts; // array of Accounts
+    private int accAmount;
+
+<span class="fc" id="L6">    public BankDatabase() {</span>
+<span class="fc" id="L7">        accounts = new Account[10]; // just 2 accounts for testing</span>
+<span class="fc" id="L8">        accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);</span>
+<span class="fc" id="L9">        accounts[1] = new Student(8765, 5678, 200.0, 200.0);</span>
+<span class="fc" id="L10">        accounts[2] = new Business(6665, 1234, 700.0, 900.0);</span>
+<span class="fc" id="L11">        accounts[3] = new Deposito(6666, 1234, 1700.0, 1900.0);</span>
+<span class="fc" id="L12">        accounts[4] = new Admin(00000, 00000, 0.0, 0.0);</span>
+<span class="fc" id="L13">        accAmount = accounts.length;</span>
+<span class="fc" id="L14">    }</span>
+
+    private Account getAccount(int accountNumber) {
+        int ak;
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        for (ak = 0; ak &lt; accAmount; ak++) {</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">            if (accounts[ak] == null){break;}</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">            if (accountNumber == accounts[ak].getAccountNumber()) {</span>
+<span class="fc" id="L21">                return accounts[ak];</span>
+            }
+        }
+<span class="fc" id="L24">        return null;</span>
+    }
+    
+    public Account getSpecificAccount(int userAccountNumber, int userPIN){
+<span class="fc" id="L28">        Account userAccount = getAccount(userAccountNumber);</span>
+       
+<span class="pc bpc" id="L30" title="2 of 6 branches missed.">        if (userAccount != null &amp;&amp; userAccount.validatePIN(userPIN) &amp;&amp; !userAccount.isUserBlocked()) {</span>
+<span class="fc" id="L31">            return userAccount;</span>
+        }
+        else {
+<span class="fc" id="L34">           return null; // account number not found, so return false</span>
+        }
+   }
+
+    public boolean checkAvail(int accountNumber) {
+        int ak;
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        for (ak = 0; ak &lt; accAmount; ak++) {</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">            if (accountNumber == accounts[ak].getAccountNumber()) {</span>
+<span class="fc" id="L42">                return false;</span>
+            }
+        }
+<span class="nc" id="L45">        return true;</span>
+    }
+
+    public boolean authenticateAdmin(int userAccountNumber, int userPIN) {
+        // attempt to retrieve the account with the account number
+<span class="fc" id="L50">        Account userAccount = getAccount(userAccountNumber);</span>
+
+//      if account exists, return result of Account method validatePIN
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (userAccount != null) {</span>
+<span class="fc bfc" id="L54" title="All 4 branches covered.">            return (userAccount.validatePIN(userPIN) &amp;&amp; getAccount(userAccountNumber).getAccountType().equals(&quot;Admin&quot;));</span>
+        } else {
+<span class="fc" id="L56">            return false; // account number not found, so return false</span>
+        }
+    }
+
+    public boolean authenticateUser(int userAccountNumber, int userPIN) {
+        // attempt to retrieve the account with the account number
+<span class="fc" id="L62">        Account userAccount = getAccount(userAccountNumber);</span>
+
+//      if account exists, return result of Account method validatePIN
+<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        if (userAccount != null &amp;&amp; !userAccount.isUserBlocked()) {</span>
+<span class="fc" id="L66">            return userAccount.validatePIN(userPIN);</span>
+        } else {
+<span class="fc" id="L68">            return false; // account number not found, so return false</span>
+        }
+    }
+
+    public boolean seekAccountNumber(int accountNumber) {
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        for (Account ak : accounts) {</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">            if (accountNumber == ak.getAccountNumber()) {</span>
+<span class="fc" id="L75">                return true;</span>
+            }
+        }
+<span class="nc" id="L78">        return false;</span>
+    }
+
+    public double getAvailableBalance(int userAccountNumber) {
+<span class="fc" id="L82">        return getAccount(userAccountNumber).getAvailableBalance();</span>
+    }
+
+    public double getTotalBalance(int userAccountNumber) {
+<span class="fc" id="L86">        return getAccount(userAccountNumber).getTotalBalance();</span>
+    }
+
+    public void transfer(int userAccountNumber, double amount) {
+<span class="fc" id="L90">        getAccount(userAccountNumber).transfer(amount);</span>
+<span class="fc" id="L91">        getAccount(userAccountNumber).setTransferToday(amount);</span>
+<span class="fc" id="L92">    }</span>
+
+    public void credit(int userAccountNumber, double amount) {
+<span class="fc" id="L95">        getAccount(userAccountNumber).credit(amount);</span>
+<span class="fc" id="L96">        getAccount(userAccountNumber).setWithdrawToday(amount);</span>
+<span class="fc" id="L97">    }</span>
+
+    public void debit(int userAccountNumber, double amount) {
+<span class="fc" id="L100">        getAccount(userAccountNumber).debit(amount);</span>
+<span class="fc" id="L101">    }</span>
+
+    public void changeAccountPIN(int userAccountNumber, int curPIN, int newPIN) {
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (authenticateUser(userAccountNumber, curPIN)) {</span>
+<span class="fc" id="L105">            getAccount(userAccountNumber).changePIN(newPIN);</span>
+        } else {
+<span class="nc" id="L107">            System.out.println(&quot;Sorry, Can't Change PIN&quot;);</span>
+        }
+<span class="fc" id="L109">    }</span>
+
+    public void blockAccount(int userAccountNumber) {
+<span class="fc" id="L112">        getAccount(userAccountNumber).blockUser();</span>
+<span class="fc" id="L113">    }</span>
+
+    public void unblockAccount(int userAccountNumber) {
+<span class="fc" id="L116">        getAccount(userAccountNumber).unblockUser();</span>
+<span class="fc" id="L117">    }</span>
+
+    public boolean isAccountBlocked(int userAccountNumber) {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (getAccount(userAccountNumber) != null) {</span>
+<span class="fc" id="L121">            return getAccount(userAccountNumber).isUserBlocked();</span>
+        } else {
+<span class="fc" id="L123">            return false;</span>
+        }
+    }
+
+    public boolean isUserExist(int userAccountNumber) {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        return getAccount(userAccountNumber) != null;</span>
+    }
+
+    public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
+<span class="nc" id="L132">        accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);</span>
+<span class="nc" id="L133">        accAmount++;</span>
+<span class="nc" id="L134">    }</span>
+
+    public double getTransferToday(int theAccountNumber) {
+<span class="fc" id="L137">        return getAccount(theAccountNumber).getTransferToday();</span>
+    }
+
+    public double getWithdrawalToday(int theAccountNumber) {
+<span class="fc" id="L141">        return getAccount(theAccountNumber).getWithdrawToday();</span>
+    }
+    
+    public boolean isAvailableWithdraw(int theAccountNumber, double amount){
+<span class="fc" id="L145">        return getAccount(theAccountNumber).isAvailableForWithdraw(amount);</span>
+    }
+    
+    public void monthlyTax(){
+        int ak;
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">         for (ak = 0; ak &lt; (accAmount-1); ak++) {</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">             if(accounts[ak] == null){break;}</span>
+             
+<span class="fc bfc" id="L153" title="All 2 branches covered.">             if(!&quot;Student&quot;.equals(accounts[ak].getAccountType())){</span>
+<span class="fc" id="L154">                 accounts[ak].payTax();</span>
+             }
+         }
+<span class="fc" id="L157">    }</span>
+   
+    public int getWithdrawal(int userAccountNumber){
+<span class="fc" id="L160">        Account userAccount= getAccount(userAccountNumber);</span>
+<span class="nc" id="L161">        return userAccount.displayWithdrawalMenu();</span>
+    }
+
+    public void resetLimit(){
+         int ak;
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">         for (ak = 0; ak &lt; (accAmount-1); ak++) {</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">             if(accounts[ak] != null){</span>
+<span class="fc" id="L168">                 accounts[ak].setWithdrawToday((-1*accounts[ak].getWithdrawToday()));</span>
+             }else{
+                 break;
+             }
+         }
+<span class="fc" id="L173">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
