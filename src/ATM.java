@@ -18,6 +18,7 @@ public class ATM {
     private static final int DEPOSIT = 3;
     private static final int TRANSFER = 4;
     private static final int PASSWORD = 5;
+    private static final int BANK_STATEMENT =6;
     private static final int EXIT = 0;
 
     private static final int ADD_NASABAH = 1;
@@ -146,6 +147,9 @@ public class ATM {
                     bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
 
                     break;
+                case BANK_STATEMENT:
+                    bankDatabase.displayBankStatement(currentAccountNumber);
+                    break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");
                     userExited = true; // this ATM session should end
@@ -181,10 +185,13 @@ public class ATM {
                     break;
                 case VALIDATE:
                     // initialize as new object of chosen type
-                    currentTransaction
-                            = createTransaction(mainMenuSelection);
+//                    currentTransaction
+//                            = createTransaction(mainMenuSelection);
 
 //                    currentTransaction.(); // execute transaction
+                    
+                    //test method updateDepVal di BankStatement;
+                    bankDatabase.updateDepVal(0);
                     break;
                 case MONEY_DISPEN:
                     cashDispenser.showCashDispenser();

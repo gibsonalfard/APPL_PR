@@ -107,11 +107,12 @@ public class Account {
         screen.displayMessageLine("2 - Withdraw cash");
         screen.displayMessageLine("3 - Deposit funds");
         screen.displayMessageLine("4 - Change PIN");
+        screen.displayMessageLine("5 - Bank Statement");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         int input = keypad.getInput(); 
         
-        return input == 4 ? 5 : input; // return user's selection
+        return input == 4 ? 5 : (input == 5 ? 6 : input); // return user's selection
     }
     
     public void payTax(){

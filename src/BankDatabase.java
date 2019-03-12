@@ -1,9 +1,18 @@
 
-public class BankDatabase {
-    private Account[] accounts; // array of Accounts
-    private int accAmount;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
+public class BankDatabase {
+    private Account[] accounts; // array of Accounts  
+    private int accAmount;
+    private List<BankStatement> list = new ArrayList<>();
+    private String[][] DepVal; 
+            
     public BankDatabase() {
+      
         accounts = new Account[10]; // just 2 accounts for testing
         accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
         accounts[1] = new Student(8765, 5678, 200.0, 200.0);
@@ -141,6 +150,108 @@ public class BankDatabase {
         return getAccount(theAccountNumber).getWithdrawToday();
     }
     
+    public List<BankStatement> getList() throws IOException {
+        if (this.list.isEmpty()) {
+            return null;
+        }
+        return this.list;
+    }
+    
+    private int generateIdStatement(){
+        int size = this.list.size();
+        if (size != 0){
+            return size;
+        }else{
+            return 0;
+        }
+    }
+
+    public void setBankStatement(int account, String description, int ref, double withdrawal, double deposit, String depVal) {
+       BankStatement tr = new BankStatement();
+       Tanggal tgl = new Tanggal();
+       tr.setIdStatement(generateIdStatement());
+       tr.setAccount(account);
+       tr.setDate(tgl.dateNow());
+       tr.setDeposit(deposit);
+       tr.setDepositValidate(depVal);
+       tr.setDescription(description);
+       tr.setRef(ref);
+       tr.setWithdrawal(withdrawal);
+       tr.setBalance(getAccount(account).getAvailableBalance());
+       this.list.add(tr);
+    }
+ 
+    public void updateDepVal(int idStatement){
+       BankStatement tr = new BankStatement();
+       
+       tr.setIdStatement(idStatement);
+       tr.setAccount(this.list.get(idStatement).getAccount());
+       tr.setDate(this.list.get(idStatement).getDate());
+       tr.setDescription(this.list.get(idStatement).getDescription());
+       tr.setRef(this.list.get(idStatement).getRef());
+       tr.setWithdrawal(this.list.get(idStatement).getWithdrawal());
+       tr.setDeposit(this.list.get(idStatement).getDeposit());
+       tr.setDepositValidate("Yes");
+       tr.setBalance(getTotalBalance(this.list.get(idStatement).getAccount()));
+       this.list.set(idStatement, tr);
+    }
+    
+    public void displayBankStatement(int accountNumber){
+      
+      if(!list.isEmpty()){
+        int size;
+        
+        size = list.size();
+        
+        System.out.println();
+        System.out.println("=========================================================================================================");
+        System.out.println("Date\t\tDescription\tRef\tWithdrawal\tDeposit \tDeposit Valid\tBalance");
+        System.out.println("=========================================================================================================");
+        
+        for(int i = 0;i < size;i++){
+            if(list.get(i).getAccount() == accountNumber){
+//               System.out.print(list.get(i).getIdStatement()+"\t");
+                System.out.print(list.get(i).getDate()+"\t");
+                System.out.print(list.get(i).getDescription()+"\t");
+                
+                int Ref = list.get(i).getRef();
+                if(Ref != 0){
+                    System.out.print(Ref);
+                }else{
+                    System.out.print("\t");
+                }
+                
+                double Withdrawal = list.get(i).getWithdrawal();
+                if(Withdrawal != 0){
+                    System.out.print(Withdrawal+"\t\t");
+                }else{
+                    System.out.print("\t\t\t");
+                }
+                
+                double Deposit = list.get(i).getDeposit();
+                if(Deposit != 0){
+                    System.out.print(Deposit+"\t\t");
+                }else{
+                    System.out.print("\t\t");
+                }
+                
+                String depVal = list.get(i).getDepositValidate();
+                if(depVal != null){
+                    System.out.print(depVal+"\t\t");
+                }else{
+                    System.out.print("\t\t");
+                }
+                
+                System.out.print(list.get(i).getBalance());
+                System.out.println();
+            }
+        }
+        
+                            
+        }
+        
+    }
+
     public boolean isAvailableWithdraw(int theAccountNumber, double amount){
         return getAccount(theAccountNumber).isAvailableForWithdraw(amount);
     }
@@ -172,6 +283,7 @@ public class BankDatabase {
              }
          }
     }
+    
     public String getAccountType(int userAccountNumber){
         Account userAccount= getAccount(userAccountNumber);
         return userAccount.getAccountType();

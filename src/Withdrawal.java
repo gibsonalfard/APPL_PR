@@ -5,7 +5,7 @@ public class Withdrawal extends Transaction {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
    private CashDispenser cashDispenser; // reference to cash dispenser
-    BankDatabase bankDatabase = getBankDatabase();
+   BankDatabase bankDatabase = getBankDatabase();
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 0;
 
@@ -24,7 +24,7 @@ public class Withdrawal extends Transaction {
    // perform transaction
    @Override
    public void execute() {
-       
+
        this.amount = displayMenuOfAmounts();
        
        if(this.amount == 0){
@@ -32,14 +32,16 @@ public class Withdrawal extends Transaction {
        }else{
            if(cashDispenser.isSufficientCashAvailable(amount) && 
              (bankDatabase.getAvailableBalance(super.getAccountNumber()) >= amount)){
+
                 if(bankDatabase.isAvailableWithdraw(super.getAccountNumber(), amount)){
                     bankDatabase.credit(super.getAccountNumber(), amount);
                     cashDispenser.dispenseCash(amount);
                     System.out.println("Your cash has been dispensed. Please take your cash now.");
+                    bankDatabase.setBankStatement(getAccountNumber(), "Withdrawal", 0, amount, 0, null);
+                    
                 }else{
                     System.out.println("You Exceeded Your Withdraw Limit For Today.");
                 }
-                
            }else{
                System.out.println("Sorry, Cash Dispenser is Empty or Your Balace not sufficient\n");
            }

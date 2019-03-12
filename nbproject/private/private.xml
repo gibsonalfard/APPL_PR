@@ -3,7 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/ahmadajinaufalali/Documents/APPL_PR/test/BankDatabaseTest.java</file>
+=======
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Deposito.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Admin.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Tanggal.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Withdrawal.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Transfer.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Transaction.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Account.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Business.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Student.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/ATM.java</file>
+            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Deposit.java</file>
+>>>>>>> Fia
         </group>
     </open-files>
 </project-private>

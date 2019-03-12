@@ -8,7 +8,7 @@
  *
  * @author Tio
  */
-public class Deposito extends Account {    
+public class Deposito extends Account {
     public static final int MAXWITHDRAW = 100;
     public static final int MAXTRANSFER = 500;
     public static final int MONTHLY_ADM = 1;
@@ -20,7 +20,7 @@ public class Deposito extends Account {
         super(theAccountNumber, thePIN,
             theAvailableBalance, theTotalBalance);
     }
-    
+
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
         screen.displayMessageLine("\nMain menu:");
@@ -29,6 +29,7 @@ public class Deposito extends Account {
         screen.displayMessageLine("3 - Deposit funds");
         screen.displayMessageLine("4 - Transfer");
         screen.displayMessageLine("5 - Change PIN");
+        screen.displayMessageLine("6 - Bank Statement");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         

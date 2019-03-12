@@ -9,6 +9,7 @@
  * @author Tio
  */
 public class Business extends Account {    
+    
     public static final int MAXWITHDRAW = 1000;
     public static final int MAXTRANSFER = 10000;
     public static final int MONTHLY_ADM = 5;
@@ -21,6 +22,7 @@ public class Business extends Account {
             theAvailableBalance, theTotalBalance);
     }
     
+    
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
         screen.displayMessageLine("\nMain menu:");
@@ -29,6 +31,7 @@ public class Business extends Account {
         screen.displayMessageLine("3 - Deposit funds");
         screen.displayMessageLine("4 - Transfer");
         screen.displayMessageLine("5 - Change PIN");
+        screen.displayMessageLine("6 - Bank Statement");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         

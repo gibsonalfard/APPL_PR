@@ -5,7 +5,7 @@
 public class Transfer extends Transaction{
     private double amount; // amount to transfer
     private int accountTrans; // account number for transfer
-    private Keypad keypad; // reference to keypad
+    private Keypad keypad = new Keypad(); // reference to keypad
     private int processTransfer; //actually boolean for confirm the prosese
     private final static int CANCELED = 0; // constant for cancel option
     private Tanggal date;
@@ -35,6 +35,9 @@ public class Transfer extends Transaction{
                 if (processTransfer==1){
                     screen.displayMessage("\nProcessing Transfer......\n");
                     promptTransfer(accountTrans,amount);
+                    System.out.println(amount);
+                    bankDatabase.setBankStatement(getAccountNumber(), "Transfer", accountTrans,(int)amount,0,null); //set sender bank statement 
+                    bankDatabase.setBankStatement(accountTrans, "Transfer", getAccountNumber(),0, (int)amount,null); //set receiver bank statement 
                     amount = 0;//for cancelling the transfer
                 }else{
                     screen.displayMessage("\nCanceling Transfer.....\n");
@@ -81,7 +84,7 @@ public class Transfer extends Transaction{
 
         screen.displayMessage("\nPlease enter the account number : ");
         int input = keypad.getInput(); // receive input of account number
-            if (input == CANCELED) {
+        if (input == CANCELED) {
             return CANCELED;
         } else {
             return input; //return the accountNumber

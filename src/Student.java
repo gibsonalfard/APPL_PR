@@ -9,11 +9,13 @@
  * @author Tio
  */
 public class Student extends Account {    
+    Screen screen = new Screen();
+    Keypad keypad = new Keypad();
+    
     public static final int MAXWITHDRAW = 20;
     public static final int MAXTRANSFER = 0;
     public static final int TRANSACT_ADM = 0;
-    private Screen screen = new Screen(); // ATM's screen
-    private Keypad keypad = new Keypad(); 
+   
     
     public Student(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -21,6 +23,7 @@ public class Student extends Account {
             theAvailableBalance, theTotalBalance);
     }
     
+    // display the main menu and return an input selection
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
         screen.displayMessageLine("\nMain menu:");
@@ -28,12 +31,15 @@ public class Student extends Account {
         screen.displayMessageLine("2 - Withdraw cash");
         screen.displayMessageLine("3 - Deposit funds");
         screen.displayMessageLine("4 - Change PIN");
+        screen.displayMessageLine("5 - Bank Statement");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         int input = keypad.getInput(); 
         
-        return input == 4 ? 5 : input; // return user's selection
+        return input == 4 ? 5 : (input == 5 ? 6 : input); // return user's selection
+        
     }
+
    
     @Override
     public int displayWithdrawalMenu(){
@@ -53,4 +59,5 @@ public class Student extends Account {
    public boolean isAvailableForWithdraw(double amount){
        return Student.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
    }
+   
 }

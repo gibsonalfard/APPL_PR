@@ -26,4 +26,8 @@ public class Tanggal {
     public void menuTanggal(){
         
     }
+    
+    public String dateNow(){
+        return now.get(Calendar.DATE)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR);
+    }
 }
