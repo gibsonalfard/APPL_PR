@@ -10,7 +10,7 @@ public class ATM {
     private DepositSlot depositSlot;
     private BankDatabase bankDatabase; // account information database
     private int loginAttempt = 0;
-    int curPin, newPin;
+    private int curPin, newPin;
     
     // constants corresponding to main menu options
     private static final int BALANCE_INQUIRY = 1;
@@ -140,9 +140,9 @@ public class ATM {
                     break;
                 case PASSWORD:
                     screen.displayMessage("\nPlease Enter Your Current Pin: ");
-                    int curPin = keypad.getInput(); // input account number
+                    curPin = keypad.getInput(); // input account number
                     screen.displayMessage("\nPlease Enter Your New Pin: ");
-                    int newPin = keypad.getInput(); // input account number
+                    newPin = keypad.getInput(); // input account number
 
                     bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
 

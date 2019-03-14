@@ -13,13 +13,13 @@ public class BankDatabase {
             
     public BankDatabase() {
       
-        accounts = new Account[10]; // just 2 accounts for testing
-        accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
+        accounts = new Account[20]; // just 20 accounts maxx for testing
+        accounts[0] = new Business(1234, 4321, 1000.0, 1200.0);
         accounts[1] = new Student(8765, 5678, 200.0, 200.0);
         accounts[2] = new Business(6665, 1234, 111700.0, 111900.0);
         accounts[3] = new Deposito(6666, 1234, 1700.0, 1900.0);
         accounts[4] = new Admin(00000, 00000, 0.0, 0.0);
-        accAmount = accounts.length;
+        accAmount = 5;
     }
 
     public Account getAccount(int accountNumber) {
@@ -46,7 +46,7 @@ public class BankDatabase {
 
     public boolean checkAvail(int accountNumber) {
         int ak;
-        for (ak = 0; ak < accAmount; ak++) {
+        for (ak = 0; ak < accAmount-1; ak++) {
             if (accountNumber == accounts[ak].getAccountNumber()) {
                 return false;
             }
@@ -193,6 +193,9 @@ public class BankDatabase {
        tr.setDeposit(this.list.get(idStatement).getDeposit());
        tr.setDepositValidate("Yes");
        tr.setBalance(getTotalBalance(this.list.get(idStatement).getAccount()));
+       
+       /* TODO : add ke avail balance */
+       getAccount(this.list.get(idStatement).getAccount()).setAvailableBalance(this.list.get(idStatement).getDeposit());
        this.list.set(idStatement, tr);
     }
     

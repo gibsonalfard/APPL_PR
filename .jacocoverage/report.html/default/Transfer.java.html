@@ -5,93 +5,117 @@
 public class Transfer extends Transaction{
     private double amount; // amount to transfer
     private int accountTrans; // account number for transfer
-    private Keypad keypad; // reference to keypad
+<span class="nc" id="L8">    private Keypad keypad = new Keypad(); // reference to keypad</span>
     private int processTransfer; //actually boolean for confirm the prosese
     private final static int CANCELED = 0; // constant for cancel option
+    private Tanggal date;
 
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase,
             Keypad atmKeypad) {
-<span class="nc" id="L14">        super(userAccountNumber, atmScreen, atmBankDatabase);</span>
-<span class="nc" id="L15">        keypad = atmKeypad;</span>
-<span class="nc" id="L16">    }</span>
+<span class="nc" id="L15">        super(userAccountNumber, atmScreen, atmBankDatabase);</span>
+<span class="nc" id="L16">        keypad = atmKeypad;</span>
+<span class="nc" id="L17">    }</span>
 
     @Override
     public void execute() {
-<span class="nc" id="L20">        BankDatabase bankDatabase = getBankDatabase();</span>
-<span class="nc" id="L21">        Screen screen = getScreen(); // get reference to screen</span>
+<span class="nc" id="L21">        BankDatabase bankDatabase = getBankDatabase();</span>
+<span class="nc" id="L22">        Screen screen = getScreen(); // get reference to screen</span>
   
-<span class="nc" id="L23">        processTransfer = 1;</span>
-<span class="nc" id="L24">        accountTrans = 1;</span>
-<span class="nc" id="L25">        amount = 1;</span>
-<span class="nc bnc" id="L26" title="All 4 branches missed.">        while(amount!=0 &amp;&amp; accountTrans!=0){</span>
-<span class="nc" id="L27">            accountTrans = getAccountForTransfer();</span>
-<span class="nc" id="L28">            amount = getAmountForTransfer();</span>
-<span class="nc bnc" id="L29" title="All 6 branches missed.">            if(bankDatabase.seekAccountNumber(accountTrans) &amp;&amp; amount!=0 &amp;&amp; super.getAccountNumber() != accountTrans){</span>
-<span class="nc" id="L30">                screen.displayMessage(&quot;\nAccount number : &quot;+accountTrans);</span>
-<span class="nc" id="L31">                screen.displayMessage(&quot;\nAmount : &quot;+amount);</span>
-<span class="nc" id="L32">                screen.displayMessage(&quot;\n\nProcess the transfer &quot; + &quot;(1 for yes, 0 for no) : &quot;);</span>
-<span class="nc" id="L33">                processTransfer = keypad.getInput(); </span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">                if (processTransfer==1){</span>
-<span class="nc" id="L35">                    screen.displayMessage(&quot;\nProcessing Transfer......\n&quot;);</span>
-<span class="nc" id="L36">                    promptTransfer(accountTrans,amount);</span>
-<span class="nc" id="L37">                    amount = 0;//for cancelling the transfer</span>
+<span class="nc" id="L24">        processTransfer = 1;</span>
+<span class="nc" id="L25">        accountTrans = 1;</span>
+<span class="nc" id="L26">        amount = 1;</span>
+<span class="nc bnc" id="L27" title="All 4 branches missed.">        while(amount!=0 &amp;&amp; accountTrans!=0){</span>
+<span class="nc" id="L28">            accountTrans = getAccountForTransfer();</span>
+<span class="nc" id="L29">            amount = getAmountForTransfer();</span>
+<span class="nc bnc" id="L30" title="All 6 branches missed.">            if(bankDatabase.seekAccountNumber(accountTrans) &amp;&amp; amount!=0 &amp;&amp; super.getAccountNumber() != accountTrans){</span>
+<span class="nc" id="L31">                screen.displayMessage(&quot;\nAccount number : &quot;+accountTrans);</span>
+<span class="nc" id="L32">                screen.displayMessage(&quot;\nAmount : &quot;+amount);</span>
+<span class="nc" id="L33">                screen.displayMessage(&quot;\n\nProcess the transfer &quot; + &quot;(1 for yes, 0 for no) : &quot;);</span>
+<span class="nc" id="L34">                processTransfer = keypad.getInput(); </span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                if (processTransfer==1){</span>
+<span class="nc" id="L36">                    screen.displayMessage(&quot;\nProcessing Transfer......\n&quot;);</span>
+<span class="nc" id="L37">                    promptTransfer(accountTrans,amount);</span>
+                    //System.out.println(amount);
+<span class="nc" id="L39">                    bankDatabase.setBankStatement(getAccountNumber(), &quot;Transfer&quot;, accountTrans,(int)amount,0,null); //set sender bank statement </span>
+<span class="nc" id="L40">                    bankDatabase.setBankStatement(accountTrans, &quot;Transfer&quot;, getAccountNumber(),0, (int)amount,null); //set receiver bank statement </span>
+<span class="nc" id="L41">                    amount = 0;//for cancelling the transfer</span>
                 }else{
-<span class="nc" id="L39">                    screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
-<span class="nc" id="L40">                    amount = 0; //for canceling the transfer</span>
+<span class="nc" id="L43">                    screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
+<span class="nc" id="L44">                    amount = 0; //for canceling the transfer</span>
                 }
             }else {
-<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (super.getAccountNumber() == accountTrans){</span>
-<span class="nc" id="L44">                    screen.displayMessage(&quot;\nYou can't transfer to yourself!&quot;);</span>
-<span class="nc" id="L45">                    screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
-<span class="nc" id="L46">                    amount = 0; //for canceling the transfer</span>
-                }else{
-<span class="nc bnc" id="L48" title="All 2 branches missed.">                    if(amount != 0){</span>
-<span class="nc" id="L49">                        screen.displayMessage(&quot;\nSorry we can't find the account number&quot;);</span>
-<span class="nc" id="L50">                        screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
-<span class="nc" id="L51">                        amount = 0; //for canceling the transfer</span>
-                    }else{
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (super.getAccountNumber() == accountTrans){</span>
+<span class="nc" id="L48">                    screen.displayMessage(&quot;\nYou can't transfer to yourself!&quot;);</span>
+<span class="nc" id="L49">                    screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
+<span class="nc" id="L50">                    amount = 0; //for canceling the transfer</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                }else if(amount != 0){</span>
+<span class="nc" id="L52">                        screen.displayMessage(&quot;\nSorry we can't find the account number&quot;);</span>
 <span class="nc" id="L53">                        screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
 <span class="nc" id="L54">                        amount = 0; //for canceling the transfer</span>
+                    }else{
+<span class="nc" id="L56">                        screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
+<span class="nc" id="L57">                        amount = 0; //for canceling the transfer</span>
                     }
                 }
             }
-        }
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L61">        }</span>
+    
     
     private double getAmountForTransfer(){
-<span class="nc" id="L62">      Screen screen = getScreen(); // get reference to screen</span>
+<span class="nc" id="L65">      Screen screen = getScreen(); // get reference to screen</span>
 
       // display the prompt
-<span class="nc" id="L65">      screen.displayMessage(&quot;\nPlease enter a transfer amount in &quot; + </span>
+<span class="nc" id="L68">      screen.displayMessage(&quot;\nPlease enter a transfer amount in &quot; + </span>
          &quot;CENTS (or 0 to cancel): &quot;);
       // receive input of transfer amount
-<span class="nc" id="L68">      int input = keypad.getInput(); // receive input of amount</span>
+<span class="nc" id="L71">      int input = keypad.getInput(); // receive input of amount</span>
       // check whether the user canceled or entered a valid amount
-<span class="nc bnc" id="L70" title="All 2 branches missed.">      if (input == CANCELED) {</span>
-<span class="nc" id="L71">         return CANCELED;</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">      if (input == CANCELED) {</span>
+<span class="nc" id="L74">         return CANCELED;</span>
       }
       else {
-<span class="nc" id="L74">         return (double) input / 100; // return dollar amount</span>
+<span class="nc" id="L77">         return (double) input / 100; // return dollar amount</span>
       }
     }
 
     private int getAccountForTransfer() {
-<span class="nc" id="L79">        Screen screen = getScreen(); // get reference to screen</span>
+<span class="nc" id="L82">        Screen screen = getScreen(); // get reference to screen</span>
 
-<span class="nc" id="L81">        screen.displayMessage(&quot;\nPlease enter the account number : &quot;);</span>
-<span class="nc" id="L82">        int input = keypad.getInput(); // receive input of account number</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (input == CANCELED) {</span>
-<span class="nc" id="L84">            return CANCELED;</span>
+<span class="nc" id="L84">        screen.displayMessage(&quot;\nPlease enter the account number : &quot;);</span>
+<span class="nc" id="L85">        int input = keypad.getInput(); // receive input of account number</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (input == CANCELED) {</span>
+<span class="nc" id="L87">            return CANCELED;</span>
         } else {
-<span class="nc" id="L86">            return input; //return the accountNumber</span>
+<span class="nc" id="L89">            return input; //return the accountNumber</span>
       }
     }
 
     private void promptTransfer(int accountTrans, double amount) {
-<span class="nc" id="L91">        BankDatabase bankDatabase = getBankDatabase();</span>
-<span class="nc" id="L92">        bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user</span>
-<span class="nc" id="L93">        bankDatabase.transfer(accountTrans, amount);//increase the money of receiver</span>
-<span class="nc" id="L94">    }</span>
+<span class="nc" id="L94">        BankDatabase bankDatabase = getBankDatabase();</span>
+<span class="nc" id="L95">        Screen screen = getScreen(); // get reference to screen</span>
+        
+<span class="nc bnc" id="L97" title="All 6 branches missed.">        if (bankDatabase.getAccountType(super.getAccountNumber()).equals(&quot;Deposito&quot;) &amp;&amp; bankDatabase.getAvailableBalance(super.getAccountNumber())&gt;=amount &amp;&amp; bankDatabase.getTransferToday(super.getAccountNumber())+amount&lt;=Deposito.MAXTRANSFER){</span>
+<span class="nc" id="L98">                bankDatabase.credit(super.getAccountNumber(), (amount + (amount*(1.5/100)))); //decrease the money of transfer user</span>
+<span class="nc" id="L99">                bankDatabase.transfer(accountTrans, amount);//increase the money of receiveramount you transfer is more than your available balance&quot;</span>
+<span class="nc" id="L100">                bankDatabase.setTransferToday(super.getAccountNumber(), amount);</span>
+<span class="nc" id="L101">                screen.displayMessage(&quot;\nDone!\n&quot;);</span>
+<span class="nc bnc" id="L102" title="All 6 branches missed.">        }else if (bankDatabase.getAccountType(super.getAccountNumber()).equals(&quot;Business&quot;) &amp;&amp; bankDatabase.getAvailableBalance(super.getAccountNumber())&gt;=amount &amp;&amp; bankDatabase.getTransferToday(super.getAccountNumber())+amount&lt;=Business.MAXTRANSFER){</span>
+<span class="nc" id="L103">                bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user</span>
+<span class="nc" id="L104">                bankDatabase.transfer(accountTrans, amount);//increase the money of receiver</span>
+<span class="nc" id="L105">                bankDatabase.setTransferToday(super.getAccountNumber(), amount);</span>
+<span class="nc" id="L106">                screen.displayMessage(&quot;\nDone!\n&quot;);</span>
+<span class="nc bnc" id="L107" title="All 12 branches missed.">        }else if ((bankDatabase.getAccountType(super.getAccountNumber()).equals(&quot;Deposito&quot;) &amp;&amp; bankDatabase.getTransferToday(super.getAccountNumber())&gt;=Deposito.MAXTRANSFER &amp;&amp; bankDatabase.getAvailableBalance(super.getAccountNumber())&gt;=amount)||(bankDatabase.getAccountType(super.getAccountNumber()).equals(&quot;Business&quot;) &amp;&amp; bankDatabase.getTransferToday(super.getAccountNumber())&gt;=Business.MAXTRANSFER &amp;&amp; bankDatabase.getAvailableBalance(super.getAccountNumber())&gt;=amount)){</span>
+<span class="nc" id="L108">            screen.displayMessage(&quot;\nYou Exceeded Your Transfer Limit For Today.&quot;);</span>
+<span class="nc" id="L109">            screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
+<span class="nc bnc" id="L110" title="All 12 branches missed.">        }else if ((bankDatabase.getAccountType(super.getAccountNumber()).equals(&quot;Deposito&quot;) &amp;&amp; bankDatabase.getTransferToday(super.getAccountNumber())+amount&gt;=Deposito.MAXTRANSFER &amp;&amp; bankDatabase.getAvailableBalance(super.getAccountNumber())&gt;=amount)||(bankDatabase.getAccountType(super.getAccountNumber()).equals(&quot;Business&quot;) &amp;&amp; bankDatabase.getTransferToday(super.getAccountNumber())+amount&gt;=Business.MAXTRANSFER &amp;&amp; bankDatabase.getAvailableBalance(super.getAccountNumber())&gt;=amount)){</span>
+<span class="nc" id="L111">            screen.displayMessage(&quot;\nThe amount you transfer is more than your transfer limit for a day&quot;);</span>
+<span class="nc" id="L112">            screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
+        }else{
+<span class="nc" id="L114">            screen.displayMessage(&quot;\nThe amount you transfer is more than your available balance&quot;);</span>
+<span class="nc" id="L115">            screen.displayMessage(&quot;\nCanceling Transfer.....\n&quot;);</span>
+        }
+        
+<span class="nc" id="L118">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -39,7 +39,7 @@ public class Account {
     }
     
     public void setAvailableBalance(double amount){
-        this.availableBalance = amount;
+        this.availableBalance += amount;
     }
 
     /* INI ANEH, TRF kok NAMBAH? */
