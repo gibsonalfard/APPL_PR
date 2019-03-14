@@ -61,7 +61,7 @@ public class Deposito extends Account {
         
         input = keypad.getInput();
         
-        return (input > 4) ? displayWithdrawalMenu() : input; // get user input through keypad   
+        return (input > 5) ? displayWithdrawalMenu() : input; // get user input through keypad   
            
     }
     

@@ -3,21 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/home/ahmadajinaufalali/Documents/APPL_PR/test/BankDatabaseTest.java</file>
-=======
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Deposito.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Admin.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Tanggal.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Withdrawal.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Transfer.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Transaction.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Account.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Business.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Student.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/ATM.java</file>
-            <file>file:/D:/.Semester%204/APPL/APPL_PR/src/Deposit.java</file>
->>>>>>> Fia
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/BankDatabase.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Withdrawal.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/test/DepositoTest.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Deposito.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/test/input.in</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Screen.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/test/ATMAppTest.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/DepositSlot.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/ATM.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Business.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Deposit.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/ATMApp.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/test/ATMTest.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Transaction.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Account.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/CashDispenser.java</file>
+            <file>file:/D:/!!dataKuliah/Workspace/APPL/APPL_W2/src/Transfer.java</file>
         </group>
     </open-files>
 </project-private>
