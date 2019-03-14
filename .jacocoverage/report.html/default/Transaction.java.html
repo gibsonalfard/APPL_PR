@@ -5,26 +5,26 @@
 
  
    public Transaction(int userAccountNumber, Screen atmScreen, 
-<span class="fc" id="L8">      BankDatabase atmBankDatabase) {</span>
+<span class="nc" id="L8">      BankDatabase atmBankDatabase) {</span>
 
-<span class="fc" id="L10">      accountNumber = userAccountNumber;</span>
-<span class="fc" id="L11">      screen = atmScreen;</span>
-<span class="fc" id="L12">      bankDatabase = atmBankDatabase;</span>
-<span class="fc" id="L13">   }</span>
+<span class="nc" id="L10">      accountNumber = userAccountNumber;</span>
+<span class="nc" id="L11">      screen = atmScreen;</span>
+<span class="nc" id="L12">      bankDatabase = atmBankDatabase;</span>
+<span class="nc" id="L13">   }</span>
 
    // return account number 
    public int getAccountNumber() {
-<span class="fc" id="L17">      return accountNumber; </span>
+<span class="nc" id="L17">      return accountNumber; </span>
    } 
 
    // return reference to screen
    public Screen getScreen() {
-<span class="fc" id="L22">      return screen;</span>
+<span class="nc" id="L22">      return screen;</span>
    } 
 
    // return reference to bank database
    public BankDatabase getBankDatabase() {
-<span class="fc" id="L27">      return bankDatabase;</span>
+<span class="nc" id="L27">      return bankDatabase;</span>
    } 
 
    // perform the transaction (overridden by each subclass)

@@ -4,22 +4,22 @@
    private int count; // number of $20 bills remaining
    
    // no-argument CashDispenser constructor initializes count to default
-<span class="fc" id="L7">   public CashDispenser() {</span>
-<span class="fc" id="L8">      count = INITIAL_COUNT; // set count attribute to default</span>
-<span class="fc" id="L9">   }</span>
+<span class="nc" id="L7">   public CashDispenser() {</span>
+<span class="nc" id="L8">      count = INITIAL_COUNT; // set count attribute to default</span>
+<span class="nc" id="L9">   }</span>
 
    // simulates dispensing of specified amount of cash
    public void dispenseCash(int amount) {
-<span class="fc" id="L13">      int billsRequired = amount / 20; // number of $20 bills required</span>
-<span class="fc" id="L14">      count -= billsRequired; // update the count of bills</span>
-<span class="fc" id="L15">   }</span>
+<span class="nc" id="L13">      int billsRequired = amount / 20; // number of $20 bills required</span>
+<span class="nc" id="L14">      count -= billsRequired; // update the count of bills</span>
+<span class="nc" id="L15">   }</span>
 
    // indicates whether cash dispenser can dispense desired amount
    public boolean isSufficientCashAvailable(int amount) {
-<span class="fc" id="L19">      int billsRequired = amount / 20; // number of $20 bills required</span>
+<span class="nc" id="L19">      int billsRequired = amount / 20; // number of $20 bills required</span>
 
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">      if (count &gt;= billsRequired) {</span>
-<span class="fc" id="L22">         return true; // enough bills available</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">      if (count &gt;= billsRequired) {</span>
+<span class="nc" id="L22">         return true; // enough bills available</span>
       }
       else {
 <span class="nc" id="L25">         return false; // not enough bills available</span>
@@ -27,8 +27,8 @@
    }
    
    public void showCashDispenser(){
-<span class="fc" id="L30">       System.out.println(&quot;Money in Dispenser is : $&quot;+(this.count*20)+&quot;.\n&quot;);</span>
-<span class="fc" id="L31">   }</span>
+<span class="nc" id="L30">       System.out.println(&quot;Money in Dispenser is : $&quot;+(this.count*20)+&quot;.\n&quot;);</span>
+<span class="nc" id="L31">   }</span>
    
    
 } 
