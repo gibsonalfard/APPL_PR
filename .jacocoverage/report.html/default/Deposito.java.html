@@ -8,19 +8,19 @@
  *
  * @author Tio
  */
-public class Deposito extends Account {    
+public class Deposito extends Account {
     public static final int MAXWITHDRAW = 100;
     public static final int MAXTRANSFER = 500;
     public static final int MONTHLY_ADM = 1;
-<span class="fc" id="L15">    private Screen screen = new Screen(); // ATM's screen</span>
-<span class="fc" id="L16">    private Keypad keypad = new Keypad(); </span>
+<span class="nc" id="L15">    private Screen screen = new Screen(); // ATM's screen</span>
+<span class="nc" id="L16">    private Keypad keypad = new Keypad(); </span>
     
     public Deposito(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
-<span class="fc" id="L20">        super(theAccountNumber, thePIN,</span>
+<span class="nc" id="L20">        super(theAccountNumber, thePIN,</span>
             theAvailableBalance, theTotalBalance);
-<span class="fc" id="L22">    }</span>
-    
+<span class="nc" id="L22">    }</span>
+
     @Override
     public int displayMainMenu(Screen screen, Keypad keypad) {
 <span class="nc" id="L26">        screen.displayMessageLine(&quot;\nMain menu:&quot;);</span>
@@ -29,44 +29,49 @@ public class Deposito extends Account {
 <span class="nc" id="L29">        screen.displayMessageLine(&quot;3 - Deposit funds&quot;);</span>
 <span class="nc" id="L30">        screen.displayMessageLine(&quot;4 - Transfer&quot;);</span>
 <span class="nc" id="L31">        screen.displayMessageLine(&quot;5 - Change PIN&quot;);</span>
-<span class="nc" id="L32">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
-<span class="nc" id="L33">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
+<span class="nc" id="L32">        screen.displayMessageLine(&quot;6 - Bank Statement&quot;);</span>
+<span class="nc" id="L33">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
+<span class="nc" id="L34">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
         
-<span class="nc" id="L35">        return keypad.getInput(); // return user's selection</span>
+<span class="nc" id="L36">        return keypad.getInput(); // return user's selection</span>
     }
     
     @Override
     public void payTax(){
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if((getTotalBalance()-Deposito.MONTHLY_ADM) &gt;= 0){</span>
-<span class="fc" id="L41">            credit(Deposito.MONTHLY_ADM);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if((getTotalBalance()-Deposito.MONTHLY_ADM) &gt;= 0){</span>
+<span class="nc" id="L42">            credit(Deposito.MONTHLY_ADM);</span>
         }else{
-<span class="nc" id="L43">            credit(this.getTotalBalance());</span>
-<span class="nc" id="L44">            this.setAvailableBalance(this.getAvailableBalance()+(getTotalBalance()-Deposito.MONTHLY_ADM));</span>
+<span class="nc" id="L44">            credit(this.getTotalBalance());</span>
+<span class="nc" id="L45">            this.setAvailableBalance(this.getAvailableBalance()+(getTotalBalance()-Deposito.MONTHLY_ADM));</span>
         }
-<span class="fc" id="L46">    }</span>
+<span class="nc" id="L47">    }</span>
     
     @Override
     public int displayWithdrawalMenu(){
         int input;
         
-<span class="nc" id="L52">        screen.displayMessageLine(&quot;\nLimit Withdraw for Today is : $&quot;+(Deposito.MAXWITHDRAW-getWithdrawToday())+&quot;.&quot;);</span>
-<span class="nc" id="L53">        screen.displayMessageLine(&quot;\nWithdrawal Menu:&quot;);</span>
-<span class="nc" id="L54">        screen.displayMessageLine(&quot;1 - $20&quot;);</span>
-<span class="nc" id="L55">        screen.displayMessageLine(&quot;2 - $40&quot;);</span>
-<span class="nc" id="L56">        screen.displayMessageLine(&quot;3 - $60&quot;);</span>
-<span class="nc" id="L57">        screen.displayMessageLine(&quot;4 - $100&quot;);</span>
-<span class="nc" id="L58">        screen.displayMessageLine(&quot;0 - Cancel transaction&quot;);</span>
-<span class="nc" id="L59">        screen.displayMessage(&quot;\nChoose a withdrawal amount: &quot;);</span>
+<span class="nc" id="L53">        screen.displayMessageLine(&quot;\nLimit Withdraw for Today is : $&quot;+(Deposito.MAXWITHDRAW-getWithdrawToday())+&quot;.&quot;);</span>
+<span class="nc" id="L54">        screen.displayMessageLine(&quot;\nWithdrawal Menu:&quot;);</span>
+<span class="nc" id="L55">        screen.displayMessageLine(&quot;1 - $20&quot;);</span>
+<span class="nc" id="L56">        screen.displayMessageLine(&quot;2 - $40&quot;);</span>
+<span class="nc" id="L57">        screen.displayMessageLine(&quot;3 - $60&quot;);</span>
+<span class="nc" id="L58">        screen.displayMessageLine(&quot;4 - $100&quot;);</span>
+<span class="nc" id="L59">        screen.displayMessageLine(&quot;0 - Cancel transaction&quot;);</span>
+<span class="nc" id="L60">        screen.displayMessage(&quot;\nChoose a withdrawal amount: &quot;);</span>
         
-<span class="nc" id="L61">        input = keypad.getInput();</span>
+<span class="nc" id="L62">        input = keypad.getInput();</span>
         
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        return (input &gt; 4) ? displayWithdrawalMenu() : input; // get user input through keypad   </span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        return (input &gt; 5) ? displayWithdrawalMenu() : input; // get user input through keypad   </span>
            
     }
     
     @Override
     public boolean isAvailableForWithdraw(double amount){
-<span class="nc bnc" id="L69" title="All 2 branches missed.">       return Deposito.MAXWITHDRAW &gt;= (this.getWithdrawToday()+amount);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">       return Deposito.MAXWITHDRAW &gt;= (this.getWithdrawToday()+amount);</span>
+    }
+    @Override
+    public boolean isAvailableForTransfer(double amount){
+<span class="nc bnc" id="L74" title="All 2 branches missed.">       return Business.MAXTRANSFER &gt;= (this.getTransferToday()+amount);</span>
     }
 }
 

@@ -192,6 +192,9 @@ public class ATM {
                     
                     //test method updateDepVal di BankStatement;
                     bankDatabase.updateDepVal(0);
+                    int accNum = bankDatabase.showValidateDeposit(keypad);
+                    bankDatabase.validateDeposit(accNum);
+//                    depositSlot.showDepositSlot();
                     break;
                 case MONEY_DISPEN:
                     cashDispenser.showCashDispenser();

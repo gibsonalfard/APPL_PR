@@ -196,6 +196,30 @@ public class BankDatabase {
        this.list.set(idStatement, tr);
     }
     
+    public int showValidateDeposit(Keypad keypad){
+        int limit = Deposit.depositSlot.length;
+        int i = 0;
+        
+        DepositSlot[] ds = Deposit.depositSlot;
+        
+        while(i<=limit && ds[i] != null){
+            if(!ds[i].validated){
+                System.out.println("\nDeposit Number : "+ (i+1));
+                System.out.println("Account Number : " + ds[i].accountNumber);
+                System.out.println("Amount of Deposit : " + ds[i].amountOfDeposit);
+            }
+            i+=1;
+        }
+        
+        System.out.print("Enter Deposit Number : ");
+        i = keypad.getInput();
+        return (i-1);
+    }
+    
+    public void validateDeposit(int account){
+        Deposit.depositSlot[account].validateDeposit(this);
+    }
+    
     public void displayBankStatement(int accountNumber){
       
       if(!list.isEmpty()){

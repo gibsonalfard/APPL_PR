@@ -5,10 +5,9 @@ import java.util.List;
 public class Deposit extends Transaction {
    private double amount; // amount to deposit
    private Keypad keypad = new Keypad(); // reference to keypad
-   private static DepositSlot[] depositSlot = new DepositSlot[100]; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
-   
-   private int numberOfDeposit = 0;
+   private static int numberOfDeposit = 0;
+   static DepositSlot[] depositSlot = new DepositSlot[100]; // reference to deposit slot
 
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 
@@ -25,9 +24,15 @@ public class Deposit extends Transaction {
           numberOfDeposit += 1;
       }else{
           depositSlot[numberOfDeposit] = atmDepositSlot;
-          numberOfDeposit = depositSlot.length + 1;
+          numberOfDeposit += 1;
       }
    } 
+   
+//   public static void changeSlotOrder(int theAccount){
+//       depositSlot
+//       depositSlot[theAccount] = depositSlot[numberOfDeposit];
+//       numberOfDeposit -= 1;
+//   }
    
 //   public void showByAccount(int accountNumber){
 //       
@@ -48,8 +53,8 @@ public class Deposit extends Transaction {
                                  "NOTE: The money just deposited will not be available"+
                                  "until we verify the amount of any enclosed cash and your checks clear.\n");
             
-            bankDatabase.debit(super.getAccountNumber(), amount);
-            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
+//            bankDatabase.debit(super.getAccountNumber(), amount);
+            this.depositSlot[numberOfDeposit-1].addDeposit(super.getAccountNumber(), amount);
             
             bankDatabase.setBankStatement(getAccountNumber(), "Deposit", 0,0,(int)amount,"No");
             

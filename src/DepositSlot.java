@@ -1,7 +1,7 @@
 public class DepositSlot {
    int accountNumber;
-   private double amountOfDeposit;
-   private boolean validated;
+   double amountOfDeposit;
+   boolean validated;
    
    public boolean isEnvelopeReceived() {
       return true; // deposit envelope was received
@@ -21,5 +21,10 @@ public class DepositSlot {
    
    public void validateDeposit(){
        this.validated = true;
+   }
+   
+   public void validateDeposit(BankDatabase bd){
+       this.validated = true;
+       bd.debit(this.accountNumber, this.amountOfDeposit);
    }
 } 
