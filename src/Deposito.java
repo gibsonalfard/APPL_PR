@@ -10,7 +10,7 @@
  */
 public class Deposito extends Account {
     public static final int MAXWITHDRAW = 100;
-    public static final int MAXTRANSFER = 500;
+    public static final double MAXTRANSFER = 500;
     public static final int MONTHLY_ADM = 1;
     private Screen screen = new Screen(); // ATM's screen
     private Keypad keypad = new Keypad(); 

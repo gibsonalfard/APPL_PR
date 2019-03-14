@@ -11,7 +11,7 @@
 public class Business extends Account {    
     
     public static final int MAXWITHDRAW = 1000;
-    public static final int MAXTRANSFER = 10000;
+    public static final double MAXTRANSFER = 10000;
     public static final int MONTHLY_ADM = 5;
     private Screen screen = new Screen(); // ATM's screen
     private Keypad keypad = new Keypad(); 

@@ -35,7 +35,7 @@ public class Transfer extends Transaction{
                 if (processTransfer==1){
                     screen.displayMessage("\nProcessing Transfer......\n");
                     promptTransfer(accountTrans,amount);
-                    System.out.println(amount);
+                    //System.out.println(amount);
                     bankDatabase.setBankStatement(getAccountNumber(), "Transfer", accountTrans,(int)amount,0,null); //set sender bank statement 
                     bankDatabase.setBankStatement(accountTrans, "Transfer", getAccountNumber(),0, (int)amount,null); //set receiver bank statement 
                     amount = 0;//for cancelling the transfer
@@ -48,8 +48,7 @@ public class Transfer extends Transaction{
                     screen.displayMessage("\nYou can't transfer to yourself!");
                     screen.displayMessage("\nCanceling Transfer.....\n");
                     amount = 0; //for canceling the transfer
-                }else{
-                    if(amount != 0){
+                }else if(amount != 0){
                         screen.displayMessage("\nSorry we can't find the account number");
                         screen.displayMessage("\nCanceling Transfer.....\n");
                         amount = 0; //for canceling the transfer
@@ -60,7 +59,7 @@ public class Transfer extends Transaction{
                 }
             }
         }
-    }
+    
     
     private double getAmountForTransfer(){
       Screen screen = getScreen(); // get reference to screen
@@ -95,36 +94,26 @@ public class Transfer extends Transaction{
         BankDatabase bankDatabase = getBankDatabase();
         Screen screen = getScreen(); // get reference to screen
         
-        if (bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount && bankDatabase.getTransferToday(super.getAccountNumber())<=Deposito.MAXTRANSFER){
-            if ( amount <= Business.MAXTRANSFER && amount <= Deposito.MAXTRANSFER){
+        if (bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount && bankDatabase.getTransferToday(super.getAccountNumber())+amount<=Deposito.MAXTRANSFER){
                 bankDatabase.credit(super.getAccountNumber(), (amount + (amount*(1.5/100)))); //decrease the money of transfer user
                 bankDatabase.transfer(accountTrans, amount);//increase the money of receiveramount you transfer is more than your available balance"
                 bankDatabase.setTransferToday(super.getAccountNumber(), amount);
                 screen.displayMessage("\nDone!\n");
-            }
-            else{
-                screen.displayMessage("\n The amount you want to transfer is more than the limit.");
-                screen.displayMessage("\nCanceling Transfer.....\n");
-            }
-        }else if (bankDatabase.getTransferToday(super.getAccountNumber())<=bankDatabase.getAccount(super.getAccountNumber()).MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
-            if ( amount <= Business.MAXTRANSFER && amount <= Deposito.MAXTRANSFER){
+        }else if (bankDatabase.getAccountType(super.getAccountNumber()).equals("Business") && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount && bankDatabase.getTransferToday(super.getAccountNumber())+amount<=Business.MAXTRANSFER){
                 bankDatabase.credit(super.getAccountNumber(), amount); //decrease the money of transfer user
                 bankDatabase.transfer(accountTrans, amount);//increase the money of receiver
                 bankDatabase.setTransferToday(super.getAccountNumber(), amount);
                 screen.displayMessage("\nDone!\n");
-            }
-            else{
-                screen.displayMessage("\n The amount you want to transfer is more than the limit.");
-                screen.displayMessage("\nCanceling Transfer.....\n");
-            }
-            }else if (bankDatabase.getTransferToday(super.getAccountNumber())>=bankDatabase.getAccount(super.getAccountNumber()).MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount){
-                screen.displayMessage("\n You Exceeded Your Transfer Limit For Today.");
-                screen.displayMessage("\nCanceling Transfer.....\n");
-            } 
-            else{
-                screen.displayMessage("\n The amount you transfer is more than your available balance");
-                screen.displayMessage("\nCanceling Transfer.....\n");
-            }
+        }else if ((bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getTransferToday(super.getAccountNumber())>=Deposito.MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount)||(bankDatabase.getAccountType(super.getAccountNumber()).equals("Business") && bankDatabase.getTransferToday(super.getAccountNumber())>=Business.MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount)){
+            screen.displayMessage("\nYou Exceeded Your Transfer Limit For Today.");
+            screen.displayMessage("\nCanceling Transfer.....\n");
+        }else if ((bankDatabase.getAccountType(super.getAccountNumber()).equals("Deposito") && bankDatabase.getTransferToday(super.getAccountNumber())+amount>=Deposito.MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount)||(bankDatabase.getAccountType(super.getAccountNumber()).equals("Business") && bankDatabase.getTransferToday(super.getAccountNumber())+amount>=Business.MAXTRANSFER && bankDatabase.getAvailableBalance(super.getAccountNumber())>=amount)){
+            screen.displayMessage("\nThe amount you transfer is more than your transfer limit for a day");
+            screen.displayMessage("\nCanceling Transfer.....\n");
+        }else{
+            screen.displayMessage("\nThe amount you transfer is more than your available balance");
+            screen.displayMessage("\nCanceling Transfer.....\n");
+        }
         
     }
     
