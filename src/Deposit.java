@@ -7,6 +7,7 @@ public class Deposit extends Transaction {
    private Keypad keypad = new Keypad(); // reference to keypad
    private static DepositSlot[] depositSlot = new DepositSlot[100]; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
+   private final static int UNBLOCK_COST = 2; // balance cost for unblocking account
 
    private int numberOfDeposit = 0;
 
@@ -108,5 +109,9 @@ public class Deposit extends Transaction {
                bankDatabase.updateDepVal(input);
            }
        }
+   }
+   
+   public int getUnblockCost(){
+        return Deposit.UNBLOCK_COST;
    }
 } 

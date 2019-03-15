@@ -12,6 +12,7 @@ public class Account {
     public static int MAXWITHDRAW;
     public int MAXTRANSFER;
     public int MONTHLY_ADM = 1;
+    private static int UNBLOCK_COST = 0; // balance cost for unblocking account
 
     // Account constructor initializes attributes
     public Account(int theAccountNumber, int thePIN,
@@ -125,5 +126,9 @@ public class Account {
     
     public boolean isAvailableForTransfer(double amount){
        return true;
+    }
+    
+    public int getUnblockCost(){
+        return Account.UNBLOCK_COST;
     }
 } 
