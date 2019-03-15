@@ -169,12 +169,10 @@ public class ATM {
                         transfer.displayTransferHistory();
                     }
                     else{
-//                        System.out.print("Please Enter Month (ex:03-2019) : ");
-//                        String month = keypad.getString();
-//                        String subTanggal = tanggal.dateNow().substring(3);
-//                        System.out.println(month+ "=" +subTanggal);
+                        System.out.print("Please Enter Month and Year (ex:03-2019) : ");
+                        String month_year = keypad.getString();
                         withdrawal = new Withdrawal(currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);
-                        withdrawal.displayWithdrawalHistory("03-2019");
+                        withdrawal.displayWithdrawalHistory(month_year);
                     }
                     break;
                 
