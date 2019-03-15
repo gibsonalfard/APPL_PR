@@ -182,6 +182,7 @@ public class ATM {
                     currentTransaction.execute();
                 case UNBLOCK:
                     showUnblockMenu(keypad, bankDatabase, screen);
+                    
                     break;
                 case VALIDATE:
                     // initialize as new object of chosen type
@@ -280,10 +281,19 @@ public class ATM {
     public void showUnblockMenu(Keypad keypad, BankDatabase bankDatabase, Screen screen){
        screen.displayMessage("Insert account number to unblock : ");
        int accNum = keypad.getInput();
+       int unblockCost;
        
        if(bankDatabase.isAccountBlocked(accNum)){
+           if(bankDatabase.getAccount(accNum).getAvailableBalance()<2){
+               unblockCost=1;
+           }else{
+               unblockCost=bankDatabase.getAccount(accNum).getUnblockCost();
+           }
            bankDatabase.unblockAccount(accNum);
            screen.displayMessageLine("Account number "+accNum+" has been unblocked");
+           screen.displayMessageLine("$"+unblockCost+" from account number "+accNum+" has been taken");
+           bankDatabase.getAccount(accNum).credit(unblockCost);
+           bankDatabase.setBankStatement(accNum, "Withdrawal", 0, unblockCost, 0, null);
        }else{
            screen.displayMessageLine("Account number "+accNum+" was not blocked anyway");
        }  

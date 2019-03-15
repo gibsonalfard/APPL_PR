@@ -15,6 +15,7 @@ public class Business extends Account {
     public static final int MONTHLY_ADM = 5;
     private Screen screen = new Screen(); // ATM's screen
     private Keypad keypad = new Keypad(); 
+    private final static int UNBLOCK_COST = 3; // balance cost for unblocking account
     
     public Business(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -71,5 +72,8 @@ public class Business extends Account {
     @Override
     public boolean isAvailableForTransfer(double amount){
        return Business.MAXTRANSFER >= (this.getTransferToday()+amount);
+    }
+    public int getUnblockCost(){
+        return Business.UNBLOCK_COST;
     }
 }

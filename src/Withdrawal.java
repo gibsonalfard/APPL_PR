@@ -74,7 +74,7 @@ public class Withdrawal extends Transaction {
         
                userChoice = amounts[input]; // save user's choice
                break;
-            case 6: System.out.println("\nInput withdrawal ammount:"+"     Bill:"+cashDispenser.getBillAmount());
+            case 6: System.out.println("\nInput withdrawal ammount:"+"     Bill: $"+cashDispenser.getBillAmount());
                 withdrawInput=keypad.getInput();
                 if(withdrawInput % cashDispenser.getBillAmount() == 0){
                     userChoice=withdrawInput;

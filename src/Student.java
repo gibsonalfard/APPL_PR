@@ -15,7 +15,7 @@ public class Student extends Account {
     public static final int MAXWITHDRAW = 20;
     public static final int MAXTRANSFER = 0;
     public static final int TRANSACT_ADM = 0;
-   
+    private final static int UNBLOCK_COST = 0; // balance cost for unblocking account
     
     public Student(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -60,5 +60,8 @@ public class Student extends Account {
    public boolean isAvailableForWithdraw(double amount){
        return Student.MAXWITHDRAW >= (this.getWithdrawToday()+amount);
    }
+   public int getUnblockCost(){
+        return Student.UNBLOCK_COST;
+    }
    
 }
