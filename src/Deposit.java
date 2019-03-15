@@ -7,7 +7,7 @@ public class Deposit extends Transaction {
    private Keypad keypad = new Keypad(); // reference to keypad
    private static DepositSlot[] depositSlot = new DepositSlot[100]; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
-   
+
    private int numberOfDeposit = 0;
 
    // Deposit constructor
@@ -49,7 +49,8 @@ public class Deposit extends Transaction {
                                  "until we verify the amount of any enclosed cash and your checks clear.\n");
             
             bankDatabase.debit(super.getAccountNumber(), amount);
-            this.depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
+            depositSlot[numberOfDeposit] = new DepositSlot(super.getAccountNumber(), amount, false);
+//            depositSlot[numberOfDeposit].addDeposit(super.getAccountNumber(), amount);
             
             bankDatabase.setBankStatement(getAccountNumber(), "Deposit", 0,0,(int)amount,"No");
             

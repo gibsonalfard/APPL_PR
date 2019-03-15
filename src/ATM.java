@@ -15,8 +15,8 @@ public class ATM {
     private BankDatabase bankDatabase; // account information database
     private Transfer transfer;
     private int loginAttempt = 0;
-    int curPin, newPin;
-
+    private int curPin, newPin;
+    
     // constants corresponding to main menu options
     private static final int BALANCE_INQUIRY = 1;
     private static final int WITHDRAWAL = 2;
@@ -36,7 +36,6 @@ public class ATM {
     
     Tanggal tanggal = new Tanggal();
 
-//<<<<<<< HEAD
     // no-argument ATM constructor initializes instance variables
     public ATM() {
         userAuthenticated = false; // user is not authenticated to start
@@ -150,23 +149,29 @@ public class ATM {
                     break;
                 case PASSWORD:
                     screen.displayMessage("\nPlease Enter Your Current Pin: ");
-                    int curPin = keypad.getInput(); // input account number
+                    curPin = keypad.getInput(); // input account number
                     screen.displayMessage("\nPlease Enter Your New Pin: ");
-                    int newPin = keypad.getInput(); // input account number
+                    newPin = keypad.getInput(); // input account number
 
                     bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);
 
                     break;
                 case BANK_STATEMENT:
                     BankStatement bankStatement = new BankStatement();
-                    bankStatement.displayBankStatementMenu(screen, keypad);
-                    bankDatabase.displayBankStatement(currentAccountNumber);
+                    int input = bankStatement.displayBankStatementMenu(screen, keypad);
+                    
+                    if(input == BANK_STATEMENT){
+                        bankDatabase.displayBankStatement(currentAccountNumber);
+                    } 
+                    else if(input == TRANSFER_HISTORY){
+                        transfer = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
+                        transfer.displayTransferHistory();
+                    }
+                    else{
+                        
+                    }
                     break;
                 
-                case TRANSFER_HISTORY:
-                    transfer = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
-                     transfer.displayTransferHistory();
-                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");
                     userExited = true; // this ATM session should end
@@ -178,28 +183,6 @@ public class ATM {
             }
         }
     }
-//   // start ATM 
-//   public void run() {
-//      // welcome and authenticate user; perform transactions
-//      while (true) {
-//         // loop while user is not yet authenticated
-//         while (!userAuthenticated) {
-//            screen.displayMessageLine("\nWelcome!");       
-//            authenticateUser(); // authenticate user
-//         }
-//         
-//         if(adminAuthenticated){
-//             performAdmins();
-//         }else{
-//             performTransactions(); // user is now authenticated
-//         }
-//         userAuthenticated = false; // reset before next ATM session
-//         adminAuthenticated = false; // reset before next ATM session
-//         currentAccountNumber = 0; // reset before next ATM session
-//         screen.displayMessageLine("\nThank you! Goodbye!");
-//      }
-//   }
-                    
 
      //display the main menu and perform transactions
     private void performAdmins() {
@@ -318,40 +301,6 @@ public class ATM {
          }
         return temp;
    }
-   
-   // display the main menu and perform transactions
-//   private void performAdmins() {
-//      // local variable to store transaction currently being processed
-//      Transaction currentTransaction = null;
-//      
-//      boolean userExited = false; // user has not chosen to exit
-//
-//      // loop while user has not chosen option to exit system
-//      while (!userExited) {
-//         // show main menu and get user selection
-//         int mainMenuSelection = displayAdminMenu();
-//
-//         // decide how to proceed based on user's menu selection
-//         switch (mainMenuSelection) {
-//            // user chose to perform one of three transaction types
-//            case ADD_NASABAH:   
-//                currentTransaction = new AddNasabah(currentAccountNumber, screen, bankDatabase, keypad);
-//                currentTransaction.execute();
-//                break;
-//            case UNBLOCK:
-//            case VALIDATE:
-//               // initialize as new object of chosen type
-//               currentTransaction = 
-//                  createTransaction(mainMenuSelection);
-//
-//               currentTransaction.execute(); // execute transaction
-//               break;
-//            case MONEY_DISPEN:
-//                cashDispenser.showCashDispenser();
-//                break;
-//        }
-//    }
-//   }
     
     public void showUnblockMenu(Keypad keypad, BankDatabase bankDatabase, Screen screen){
        screen.displayMessage("Insert account number to unblock : ");
@@ -364,29 +313,4 @@ public class ATM {
            screen.displayMessageLine("Account number "+accNum+" was not blocked anyway");
        }  
     }
-
-//   // display the main menu and return an input selection
-//   private int displayMainMenu() {
-//      screen.displayMessageLine("\nMain menu:");
-//      screen.displayMessageLine("1 - View my balance");
-//      screen.displayMessageLine("2 - Withdraw cash");
-//      screen.displayMessageLine("3 - Deposit funds");
-//      screen.displayMessageLine("4 - Transfer");
-//      screen.displayMessageLine("5 - Change PIN");
-//      screen.displayMessageLine("0 - Exit\n");
-//      screen.displayMessage("Enter a choice: ");
-//      return keypad.getInput(); // return user's selection
-//   }
-//   
-//   private int displayAdminMenu() {
-//      screen.displayMessageLine("\nAdmin menu:");
-//      screen.displayMessageLine("1 - Add Nasabah");
-//      screen.displayMessageLine("2 - Unblock Nasabah");
-//      screen.displayMessageLine("3 - Validate Deposit");
-//      screen.displayMessageLine("4 - See Money Dispenser");
-//      screen.displayMessageLine("5 - Add Account");
-//      screen.displayMessageLine("0 - Exit\n");
-//      screen.displayMessage("Enter a choice: ");
-//      return keypad.getInput(); // return user's selection
-//   }
 }

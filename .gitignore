@@ -1,4 +1,13 @@
 <<<<<<< HEAD
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.properties
+*.so
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 /nbproject/private/
 =======
@@ -8,3 +17,4 @@
 =======
 /dist/
 >>>>>>> ffc8f403688b7588f033accc5eb67bfcb416356e
+>>>>>>> newGibran

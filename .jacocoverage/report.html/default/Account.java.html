@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Account.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BrandNew_ATM&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Account.java</span></div><h1>Account.java</h1><pre class="source lang-java linenums">public class Account {
+
+    private int accountNumber; // account number
+    private int pin; // PIN for authentication
+    private double availableBalance; // funds available for withdrawal
+    private double totalBalance; // funds available &amp; pending deposits
+    private boolean isBlocked;
+<span class="fc" id="L8">    private int transferToday = 0;</span>
+<span class="fc" id="L9">    private int WithdrawToday = 0;</span>
+    private Keypad keypad;
+    
+    public static int MAXWITHDRAW;
+    public int MAXTRANSFER;
+<span class="fc" id="L14">    public int MONTHLY_ADM = 1;</span>
+
+    // Account constructor initializes attributes
+    public Account(int theAccountNumber, int thePIN,
+<span class="fc" id="L18">            double theAvailableBalance, double theTotalBalance) {</span>
+<span class="fc" id="L19">        accountNumber = theAccountNumber;</span>
+<span class="fc" id="L20">        pin = thePIN;</span>
+<span class="fc" id="L21">        availableBalance = theAvailableBalance;</span>
+<span class="fc" id="L22">        totalBalance = theTotalBalance;</span>
+<span class="fc" id="L23">        isBlocked = false;</span>
+<span class="fc" id="L24">    }</span>
+
+    // determines whether a user-specified PIN matches PIN in Account
+    public boolean validatePIN(int userPIN) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        return userPIN == pin;</span>
+    }
+
+    // returns available balance
+    public double getAvailableBalance() {
+<span class="fc" id="L33">        return availableBalance;</span>
+    }
+
+    // returns the total balance
+    public double getTotalBalance() {
+<span class="fc" id="L38">        return totalBalance;</span>
+    }
+    
+    public void setAvailableBalance(double amount){
+<span class="fc" id="L42">        this.availableBalance = amount;</span>
+<span class="fc" id="L43">    }</span>
+
+    /* INI ANEH, TRF kok NAMBAH? */
+    public void transfer(double amount) {
+<span class="fc" id="L47">        this.availableBalance += amount;</span>
+<span class="fc" id="L48">        this.totalBalance += amount;</span>
+<span class="fc" id="L49">    }</span>
+
+    public void credit(double amount) {
+<span class="fc" id="L52">        this.availableBalance -= amount;</span>
+<span class="fc" id="L53">        this.totalBalance -= amount;</span>
+<span class="fc" id="L54">    }</span>
+
+    public void debit(double amount) {
+<span class="fc" id="L57">        this.totalBalance += amount;</span>
+<span class="fc" id="L58">    }</span>
+
+    public int getAccountNumber() {
+<span class="fc" id="L61">        return accountNumber;</span>
+    }
+
+    public void changePIN(int thePIN) {
+<span class="fc" id="L65">        this.pin = thePIN;</span>
+<span class="fc" id="L66">    }</span>
+
+    public void blockUser() {
+<span class="fc" id="L69">        this.isBlocked = true;</span>
+<span class="fc" id="L70">    }</span>
+
+    public void unblockUser() {
+<span class="fc" id="L73">        this.isBlocked = false;</span>
+<span class="fc" id="L74">    }</span>
+
+    public boolean isUserBlocked() {
+<span class="fc" id="L77">        return this.isBlocked;</span>
+    }
+
+    public String getAccountType() {
+<span class="fc" id="L81">        return this.getClass().toString().substring(6);</span>
+    }
+
+    public int getTransferToday() {
+<span class="fc" id="L85">        return transferToday;</span>
+    }
+
+    public void setTransferToday(double transferToday) {
+<span class="fc" id="L89">        this.transferToday += transferToday;</span>
+<span class="fc" id="L90">    }</span>
+
+    public int getWithdrawToday() {
+<span class="fc" id="L93">        return WithdrawToday;</span>
+    }
+
+    public void setWithdrawToday(double WithdrawToday) {
+<span class="fc" id="L97">        this.WithdrawToday += WithdrawToday;</span>
+<span class="fc" id="L98">    }</span>
+    
+    public int displayWithdrawalMenu() {
+<span class="nc" id="L101">       return keypad.getInput(); // return user's selection</span>
+    }
+    
+    public int displayMainMenu(Screen screen, Keypad keypad) {
+<span class="nc" id="L105">        screen.displayMessageLine(&quot;\nMain menu:&quot;);</span>
+<span class="nc" id="L106">        screen.displayMessageLine(&quot;1 - View my balance&quot;);</span>
+<span class="nc" id="L107">        screen.displayMessageLine(&quot;2 - Withdraw cash&quot;);</span>
+<span class="nc" id="L108">        screen.displayMessageLine(&quot;3 - Deposit funds&quot;);</span>
+<span class="nc" id="L109">        screen.displayMessageLine(&quot;4 - Change PIN&quot;);</span>
+<span class="nc" id="L110">        screen.displayMessageLine(&quot;5 - Bank Statement&quot;);</span>
+<span class="nc" id="L111">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
+<span class="nc" id="L112">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
+<span class="nc" id="L113">        int input = keypad.getInput(); </span>
+        
+<span class="nc bnc" id="L115" title="All 4 branches missed.">        return input == 4 ? 5 : (input == 5 ? 6 : input); // return user's selection</span>
+    }
+    
+    public void payTax(){
+        
+<span class="fc" id="L120">    }</span>
+    
+    public boolean isAvailableForWithdraw(double amount){
+<span class="fc" id="L123">       return true;</span>
+    }
+    
+    public boolean isAvailableForTransfer(double amount){
+<span class="nc" id="L127">       return true;</span>
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
