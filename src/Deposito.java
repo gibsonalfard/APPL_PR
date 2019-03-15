@@ -56,6 +56,7 @@ public class Deposito extends Account {
         screen.displayMessageLine("2 - $40");
         screen.displayMessageLine("3 - $60");
         screen.displayMessageLine("4 - $100");
+        screen.displayMessageLine("6 - Another amount");
         screen.displayMessageLine("0 - Cancel transaction");
         screen.displayMessage("\nChoose a withdrawal amount: ");
         

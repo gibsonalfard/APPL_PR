@@ -47,6 +47,7 @@ public class Student extends Account {
         screen.displayMessageLine("\nLimit Withdraw for Today is : $"+(Student.MAXWITHDRAW-getWithdrawToday())+".");
         screen.displayMessageLine("\nWithdrawal Menu:");
         screen.displayMessageLine("1 - $20");
+        screen.displayMessageLine("6 - Another amount");
         screen.displayMessageLine("0 - Cancel transaction");
         screen.displayMessage("\nChoose a withdrawal amount: ");
         

@@ -57,6 +57,7 @@ public class Business extends Account {
         screen.displayMessageLine("3 - $60");
         screen.displayMessageLine("4 - $100");
         screen.displayMessageLine("5 - $200");
+        screen.displayMessageLine("6 - Another amount");
         screen.displayMessageLine("0 - Cancel transaction");
         screen.displayMessage("\nChoose a withdrawal amount: ");
          

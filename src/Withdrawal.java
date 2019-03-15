@@ -52,11 +52,12 @@ public class Withdrawal extends Transaction {
    // return the chosen amount or 0 if the user chooses to cancel
    private int displayMenuOfAmounts() {
       int userChoice = 100; // local variable to store return value
-
+      int withdrawInput;
+      
       Screen screen = getScreen(); // get screen reference
       
       // array of amounts to correspond to menu numbers
-      int[] amounts = {0, 20, 40, 60, 100, 200, 400, 800,1000};
+      int[] amounts = {0, 20, 40, 60, 100, 200};
 
       // loop while no valid choice has been made
       while (userChoice == 100) {
@@ -70,13 +71,19 @@ public class Withdrawal extends Transaction {
             case 3: // corresponding amount from amounts array
             case 4:
             case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
         
                userChoice = amounts[input]; // save user's choice
-               break;       
+               break;
+            case 6: System.out.println("\nInput withdrawal ammount:"+"     Bill:"+cashDispenser.getBillAmount());
+                withdrawInput=keypad.getInput();
+                if(withdrawInput % cashDispenser.getBillAmount() == 0){
+                    userChoice=withdrawInput;
+                }
+                else{
+                    screen.displayMessageLine(
+                  "\nInvalid amount. Try again.");
+                }
+                break;
             case CANCELED: // the user chose to cancel
                userChoice = CANCELED; // save user's choice
                break;
