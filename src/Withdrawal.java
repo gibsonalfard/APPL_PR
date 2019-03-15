@@ -1,5 +1,7 @@
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // Withdrawal.java
@@ -97,6 +99,7 @@ public class Withdrawal extends Transaction {
         List<BankStatement> list = bankDatabase.getList();
         Tanggal tgl = new Tanggal();
         
+        Collections.sort(list, new SortDescendingByWithdrawalAmount());
         if (!list.isEmpty()) {
             int size;
 
@@ -106,7 +109,9 @@ public class Withdrawal extends Transaction {
             System.out.println("=========================================================================================================");
             System.out.println("Date\t\tDescription\tRef\tWithdrawal\tDeposit\t\tBalance");
             System.out.println("=========================================================================================================");
-
+            
+            
+            
             for (int i = 0; i < size; i++) {
                 String subTanggal = list.get(i).getDate().substring(3);
                 if (list.get(i).getDescription().equals("Withdrawal") && subTanggal.equals(month) && list.get(i).getAccount() == super.getAccountNumber()) {

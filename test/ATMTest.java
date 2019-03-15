@@ -5,6 +5,7 @@
  */
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 import org.junit.After;
@@ -43,7 +44,7 @@ public class ATMTest {
      * Test of run method, of class ATM.
      */
     @Test
-    public void testRun() {
+    public void testRun() throws IOException {
         System.out.println("run");  
         ATM instance = new ATM();
         instance.run();
