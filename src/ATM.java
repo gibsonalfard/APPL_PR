@@ -158,6 +158,8 @@ public class ATM {
 
                     break;
                 case BANK_STATEMENT:
+                    BankStatement bankStatement = new BankStatement();
+                    bankStatement.displayBankStatementMenu(screen, keypad);
                     bankDatabase.displayBankStatement(currentAccountNumber);
                     break;
                 

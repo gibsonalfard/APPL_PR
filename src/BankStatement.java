@@ -18,7 +18,8 @@ public class BankStatement {
     private double deposit;
     private String DepositValidate;
     private double balance;
-
+    
+    
     public int getIdStatement() {
         return idStatement;
     }
@@ -89,5 +90,19 @@ public class BankStatement {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+    
+    public int displayBankStatementMenu(Screen screen, Keypad keypad){
+        
+        screen.displayMessageLine("\nHistory Menu:");
+        screen.displayMessageLine("1 - View Bank Statement");
+        screen.displayMessageLine("2 - View Transfer History");
+        screen.displayMessageLine("3 - View Withdrawal History(Montly)");
+        screen.displayMessageLine("0 - Cancel\n");
+        screen.displayMessage("Enter a choice: ");
+        int input = keypad.getInput(); 
+        
+        return input == 1 ? 6 : (input == 2 ? 7 : (input == 3 ? 8 : input)); // return user's selection
+    
     }
 }
