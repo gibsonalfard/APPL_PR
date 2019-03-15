@@ -32,6 +32,8 @@ public class Business extends Account {
         screen.displayMessageLine("4 - Transfer");
         screen.displayMessageLine("5 - Change PIN");
         screen.displayMessageLine("6 - Bank Statement");
+        screen.displayMessageLine("7 - Transfer History");
+        screen.displayMessageLine("7 - Withdrawal Histroy (Monthly)");
         screen.displayMessageLine("0 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         

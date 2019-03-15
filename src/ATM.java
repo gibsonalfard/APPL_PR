@@ -1,4 +1,7 @@
 
+import java.io.IOException;
+
+
 public class ATM {
     private boolean userAuthenticated; // whether user is authenticated
     private boolean adminAuthenticated;//whether user is admin
@@ -10,6 +13,7 @@ public class ATM {
     private CashDispenser cashDispenser; // ATM's cash dispenser
     private DepositSlot depositSlot;
     private BankDatabase bankDatabase; // account information database
+    private Transfer transfer;
     private int loginAttempt = 0;
     int curPin, newPin;
 
@@ -19,7 +23,9 @@ public class ATM {
     private static final int DEPOSIT = 3;
     private static final int TRANSFER = 4;
     private static final int PASSWORD = 5;
-    private static final int BANK_STATEMENT =6;
+    private static final int BANK_STATEMENT = 6;
+    private static final int TRANSFER_HISTORY = 7;
+    private static final int WITHDRAWAL_HISTORY = 8;
     private static final int EXIT = 0;
 
     private static final int ADD_NASABAH = 1;
@@ -40,10 +46,11 @@ public class ATM {
         keypad = new Keypad(); // create keypad
         cashDispenser = new CashDispenser(); // create cash dispenser
         bankDatabase = new BankDatabase(); // create acct info database
+        
     }
 
     // start ATM 
-    public void run() {
+    public void run() throws IOException {
         // welcome and authenticate user; perform transactions
         while (true) {
             screen.displayMessageLine("\nWelcome!");
@@ -115,7 +122,7 @@ public class ATM {
     }
 
     // display the main menu and perform transactions
-    private void performTransactions() {
+    private void performTransactions() throws IOException {
         // local variable to store transaction currently being processed
         Transaction currentTransaction = null;
 
@@ -134,6 +141,7 @@ public class ATM {
                 case WITHDRAWAL:
                 case DEPOSIT:
                 case TRANSFER:
+                
                     // initialize as new object of chosen type
                     currentTransaction
                             = createTransaction(mainMenuSelection);
@@ -152,6 +160,11 @@ public class ATM {
                 case BANK_STATEMENT:
                     bankDatabase.displayBankStatement(currentAccountNumber);
                     break;
+                
+                case TRANSFER_HISTORY:
+                    transfer = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
+                     transfer.displayTransferHistory();
+                     break;
                 case EXIT: // user chose to terminate session
                     screen.displayMessageLine("\nExiting the system...");
                     userExited = true; // this ATM session should end
@@ -284,6 +297,9 @@ public class ATM {
                 break;
                 
             case TRANSFER:
+                temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
+                break;
+            case TRANSFER_HISTORY:
                 temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
                 break;
             case PASSWORD:
