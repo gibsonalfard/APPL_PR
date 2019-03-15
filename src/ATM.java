@@ -14,6 +14,7 @@ public class ATM {
     private DepositSlot depositSlot;
     private BankDatabase bankDatabase; // account information database
     private Transfer transfer;
+    private Withdrawal withdrawal;
     private int loginAttempt = 0;
     private int curPin, newPin;
     
@@ -168,7 +169,12 @@ public class ATM {
                         transfer.displayTransferHistory();
                     }
                     else{
-                        
+//                        System.out.print("Please Enter Month (ex:03-2019) : ");
+//                        String month = keypad.getString();
+//                        String subTanggal = tanggal.dateNow().substring(3);
+//                        System.out.println(month+ "=" +subTanggal);
+                        withdrawal = new Withdrawal(currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);
+                        withdrawal.displayWithdrawalHistory("03-2019");
                     }
                     break;
                 

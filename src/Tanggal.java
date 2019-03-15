@@ -28,6 +28,10 @@ public class Tanggal {
     }
     
     public String dateNow(){
-        return now.get(Calendar.DATE)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR);
+        int day = now.get(Calendar.DATE);
+        int month = now.get(Calendar.MONTH)+1;
+        int year = now.get(Calendar.YEAR);
+        
+        return (day < 9 ? "0" : "")+day +"-"+ (month < 9 ? "0" : "")+month+"-"+year;
     }
 }

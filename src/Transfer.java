@@ -143,6 +143,7 @@ public class Transfer extends Transaction {
             System.out.println("=========================================================================================================");
 
             for (int i = 0; i < size; i++) {
+                
                 if (list.get(i).getDescription().equals("Transfer") && list.get(i).getDate().equals(tanggal) && list.get(i).getAccount() == super.getAccountNumber()) {
 //               System.out.print(list.get(i).getIdStatement()+"\t"); 
                     System.out.print(list.get(i).getDate() + "\t");
