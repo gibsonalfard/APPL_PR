@@ -192,101 +192,104 @@
                     
                     //test method updateDepVal di BankStatement;
 <span class="nc" id="L194">                    bankDatabase.updateDepVal(0);</span>
-<span class="nc" id="L195">                    break;</span>
-                case MONEY_DISPEN:
-<span class="nc" id="L197">                    cashDispenser.showCashDispenser();</span>
+<span class="nc" id="L195">                    int accNum = bankDatabase.showValidateDeposit(keypad);</span>
+<span class="nc" id="L196">                    bankDatabase.validateDeposit(accNum);</span>
+//                    depositSlot.showDepositSlot();
 <span class="nc" id="L198">                    break;</span>
+                case MONEY_DISPEN:
+<span class="nc" id="L200">                    cashDispenser.showCashDispenser();</span>
+<span class="nc" id="L201">                    break;</span>
                 case ADD_TANGGAL:
-<span class="nc" id="L200">                    tanggal.tanggalSekarang();</span>
-<span class="nc" id="L201">                    tanggal.addTanggal(1);</span>
+<span class="nc" id="L203">                    tanggal.tanggalSekarang();</span>
+<span class="nc" id="L204">                    tanggal.addTanggal(1);</span>
                     
-<span class="nc" id="L203">                    bankDatabase.resetLimit();</span>
+<span class="nc" id="L206">                    bankDatabase.resetLimit();</span>
                     
-<span class="nc bnc" id="L205" title="All 2 branches missed.">                    if(tanggal.getTanggal() == 3){</span>
-<span class="nc" id="L206">                        bankDatabase.monthlyTax();</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">                    if(tanggal.getTanggal() == 3){</span>
+<span class="nc" id="L209">                        bankDatabase.monthlyTax();</span>
                     }
                     
                     break;
                 case EXIT: // user chose to terminate session
-<span class="nc" id="L211">                    screen.displayMessageLine(&quot;\nExiting the system...&quot;);</span>
-<span class="nc" id="L212">                    userExited = true; // this ATM session should end</span>
-<span class="nc" id="L213">                    break;</span>
+<span class="nc" id="L214">                    screen.displayMessageLine(&quot;\nExiting the system...&quot;);</span>
+<span class="nc" id="L215">                    userExited = true; // this ATM session should end</span>
+<span class="nc" id="L216">                    break;</span>
                 default: // 
-<span class="nc" id="L215">                    screen.displayMessageLine(</span>
+<span class="nc" id="L218">                    screen.displayMessageLine(</span>
                             &quot;\nYou did not enter a valid selection. Try again.&quot;);
                     break;
             }
-<span class="nc" id="L219">        }</span>
-<span class="nc" id="L220">    }</span>
+<span class="nc" id="L222">        }</span>
+<span class="nc" id="L223">    }</span>
 
     // display the main menu and return an input selection
     private int displayMainMenu() {
-<span class="nc" id="L224">        screen.displayMessageLine(&quot;\nMain menu:&quot;);</span>
-<span class="nc" id="L225">        screen.displayMessageLine(&quot;1 - View my balance&quot;);</span>
-<span class="nc" id="L226">        screen.displayMessageLine(&quot;2 - Withdraw cash&quot;);</span>
-<span class="nc" id="L227">        screen.displayMessageLine(&quot;3 - Deposit funds&quot;);</span>
-<span class="nc" id="L228">        screen.displayMessageLine(&quot;4 - Transfer&quot;);</span>
-<span class="nc" id="L229">        screen.displayMessageLine(&quot;5 - Change PIN&quot;);</span>
-<span class="nc" id="L230">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
-<span class="nc" id="L231">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
-<span class="nc" id="L232">        return keypad.getInput(); // return user's selection</span>
+<span class="nc" id="L227">        screen.displayMessageLine(&quot;\nMain menu:&quot;);</span>
+<span class="nc" id="L228">        screen.displayMessageLine(&quot;1 - View my balance&quot;);</span>
+<span class="nc" id="L229">        screen.displayMessageLine(&quot;2 - Withdraw cash&quot;);</span>
+<span class="nc" id="L230">        screen.displayMessageLine(&quot;3 - Deposit funds&quot;);</span>
+<span class="nc" id="L231">        screen.displayMessageLine(&quot;4 - Transfer&quot;);</span>
+<span class="nc" id="L232">        screen.displayMessageLine(&quot;5 - Change PIN&quot;);</span>
+<span class="nc" id="L233">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
+<span class="nc" id="L234">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
+<span class="nc" id="L235">        return keypad.getInput(); // return user's selection</span>
     }
 
     private int displayAdminMenu() {
-<span class="nc" id="L236">        screen.displayMessageLine(&quot;\nAdmin menu:&quot;);</span>
-<span class="nc" id="L237">        screen.displayMessageLine(&quot;1 - Add Nasabah&quot;);</span>
-<span class="nc" id="L238">        screen.displayMessageLine(&quot;2 - Unblock Nasabah&quot;);</span>
-<span class="nc" id="L239">        screen.displayMessageLine(&quot;3 - Validate Deposit&quot;);</span>
-<span class="nc" id="L240">        screen.displayMessageLine(&quot;4 - See Money Dispenser&quot;);</span>
-<span class="nc" id="L241">        screen.displayMessageLine(&quot;5 - Add Tanggal&quot;);</span>
-<span class="nc" id="L242">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
-<span class="nc" id="L243">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
-<span class="nc" id="L244">        return keypad.getInput(); // return user's selection</span>
+<span class="nc" id="L239">        screen.displayMessageLine(&quot;\nAdmin menu:&quot;);</span>
+<span class="nc" id="L240">        screen.displayMessageLine(&quot;1 - Add Nasabah&quot;);</span>
+<span class="nc" id="L241">        screen.displayMessageLine(&quot;2 - Unblock Nasabah&quot;);</span>
+<span class="nc" id="L242">        screen.displayMessageLine(&quot;3 - Validate Deposit&quot;);</span>
+<span class="nc" id="L243">        screen.displayMessageLine(&quot;4 - See Money Dispenser&quot;);</span>
+<span class="nc" id="L244">        screen.displayMessageLine(&quot;5 - Add Tanggal&quot;);</span>
+<span class="nc" id="L245">        screen.displayMessageLine(&quot;0 - Exit\n&quot;);</span>
+<span class="nc" id="L246">        screen.displayMessage(&quot;Enter a choice: &quot;);</span>
+<span class="nc" id="L247">        return keypad.getInput(); // return user's selection</span>
     }
 
     private Transaction createTransaction(int type) {
-<span class="nc" id="L248">        Transaction temp = null;</span>
+<span class="nc" id="L251">        Transaction temp = null;</span>
 
-<span class="nc bnc" id="L250" title="All 7 branches missed.">        switch (type) {</span>
+<span class="nc bnc" id="L253" title="All 7 branches missed.">        switch (type) {</span>
             case BALANCE_INQUIRY:
-<span class="nc" id="L252">                temp = new BalanceInquiry(</span>
+<span class="nc" id="L255">                temp = new BalanceInquiry(</span>
                         currentAccountNumber, screen, bankDatabase);
-<span class="nc" id="L254">                break;</span>
-            case WITHDRAWAL:
-<span class="nc" id="L256">                temp = new Withdrawal(currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);</span>
 <span class="nc" id="L257">                break;</span>
-            case DEPOSIT:
-<span class="nc" id="L259">                temp = new Deposit(currentAccountNumber, screen, bankDatabase, keypad, depositSlot);</span>
+            case WITHDRAWAL:
+<span class="nc" id="L259">                temp = new Withdrawal(currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);</span>
 <span class="nc" id="L260">                break;</span>
+            case DEPOSIT:
+<span class="nc" id="L262">                temp = new Deposit(currentAccountNumber, screen, bankDatabase, keypad, depositSlot);</span>
+<span class="nc" id="L263">                break;</span>
                 
             case TRANSFER:
-<span class="nc" id="L263">                temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);</span>
-<span class="nc" id="L264">                break;</span>
-            case PASSWORD:
-<span class="nc" id="L266">                bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);</span>
+<span class="nc" id="L266">                temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);</span>
 <span class="nc" id="L267">                break;</span>
+            case PASSWORD:
+<span class="nc" id="L269">                bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);</span>
+<span class="nc" id="L270">                break;</span>
             case EXIT: // user chose to terminate session
-<span class="nc" id="L269">                screen.displayMessageLine(&quot;\nExiting the system...&quot;);</span>
-<span class="nc" id="L270">                userExited = true; // this ATM session should end</span>
-<span class="nc" id="L271">                break;</span>
+<span class="nc" id="L272">                screen.displayMessageLine(&quot;\nExiting the system...&quot;);</span>
+<span class="nc" id="L273">                userExited = true; // this ATM session should end</span>
+<span class="nc" id="L274">                break;</span>
             default: // 
-<span class="nc" id="L273">                screen.displayMessageLine(</span>
+<span class="nc" id="L276">                screen.displayMessageLine(</span>
                         &quot;\nYou did not enter a valid selection. Try again.&quot;);
                 break;
          }
-<span class="nc" id="L277">        return temp;</span>
+<span class="nc" id="L280">        return temp;</span>
    }
     
     public void showUnblockMenu(Keypad keypad, BankDatabase bankDatabase, Screen screen){
-<span class="nc" id="L281">       screen.displayMessage(&quot;Insert account number to unblock : &quot;);</span>
-<span class="nc" id="L282">       int accNum = keypad.getInput();</span>
+<span class="nc" id="L284">       screen.displayMessage(&quot;Insert account number to unblock : &quot;);</span>
+<span class="nc" id="L285">       int accNum = keypad.getInput();</span>
        
-<span class="nc bnc" id="L284" title="All 2 branches missed.">       if(bankDatabase.isAccountBlocked(accNum)){</span>
-<span class="nc" id="L285">           bankDatabase.unblockAccount(accNum);</span>
-<span class="nc" id="L286">           screen.displayMessageLine(&quot;Account number &quot;+accNum+&quot; has been unblocked&quot;);</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">       if(bankDatabase.isAccountBlocked(accNum)){</span>
+<span class="nc" id="L288">           bankDatabase.unblockAccount(accNum);</span>
+<span class="nc" id="L289">           screen.displayMessageLine(&quot;Account number &quot;+accNum+&quot; has been unblocked&quot;);</span>
        }else{
-<span class="nc" id="L288">           screen.displayMessageLine(&quot;Account number &quot;+accNum+&quot; was not blocked anyway&quot;);</span>
+<span class="nc" id="L291">           screen.displayMessageLine(&quot;Account number &quot;+accNum+&quot; was not blocked anyway&quot;);</span>
        }  
-<span class="nc" id="L290">    }</span>
+<span class="nc" id="L293">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

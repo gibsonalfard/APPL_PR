@@ -2,29 +2,28 @@
    private int accountNumber; // indicates account involved
    private Screen screen; // ATM screen
    private BankDatabase bankDatabase; // account database
-
  
    public Transaction(int userAccountNumber, Screen atmScreen, 
-<span class="nc" id="L8">      BankDatabase atmBankDatabase) {</span>
+<span class="nc" id="L7">      BankDatabase atmBankDatabase) {</span>
 
-<span class="nc" id="L10">      accountNumber = userAccountNumber;</span>
-<span class="nc" id="L11">      screen = atmScreen;</span>
-<span class="nc" id="L12">      bankDatabase = atmBankDatabase;</span>
-<span class="nc" id="L13">   }</span>
+<span class="nc" id="L9">      accountNumber = userAccountNumber;</span>
+<span class="nc" id="L10">      screen = atmScreen;</span>
+<span class="nc" id="L11">      bankDatabase = atmBankDatabase;</span>
+<span class="nc" id="L12">   }</span>
 
    // return account number 
    public int getAccountNumber() {
-<span class="nc" id="L17">      return accountNumber; </span>
+<span class="nc" id="L16">      return accountNumber; </span>
    } 
 
    // return reference to screen
    public Screen getScreen() {
-<span class="nc" id="L22">      return screen;</span>
+<span class="nc" id="L21">      return screen;</span>
    } 
 
    // return reference to bank database
    public BankDatabase getBankDatabase() {
-<span class="nc" id="L27">      return bankDatabase;</span>
+<span class="nc" id="L26">      return bankDatabase;</span>
    } 
 
    // perform the transaction (overridden by each subclass)
