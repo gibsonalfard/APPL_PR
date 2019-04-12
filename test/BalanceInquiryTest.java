@@ -42,7 +42,7 @@ public class BalanceInquiryTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        BalanceInquiry instance = null;
+        BalanceInquiry instance = new BalanceInquiry(1234, new Screen(), new BankDatabase());
         instance.execute();
     }
     

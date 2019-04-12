@@ -137,8 +137,13 @@ public class BankDatabase {
         return getAccount(userAccountNumber) != null;
     }
 
-    public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
-        accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
+    public void incAccount(int typeAccount, int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
+        switch (typeAccount){
+            case 0 : accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //admin
+            case 1 : accounts[accAmount] = new Student(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //student
+            case 2 : accounts[accAmount] = new Business(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //business
+            case 3 : accounts[accAmount] = new Deposito(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //deposito
+        }
         accAmount++;
     }
 

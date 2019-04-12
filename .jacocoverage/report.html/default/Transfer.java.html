@@ -5,26 +5,26 @@
 public class Transfer extends Transaction{
     private double amount; // amount to transfer
     private int accountTrans; // account number for transfer
-<span class="nc" id="L8">    private Keypad keypad = new Keypad(); // reference to keypad</span>
+<span class="fc" id="L8">    private Keypad keypad = new Keypad(); // reference to keypad</span>
     private int processTransfer; //actually boolean for confirm the prosese
     private final static int CANCELED = 0; // constant for cancel option
     private Tanggal date;
 
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase,
             Keypad atmKeypad) {
-<span class="nc" id="L15">        super(userAccountNumber, atmScreen, atmBankDatabase);</span>
-<span class="nc" id="L16">        keypad = atmKeypad;</span>
-<span class="nc" id="L17">    }</span>
+<span class="fc" id="L15">        super(userAccountNumber, atmScreen, atmBankDatabase);</span>
+<span class="fc" id="L16">        keypad = atmKeypad;</span>
+<span class="fc" id="L17">    }</span>
 
     @Override
     public void execute() {
-<span class="nc" id="L21">        BankDatabase bankDatabase = getBankDatabase();</span>
-<span class="nc" id="L22">        Screen screen = getScreen(); // get reference to screen</span>
+<span class="fc" id="L21">        BankDatabase bankDatabase = getBankDatabase();</span>
+<span class="fc" id="L22">        Screen screen = getScreen(); // get reference to screen</span>
   
-<span class="nc" id="L24">        processTransfer = 1;</span>
-<span class="nc" id="L25">        accountTrans = 1;</span>
-<span class="nc" id="L26">        amount = 1;</span>
-<span class="nc bnc" id="L27" title="All 4 branches missed.">        while(amount!=0 &amp;&amp; accountTrans!=0){</span>
+<span class="fc" id="L24">        processTransfer = 1;</span>
+<span class="fc" id="L25">        accountTrans = 1;</span>
+<span class="fc" id="L26">        amount = 1;</span>
+<span class="pc bpc" id="L27" title="2 of 4 branches missed.">        while(amount!=0 &amp;&amp; accountTrans!=0){</span>
 <span class="nc" id="L28">            accountTrans = getAccountForTransfer();</span>
 <span class="nc" id="L29">            amount = getAmountForTransfer();</span>
 <span class="nc bnc" id="L30" title="All 6 branches missed.">            if(bankDatabase.seekAccountNumber(accountTrans) &amp;&amp; amount!=0 &amp;&amp; super.getAccountNumber() != accountTrans){</span>
@@ -79,9 +79,9 @@ public class Transfer extends Transaction{
     }
 
     private int getAccountForTransfer() {
-<span class="nc" id="L82">        Screen screen = getScreen(); // get reference to screen</span>
+<span class="fc" id="L82">        Screen screen = getScreen(); // get reference to screen</span>
 
-<span class="nc" id="L84">        screen.displayMessage(&quot;\nPlease enter the account number : &quot;);</span>
+<span class="fc" id="L84">        screen.displayMessage(&quot;\nPlease enter the account number : &quot;);</span>
 <span class="nc" id="L85">        int input = keypad.getInput(); // receive input of account number</span>
 <span class="nc bnc" id="L86" title="All 2 branches missed.">        if (input == CANCELED) {</span>
 <span class="nc" id="L87">            return CANCELED;</span>

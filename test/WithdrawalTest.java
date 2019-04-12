@@ -42,7 +42,7 @@ public class WithdrawalTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        Withdrawal instance = null;
+        Withdrawal instance = new Withdrawal(1234, new Screen(), new BankDatabase(), new Keypad(), new CashDispenser());
         instance.execute();
     }
     

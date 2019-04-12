@@ -55,7 +55,7 @@ public class TransactionTest {
     public void testGetScreen() {
         System.out.println("getScreen");
         Transaction instance = null;
-        Screen expResult = null;
+        Screen expResult = new Screen();
         Screen result = instance.getScreen();
         assertEquals(expResult, result);
     }
@@ -67,7 +67,7 @@ public class TransactionTest {
     public void testGetBankDatabase() {
         System.out.println("getBankDatabase");
         Transaction instance = null;
-        BankDatabase expResult = null;
+        BankDatabase expResult = new BankDatabase();
         BankDatabase result = instance.getBankDatabase();
         assertEquals(expResult, result);
     }

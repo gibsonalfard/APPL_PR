@@ -55,6 +55,7 @@ public class AddNasabah extends Transaction {
         
         screen.displayMessage("\nPlease input new user pin : ");
         int thePIN = keypad.getInput();
+        int type = 0;
         /* TODO : periksa apakah admin*/
         if (!Admin) {
             do {
@@ -63,9 +64,14 @@ public class AddNasabah extends Transaction {
                 if (theTotalBalance<0) {
                     screen.displayMessageLine("\nStarting balance cannot be negative!");
                 }
-            } while (theTotalBalance < 0);       
+            } while (theTotalBalance < 0);  
+            screen.displayMessageLine("\nSelect Account Type : ");
+            screen.displayMessageLine("\n1 Student");
+            screen.displayMessageLine("\n2 Business");
+            screen.displayMessageLine("\n3 Deposite");
+            type = keypad.getInput();
         }
         
-        bankDatabase.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
+        bankDatabase.incAccount(type, theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
     }
 }

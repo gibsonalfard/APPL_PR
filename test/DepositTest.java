@@ -42,7 +42,7 @@ public class DepositTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        Deposit instance = null;
+        Deposit instance = new Deposit(1234, new Screen(),new BankDatabase(), new Keypad(), new DepositSlot(1234, 4000, false));
         instance.execute();
     }
     

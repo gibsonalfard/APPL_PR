@@ -14,24 +14,24 @@ public class AddNasabah extends Transaction {
     public AddNasabah(int userAccountNumber, Screen atmScreen, 
       BankDatabase atmBankDatabase, Keypad keypad) {
 
-<span class="nc" id="L17">      super(userAccountNumber, atmScreen, atmBankDatabase);</span>
-<span class="nc" id="L18">      this.keypad = keypad;</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L17">      super(userAccountNumber, atmScreen, atmBankDatabase);</span>
+<span class="fc" id="L18">      this.keypad = keypad;</span>
+<span class="fc" id="L19">    }</span>
     
     @Override
     public void execute() {
-<span class="nc" id="L23">        boolean Admin = false, accAvail = false;</span>
-<span class="nc" id="L24">        double theTotalBalance = 0, theAvailableBalance = 0;</span>
+<span class="fc" id="L23">        boolean Admin = false, accAvail = false;</span>
+<span class="fc" id="L24">        double theTotalBalance = 0, theAvailableBalance = 0;</span>
         int theAccountNumber;
         // get references to bank database and screen
-<span class="nc" id="L27">        BankDatabase bankDatabase = getBankDatabase();</span>
-<span class="nc" id="L28">        Screen screen = getScreen();</span>
+<span class="fc" id="L27">        BankDatabase bankDatabase = getBankDatabase();</span>
+<span class="fc" id="L28">        Screen screen = getScreen();</span>
         
         do {
-<span class="nc" id="L31">            screen.displayMessageLine(&quot;\nChoose what type of user to create : &quot;);</span>
-<span class="nc" id="L32">            screen.displayMessageLine(&quot;\n1.Admin&quot;);</span>
-<span class="nc" id="L33">            screen.displayMessageLine(&quot;\n2.Normal&quot;);</span>
-<span class="nc" id="L34">            screen.displayMessageLine(&quot;\nInput the number of your choice : &quot;);</span>
+<span class="fc" id="L31">            screen.displayMessageLine(&quot;\nChoose what type of user to create : &quot;);</span>
+<span class="fc" id="L32">            screen.displayMessageLine(&quot;\n1.Admin&quot;);</span>
+<span class="fc" id="L33">            screen.displayMessageLine(&quot;\n2.Normal&quot;);</span>
+<span class="fc" id="L34">            screen.displayMessageLine(&quot;\nInput the number of your choice : &quot;);</span>
 <span class="nc" id="L35">            theAccountNumber = keypad.getInput();</span>
 <span class="nc bnc" id="L36" title="All 2 branches missed.">            if (theAccountNumber == 1) {</span>
 <span class="nc" id="L37">                Admin = true;</span>
@@ -55,18 +55,24 @@ public class AddNasabah extends Transaction {
         
 <span class="nc" id="L56">        screen.displayMessage(&quot;\nPlease input new user pin : &quot;);</span>
 <span class="nc" id="L57">        int thePIN = keypad.getInput();</span>
+<span class="nc" id="L58">        int type = 0;</span>
         /* TODO : periksa apakah admin*/
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!Admin) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (!Admin) {</span>
             do {
-<span class="nc" id="L61">                screen.displayMessageLine(&quot;\nPlease input new user starting balance : &quot;);</span>
-<span class="nc" id="L62">                theTotalBalance = theAvailableBalance = keypad.getInput();</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">                if (theTotalBalance&lt;0) {</span>
-<span class="nc" id="L64">                    screen.displayMessageLine(&quot;\nStarting balance cannot be negative!&quot;);</span>
+<span class="nc" id="L62">                screen.displayMessageLine(&quot;\nPlease input new user starting balance : &quot;);</span>
+<span class="nc" id="L63">                theTotalBalance = theAvailableBalance = keypad.getInput();</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                if (theTotalBalance&lt;0) {</span>
+<span class="nc" id="L65">                    screen.displayMessageLine(&quot;\nStarting balance cannot be negative!&quot;);</span>
                 }
-<span class="nc bnc" id="L66" title="All 2 branches missed.">            } while (theTotalBalance &lt; 0);       </span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            } while (theTotalBalance &lt; 0);  </span>
+<span class="nc" id="L68">            screen.displayMessageLine(&quot;\nSelect Account Type : &quot;);</span>
+<span class="nc" id="L69">            screen.displayMessageLine(&quot;\n1 Student&quot;);</span>
+<span class="nc" id="L70">            screen.displayMessageLine(&quot;\n2 Business&quot;);</span>
+<span class="nc" id="L71">            screen.displayMessageLine(&quot;\n3 Deposite&quot;);</span>
+<span class="nc" id="L72">            type = keypad.getInput();</span>
         }
         
-<span class="nc" id="L69">        bankDatabase.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L75">        bankDatabase.incAccount(type, theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);</span>
+<span class="nc" id="L76">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

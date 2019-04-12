@@ -9,7 +9,7 @@ public class Deposit extends Transaction {
    private final static int CANCELED = 0; // constant for cancel option
 
    private int numberOfDeposit = 0;
-
+   
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 
       BankDatabase atmBankDatabase, Keypad atmKeypad, 

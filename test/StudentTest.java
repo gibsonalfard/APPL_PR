@@ -42,9 +42,9 @@ public class StudentTest {
     @Test
     public void testDisplayMainMenu() {
         System.out.println("displayMainMenu");
-        Screen screen = null;
-        Keypad keypad = null;
-        Student instance = null;
+        Screen screen = new Screen();
+        Keypad keypad = new Keypad();
+        Student instance = new Student(1234, 4321, 1000.0, 1200.0); 
         int expResult = 0;
         int result = instance.displayMainMenu(screen, keypad);
         assertEquals(expResult, result);
@@ -56,7 +56,7 @@ public class StudentTest {
     @Test
     public void testDisplayWithdrawalMenu() {
         System.out.println("displayWithdrawalMenu");
-        Student instance = null;
+        Student instance = new Student(1234, 4321, 1000.0, 1200.0); 
         int expResult = 0;
         int result = instance.displayWithdrawalMenu();
         assertEquals(expResult, result);
@@ -69,7 +69,7 @@ public class StudentTest {
     public void testIsAvailableForWithdraw() {
         System.out.println("isAvailableForWithdraw");
         double amount = 0.0;
-        Student instance = null;
+        Student instance = new Student(1234, 4321, 1000.0, 1200.0); 
         boolean expResult = false;
         boolean result = instance.isAvailableForWithdraw(amount);
         assertEquals(expResult, result);

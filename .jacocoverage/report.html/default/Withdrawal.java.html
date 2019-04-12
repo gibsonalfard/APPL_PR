@@ -5,7 +5,7 @@ public class Withdrawal extends Transaction {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
    private CashDispenser cashDispenser; // reference to cash dispenser
-<span class="nc" id="L8">   BankDatabase bankDatabase = getBankDatabase();</span>
+<span class="fc" id="L8">   BankDatabase bankDatabase = getBankDatabase();</span>
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 0;
 
@@ -15,11 +15,11 @@ public class Withdrawal extends Transaction {
       CashDispenser atmCashDispenser) {
 
       // initialize superclass variables
-<span class="nc" id="L18">      super(userAccountNumber, atmScreen, atmBankDatabase);</span>
+<span class="fc" id="L18">      super(userAccountNumber, atmScreen, atmBankDatabase);</span>
       
-<span class="nc" id="L20">      keypad = atmKeypad;</span>
-<span class="nc" id="L21">      cashDispenser = atmCashDispenser;</span>
-<span class="nc" id="L22">   }</span>
+<span class="fc" id="L20">      keypad = atmKeypad;</span>
+<span class="fc" id="L21">      cashDispenser = atmCashDispenser;</span>
+<span class="fc" id="L22">   }</span>
 
    // perform transaction
    @Override
@@ -51,15 +51,15 @@ public class Withdrawal extends Transaction {
    // display a menu of withdrawal amounts and the option to cancel;
    // return the chosen amount or 0 if the user chooses to cancel
    private int displayMenuOfAmounts() {
-<span class="nc" id="L54">      int userChoice = 100; // local variable to store return value</span>
+<span class="fc" id="L54">      int userChoice = 100; // local variable to store return value</span>
 
-<span class="nc" id="L56">      Screen screen = getScreen(); // get screen reference</span>
+<span class="fc" id="L56">      Screen screen = getScreen(); // get screen reference</span>
       
       // array of amounts to correspond to menu numbers
-<span class="nc" id="L59">      int[] amounts = {0, 20, 40, 60, 100, 200, 400, 800,1000};</span>
+<span class="fc" id="L59">      int[] amounts = {0, 20, 40, 60, 100, 200, 400, 800,1000};</span>
 
       // loop while no valid choice has been made
-<span class="nc bnc" id="L62" title="All 2 branches missed.">      while (userChoice == 100) {</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">      while (userChoice == 100) {</span>
          // display the withdrawal menu
 <span class="nc" id="L64">        int input = bankDatabase.getWithdrawal(super.getAccountNumber());</span>
 

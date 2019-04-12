@@ -264,7 +264,7 @@ public class BankDatabaseTest {
         double theAvailableBalance = 0.0;
         double theTotalBalance = 0.0;
         BankDatabase instance = new BankDatabase();
-        instance.incAccount(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
+        instance.incAccount(0, theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);
     }
 
     /**

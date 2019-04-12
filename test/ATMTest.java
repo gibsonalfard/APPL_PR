@@ -55,9 +55,9 @@ public class ATMTest {
     @Test
     public void testShowUnblockMenu() {
         System.out.println("showUnblockMenu");
-        Keypad keypad = null;
-        BankDatabase bankDatabase = null;
-        Screen screen = null;
+        Keypad keypad = new Keypad();
+        BankDatabase bankDatabase = new BankDatabase();
+        Screen screen = new Screen();
         ATM instance = new ATM();
         instance.showUnblockMenu(keypad, bankDatabase, screen);
     }

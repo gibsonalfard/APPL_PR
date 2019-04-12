@@ -10,7 +10,7 @@
     private DepositSlot depositSlot;
     private BankDatabase bankDatabase; // account information database
 <span class="fc" id="L12">    private int loginAttempt = 0;</span>
-    int curPin, newPin;
+    private int curPin, newPin;
     
     // constants corresponding to main menu options
     private static final int BALANCE_INQUIRY = 1;
@@ -140,9 +140,9 @@
 <span class="fc" id="L140">                    break;</span>
                 case PASSWORD:
 <span class="nc" id="L142">                    screen.displayMessage(&quot;\nPlease Enter Your Current Pin: &quot;);</span>
-<span class="nc" id="L143">                    int curPin = keypad.getInput(); // input account number</span>
+<span class="nc" id="L143">                    curPin = keypad.getInput(); // input account number</span>
 <span class="nc" id="L144">                    screen.displayMessage(&quot;\nPlease Enter Your New Pin: &quot;);</span>
-<span class="nc" id="L145">                    int newPin = keypad.getInput(); // input account number</span>
+<span class="nc" id="L145">                    newPin = keypad.getInput(); // input account number</span>
 
 <span class="nc" id="L147">                    bankDatabase.changeAccountPIN(currentAccountNumber, curPin, newPin);</span>
 

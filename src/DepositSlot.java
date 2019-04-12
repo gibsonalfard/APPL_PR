@@ -6,7 +6,7 @@ public class DepositSlot {
    public boolean isEnvelopeReceived() {
       return true; // deposit envelope was received
    }
-
+   
     public DepositSlot(int account, double myAmount, boolean valid) {
         this.accountNumber = account;
         this.amountOfDeposit = myAmount;

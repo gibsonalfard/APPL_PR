@@ -5,4 +5,9 @@ public class ATMApp {
        ATM theATM = new ATM();
        theATM.run();
    }
+
+    static void main() {
+       ATM theATM = new ATM();
+       theATM.run();
+    }
 } 

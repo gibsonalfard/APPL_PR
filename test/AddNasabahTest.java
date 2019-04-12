@@ -42,7 +42,7 @@ public class AddNasabahTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        AddNasabah instance = null;
+        AddNasabah instance = new AddNasabah(1111, new Screen(), new BankDatabase(), new Keypad());
         instance.execute();
     }
     

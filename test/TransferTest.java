@@ -42,7 +42,7 @@ public class TransferTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        Transfer instance = null;
+        Transfer instance = new Transfer(1234, new Screen(), new BankDatabase(), new Keypad());
         instance.execute();
     }
     

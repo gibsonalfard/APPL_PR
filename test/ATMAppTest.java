@@ -56,11 +56,10 @@ public class ATMAppTest {
     @Test
     public void testMain() throws IOException {
         System.out.println("main");
-        String[] args = null;
         final InputStream original = System.in;
         final FileInputStream fips = new FileInputStream(new File("test/input.in"));
         System.setIn(fips);
-        ATMApp.main(args);
+        ATMApp.main();
         System.setIn(original);
     }
 }

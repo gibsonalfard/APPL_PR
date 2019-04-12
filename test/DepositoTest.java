@@ -42,9 +42,9 @@ public class DepositoTest {
     @Test
     public void testDisplayMainMenu() {
         System.out.println("displayMainMenu");
-        Screen screen = null;
-        Keypad keypad = null;
-        Deposito instance = null;
+        Screen screen = new Screen();
+        Keypad keypad = new Keypad();
+        Deposito instance = new Deposito(1234, 4321, 1000.0, 1200.0);
         int expResult = 0;
         int result = instance.displayMainMenu(screen, keypad);
         assertEquals(expResult, result);
@@ -56,7 +56,7 @@ public class DepositoTest {
     @Test
     public void testPayTax() {
         System.out.println("payTax");
-        Deposito instance = null;
+        Deposito instance = new Deposito(1234, 4321, 1000.0, 1200.0);
         instance.payTax();
     }
 
@@ -66,7 +66,7 @@ public class DepositoTest {
     @Test
     public void testDisplayWithdrawalMenu() {
         System.out.println("displayWithdrawalMenu");
-        Deposito instance = null;
+        Deposito instance = new Deposito(1234, 4321, 1000.0, 1200.0);
         int expResult = 0;
         int result = instance.displayWithdrawalMenu();
         assertEquals(expResult, result);
@@ -79,7 +79,7 @@ public class DepositoTest {
     public void testIsAvailableForWithdraw() {
         System.out.println("isAvailableForWithdraw");
         double amount = 0.0;
-        Deposito instance = null;
+        Deposito instance = new Deposito(1234, 4321, 1000.0, 1200.0);
         boolean expResult = false;
         boolean result = instance.isAvailableForWithdraw(amount);
         assertEquals(expResult, result);

@@ -13,19 +13,19 @@ public class BankDatabase {
             
 <span class="fc" id="L14">    public BankDatabase() {</span>
       
-<span class="fc" id="L16">        accounts = new Account[10]; // just 2 accounts for testing</span>
+<span class="fc" id="L16">        accounts = new Account[20]; // just 20 accounts maxx for testing</span>
 <span class="fc" id="L17">        accounts[0] = new Business(1234, 4321, 1000.0, 1200.0);</span>
 <span class="fc" id="L18">        accounts[1] = new Student(8765, 5678, 200.0, 200.0);</span>
 <span class="fc" id="L19">        accounts[2] = new Business(6665, 1234, 111700.0, 111900.0);</span>
 <span class="fc" id="L20">        accounts[3] = new Deposito(6666, 1234, 1700.0, 1900.0);</span>
 <span class="fc" id="L21">        accounts[4] = new Admin(00000, 00000, 0.0, 0.0);</span>
-<span class="fc" id="L22">        accAmount = accounts.length;</span>
+<span class="fc" id="L22">        accAmount = 5;</span>
 <span class="fc" id="L23">    }</span>
 
     public Account getAccount(int accountNumber) {
         int ak;
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        for (ak = 0; ak &lt; accAmount; ak++) {</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">            if (accounts[ak] == null){break;}</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (ak = 0; ak &lt; accAmount; ak++) {</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            if (accounts[ak] == null){break;}</span>
 <span class="fc bfc" id="L29" title="All 2 branches covered.">            if (accountNumber == accounts[ak].getAccountNumber()) {</span>
 <span class="fc" id="L30">                return accounts[ak];</span>
             }
@@ -46,7 +46,7 @@ public class BankDatabase {
 
     public boolean checkAvail(int accountNumber) {
         int ak;
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        for (ak = 0; ak &lt; accAmount; ak++) {</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        for (ak = 0; ak &lt; accAmount-1; ak++) {</span>
 <span class="pc bpc" id="L50" title="1 of 2 branches missed.">            if (accountNumber == accounts[ak].getAccountNumber()) {</span>
 <span class="fc" id="L51">                return false;</span>
             }
@@ -137,160 +137,168 @@ public class BankDatabase {
 <span class="fc bfc" id="L137" title="All 2 branches covered.">        return getAccount(userAccountNumber) != null;</span>
     }
 
-    public void incAccount(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
-<span class="nc" id="L141">        accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance);</span>
-<span class="nc" id="L142">        accAmount++;</span>
-<span class="nc" id="L143">    }</span>
+    public void incAccount(int typeAccount, int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
+<span class="pc bpc" id="L141" title="4 of 5 branches missed.">        switch (typeAccount){</span>
+<span class="fc" id="L142">            case 0 : accounts[accAmount] = new Admin(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //admin</span>
+<span class="nc" id="L143">            case 1 : accounts[accAmount] = new Student(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //student</span>
+<span class="nc" id="L144">            case 2 : accounts[accAmount] = new Business(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //business</span>
+<span class="nc" id="L145">            case 3 : accounts[accAmount] = new Deposito(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); break; //deposito</span>
+        }
+<span class="fc" id="L147">        accAmount++;</span>
+<span class="fc" id="L148">    }</span>
 
     public double getTransferToday(int theAccountNumber) {
-<span class="fc" id="L146">        return getAccount(theAccountNumber).getTransferToday();</span>
+<span class="fc" id="L151">        return getAccount(theAccountNumber).getTransferToday();</span>
     }
 
     public double getWithdrawalToday(int theAccountNumber) {
-<span class="fc" id="L150">        return getAccount(theAccountNumber).getWithdrawToday();</span>
+<span class="fc" id="L155">        return getAccount(theAccountNumber).getWithdrawToday();</span>
     }
     
     public List&lt;BankStatement&gt; getList() throws IOException {
-<span class="nc bnc" id="L154" title="All 2 branches missed.">        if (this.list.isEmpty()) {</span>
-<span class="nc" id="L155">            return null;</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        if (this.list.isEmpty()) {</span>
+<span class="nc" id="L160">            return null;</span>
         }
-<span class="nc" id="L157">        return this.list;</span>
+<span class="nc" id="L162">        return this.list;</span>
     }
     
     private int generateIdStatement(){
-<span class="nc" id="L161">        int size = this.list.size();</span>
-<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (size != 0){</span>
-<span class="nc" id="L163">            return size;</span>
+<span class="nc" id="L166">        int size = this.list.size();</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        if (size != 0){</span>
+<span class="nc" id="L168">            return size;</span>
         }else{
-<span class="nc" id="L165">            return 0;</span>
+<span class="nc" id="L170">            return 0;</span>
         }
     }
 
     public void setBankStatement(int account, String description, int ref, double withdrawal, double deposit, String depVal) {
-<span class="nc" id="L170">       BankStatement tr = new BankStatement();</span>
-<span class="nc" id="L171">       Tanggal tgl = new Tanggal();</span>
-<span class="nc" id="L172">       tr.setIdStatement(generateIdStatement());</span>
-<span class="nc" id="L173">       tr.setAccount(account);</span>
-<span class="nc" id="L174">       tr.setDate(tgl.dateNow());</span>
-<span class="nc" id="L175">       tr.setDeposit(deposit);</span>
-<span class="nc" id="L176">       tr.setDepositValidate(depVal);</span>
-<span class="nc" id="L177">       tr.setDescription(description);</span>
-<span class="nc" id="L178">       tr.setRef(ref);</span>
-<span class="nc" id="L179">       tr.setWithdrawal(withdrawal);</span>
-<span class="nc" id="L180">       tr.setBalance(getAccount(account).getAvailableBalance());</span>
-<span class="nc" id="L181">       this.list.add(tr);</span>
-<span class="nc" id="L182">    }</span>
+<span class="nc" id="L175">       BankStatement tr = new BankStatement();</span>
+<span class="nc" id="L176">       Tanggal tgl = new Tanggal();</span>
+<span class="nc" id="L177">       tr.setIdStatement(generateIdStatement());</span>
+<span class="nc" id="L178">       tr.setAccount(account);</span>
+<span class="nc" id="L179">       tr.setDate(tgl.dateNow());</span>
+<span class="nc" id="L180">       tr.setDeposit(deposit);</span>
+<span class="nc" id="L181">       tr.setDepositValidate(depVal);</span>
+<span class="nc" id="L182">       tr.setDescription(description);</span>
+<span class="nc" id="L183">       tr.setRef(ref);</span>
+<span class="nc" id="L184">       tr.setWithdrawal(withdrawal);</span>
+<span class="nc" id="L185">       tr.setBalance(getAccount(account).getAvailableBalance());</span>
+<span class="nc" id="L186">       this.list.add(tr);</span>
+<span class="nc" id="L187">    }</span>
  
     public void updateDepVal(int idStatement){
-<span class="fc" id="L185">       BankStatement tr = new BankStatement();</span>
+<span class="fc" id="L190">       BankStatement tr = new BankStatement();</span>
        
-<span class="fc" id="L187">       tr.setIdStatement(idStatement);</span>
-<span class="nc" id="L188">       tr.setAccount(this.list.get(idStatement).getAccount());</span>
-<span class="nc" id="L189">       tr.setDate(this.list.get(idStatement).getDate());</span>
-<span class="nc" id="L190">       tr.setDescription(this.list.get(idStatement).getDescription());</span>
-<span class="nc" id="L191">       tr.setRef(this.list.get(idStatement).getRef());</span>
-<span class="nc" id="L192">       tr.setWithdrawal(this.list.get(idStatement).getWithdrawal());</span>
-<span class="nc" id="L193">       tr.setDeposit(this.list.get(idStatement).getDeposit());</span>
-<span class="nc" id="L194">       tr.setDepositValidate(&quot;Yes&quot;);</span>
-<span class="nc" id="L195">       tr.setBalance(getTotalBalance(this.list.get(idStatement).getAccount()));</span>
-<span class="nc" id="L196">       this.list.set(idStatement, tr);</span>
-<span class="nc" id="L197">    }</span>
+<span class="fc" id="L192">       tr.setIdStatement(idStatement);</span>
+<span class="nc" id="L193">       tr.setAccount(this.list.get(idStatement).getAccount());</span>
+<span class="nc" id="L194">       tr.setDate(this.list.get(idStatement).getDate());</span>
+<span class="nc" id="L195">       tr.setDescription(this.list.get(idStatement).getDescription());</span>
+<span class="nc" id="L196">       tr.setRef(this.list.get(idStatement).getRef());</span>
+<span class="nc" id="L197">       tr.setWithdrawal(this.list.get(idStatement).getWithdrawal());</span>
+<span class="nc" id="L198">       tr.setDeposit(this.list.get(idStatement).getDeposit());</span>
+<span class="nc" id="L199">       tr.setDepositValidate(&quot;Yes&quot;);</span>
+<span class="nc" id="L200">       tr.setBalance(getTotalBalance(this.list.get(idStatement).getAccount()));</span>
+       
+       /* TODO : add ke avail balance */
+<span class="nc" id="L203">       getAccount(this.list.get(idStatement).getAccount()).setAvailableBalance(this.list.get(idStatement).getDeposit());</span>
+<span class="nc" id="L204">       this.list.set(idStatement, tr);</span>
+<span class="nc" id="L205">    }</span>
     
     public void displayBankStatement(int accountNumber){
       
-<span class="nc bnc" id="L201" title="All 2 branches missed.">      if(!list.isEmpty()){</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">      if(!list.isEmpty()){</span>
         int size;
         
-<span class="nc" id="L204">        size = list.size();</span>
+<span class="nc" id="L212">        size = list.size();</span>
         
-<span class="nc" id="L206">        System.out.println();</span>
-<span class="nc" id="L207">        System.out.println(&quot;=========================================================================================================&quot;);</span>
-<span class="nc" id="L208">        System.out.println(&quot;Date\t\tDescription\tRef\tWithdrawal\tDeposit \tDeposit Valid\tBalance&quot;);</span>
-<span class="nc" id="L209">        System.out.println(&quot;=========================================================================================================&quot;);</span>
+<span class="nc" id="L214">        System.out.println();</span>
+<span class="nc" id="L215">        System.out.println(&quot;=========================================================================================================&quot;);</span>
+<span class="nc" id="L216">        System.out.println(&quot;Date\t\tDescription\tRef\tWithdrawal\tDeposit \tDeposit Valid\tBalance&quot;);</span>
+<span class="nc" id="L217">        System.out.println(&quot;=========================================================================================================&quot;);</span>
         
-<span class="nc bnc" id="L211" title="All 2 branches missed.">        for(int i = 0;i &lt; size;i++){</span>
-<span class="nc bnc" id="L212" title="All 2 branches missed.">            if(list.get(i).getAccount() == accountNumber){</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        for(int i = 0;i &lt; size;i++){</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">            if(list.get(i).getAccount() == accountNumber){</span>
 //               System.out.print(list.get(i).getIdStatement()+&quot;\t&quot;);
-<span class="nc" id="L214">                System.out.print(list.get(i).getDate()+&quot;\t&quot;);</span>
-<span class="nc" id="L215">                System.out.print(list.get(i).getDescription()+&quot;\t&quot;);</span>
+<span class="nc" id="L222">                System.out.print(list.get(i).getDate()+&quot;\t&quot;);</span>
+<span class="nc" id="L223">                System.out.print(list.get(i).getDescription()+&quot;\t&quot;);</span>
                 
-<span class="nc" id="L217">                int Ref = list.get(i).getRef();</span>
-<span class="nc bnc" id="L218" title="All 2 branches missed.">                if(Ref != 0){</span>
-<span class="nc" id="L219">                    System.out.print(Ref);</span>
+<span class="nc" id="L225">                int Ref = list.get(i).getRef();</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                if(Ref != 0){</span>
+<span class="nc" id="L227">                    System.out.print(Ref);</span>
                 }else{
-<span class="nc" id="L221">                    System.out.print(&quot;\t&quot;);</span>
+<span class="nc" id="L229">                    System.out.print(&quot;\t&quot;);</span>
                 }
                 
-<span class="nc" id="L224">                double Withdrawal = list.get(i).getWithdrawal();</span>
-<span class="nc bnc" id="L225" title="All 2 branches missed.">                if(Withdrawal != 0){</span>
-<span class="nc" id="L226">                    System.out.print(Withdrawal+&quot;\t\t&quot;);</span>
+<span class="nc" id="L232">                double Withdrawal = list.get(i).getWithdrawal();</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">                if(Withdrawal != 0){</span>
+<span class="nc" id="L234">                    System.out.print(Withdrawal+&quot;\t\t&quot;);</span>
                 }else{
-<span class="nc" id="L228">                    System.out.print(&quot;\t\t\t&quot;);</span>
+<span class="nc" id="L236">                    System.out.print(&quot;\t\t\t&quot;);</span>
                 }
                 
-<span class="nc" id="L231">                double Deposit = list.get(i).getDeposit();</span>
-<span class="nc bnc" id="L232" title="All 2 branches missed.">                if(Deposit != 0){</span>
-<span class="nc" id="L233">                    System.out.print(Deposit+&quot;\t\t&quot;);</span>
+<span class="nc" id="L239">                double Deposit = list.get(i).getDeposit();</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">                if(Deposit != 0){</span>
+<span class="nc" id="L241">                    System.out.print(Deposit+&quot;\t\t&quot;);</span>
                 }else{
-<span class="nc" id="L235">                    System.out.print(&quot;\t\t&quot;);</span>
+<span class="nc" id="L243">                    System.out.print(&quot;\t\t&quot;);</span>
                 }
                 
-<span class="nc" id="L238">                String depVal = list.get(i).getDepositValidate();</span>
-<span class="nc bnc" id="L239" title="All 2 branches missed.">                if(depVal != null){</span>
-<span class="nc" id="L240">                    System.out.print(depVal+&quot;\t\t&quot;);</span>
+<span class="nc" id="L246">                String depVal = list.get(i).getDepositValidate();</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">                if(depVal != null){</span>
+<span class="nc" id="L248">                    System.out.print(depVal+&quot;\t\t&quot;);</span>
                 }else{
-<span class="nc" id="L242">                    System.out.print(&quot;\t\t&quot;);</span>
+<span class="nc" id="L250">                    System.out.print(&quot;\t\t&quot;);</span>
                 }
                 
-<span class="nc" id="L245">                System.out.print(list.get(i).getBalance());</span>
-<span class="nc" id="L246">                System.out.println();</span>
+<span class="nc" id="L253">                System.out.print(list.get(i).getBalance());</span>
+<span class="nc" id="L254">                System.out.println();</span>
             }
         }
         
                             
         }
         
-<span class="nc" id="L253">    }</span>
+<span class="nc" id="L261">    }</span>
 
     public boolean isAvailableWithdraw(int theAccountNumber, double amount){
-<span class="fc" id="L256">        return getAccount(theAccountNumber).isAvailableForWithdraw(amount);</span>
+<span class="fc" id="L264">        return getAccount(theAccountNumber).isAvailableForWithdraw(amount);</span>
     }
     
     public void monthlyTax(){
         int ak;
-<span class="pc bpc" id="L261" title="1 of 2 branches missed.">         for (ak = 0; ak &lt; (accAmount-1); ak++) {</span>
-<span class="fc bfc" id="L262" title="All 2 branches covered.">             if(accounts[ak] == null){break;}</span>
+<span class="fc bfc" id="L269" title="All 2 branches covered.">         for (ak = 0; ak &lt; (accAmount-1); ak++) {</span>
+<span class="pc bpc" id="L270" title="1 of 2 branches missed.">             if(accounts[ak] == null){break;}</span>
              
-<span class="fc bfc" id="L264" title="All 2 branches covered.">             if(!&quot;Student&quot;.equals(accounts[ak].getAccountType())){</span>
-<span class="fc" id="L265">                 accounts[ak].payTax();</span>
+<span class="fc bfc" id="L272" title="All 2 branches covered.">             if(!&quot;Student&quot;.equals(accounts[ak].getAccountType())){</span>
+<span class="fc" id="L273">                 accounts[ak].payTax();</span>
              }
          }
-<span class="fc" id="L268">    }</span>
+<span class="fc" id="L276">    }</span>
    
     public int getWithdrawal(int userAccountNumber){
-<span class="fc" id="L271">        Account userAccount= getAccount(userAccountNumber);</span>
-<span class="nc" id="L272">        return userAccount.displayWithdrawalMenu();</span>
+<span class="fc" id="L279">        Account userAccount= getAccount(userAccountNumber);</span>
+<span class="nc" id="L280">        return userAccount.displayWithdrawalMenu();</span>
     }
 
     public void resetLimit(){
          int ak;
-<span class="pc bpc" id="L277" title="1 of 2 branches missed.">         for (ak = 0; ak &lt; (accAmount-1); ak++) {</span>
-<span class="fc bfc" id="L278" title="All 2 branches covered.">             if(accounts[ak] != null){</span>
-<span class="fc" id="L279">                 accounts[ak].setWithdrawToday((-1*accounts[ak].getWithdrawToday()));</span>
-<span class="fc" id="L280">                 accounts[ak].setTransferToday((-1*accounts[ak].getTransferToday()));</span>
+<span class="fc bfc" id="L285" title="All 2 branches covered.">         for (ak = 0; ak &lt; (accAmount-1); ak++) {</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">             if(accounts[ak] != null){</span>
+<span class="fc" id="L287">                 accounts[ak].setWithdrawToday((-1*accounts[ak].getWithdrawToday()));</span>
+<span class="fc" id="L288">                 accounts[ak].setTransferToday((-1*accounts[ak].getTransferToday()));</span>
              }else{
                  break;
              }
          }
-<span class="fc" id="L285">    }</span>
+<span class="fc" id="L293">    }</span>
     
     public String getAccountType(int userAccountNumber){
-<span class="nc" id="L288">        Account userAccount= getAccount(userAccountNumber);</span>
-<span class="nc" id="L289">        return userAccount.getAccountType();</span>
+<span class="nc" id="L296">        Account userAccount= getAccount(userAccountNumber);</span>
+<span class="nc" id="L297">        return userAccount.getAccountType();</span>
     }
     public void setTransferToday(int userAccountNumber, double transferToday) {
-<span class="nc" id="L292">        Account userAccount= getAccount(userAccountNumber);</span>
-<span class="nc" id="L293">        userAccount.setTransferToday(transferToday);</span>
-<span class="nc" id="L294">    }</span>
+<span class="nc" id="L300">        Account userAccount= getAccount(userAccountNumber);</span>
+<span class="nc" id="L301">        userAccount.setTransferToday(transferToday);</span>
+<span class="nc" id="L302">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

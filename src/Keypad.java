@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Keypad {
@@ -8,6 +9,12 @@ public class Keypad {
    } 
 
    public int getInput() {
-      return input.nextInt(); // user enters an integer
+      try{
+            return input.nextInt(); // user enters an integer          
+      } 
+      catch (NoSuchElementException e){
+          System.out.println("Invalid Input");
+      }
+      return input.nextInt(); // user enters an integer          
    } 
 } 

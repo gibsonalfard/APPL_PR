@@ -50,22 +50,22 @@ public class Business extends Account {
     
     @Override
     public int displayWithdrawalMenu(){
-<span class="nc" id="L53">        screen.displayMessageLine(&quot;\nLimit Withdraw for Today is : $&quot;+(Business.MAXWITHDRAW-getWithdrawToday())+&quot;.&quot;);</span>
-<span class="nc" id="L54">        screen.displayMessageLine(&quot;\nWithdrawal Menu:&quot;);</span>
-<span class="nc" id="L55">        screen.displayMessageLine(&quot;1 - $20&quot;);</span>
-<span class="nc" id="L56">        screen.displayMessageLine(&quot;2 - $40&quot;);</span>
-<span class="nc" id="L57">        screen.displayMessageLine(&quot;3 - $60&quot;);</span>
-<span class="nc" id="L58">        screen.displayMessageLine(&quot;4 - $100&quot;);</span>
-<span class="nc" id="L59">        screen.displayMessageLine(&quot;5 - $200&quot;);</span>
-<span class="nc" id="L60">        screen.displayMessageLine(&quot;0 - Cancel transaction&quot;);</span>
-<span class="nc" id="L61">        screen.displayMessage(&quot;\nChoose a withdrawal amount: &quot;);</span>
+<span class="fc" id="L53">        screen.displayMessageLine(&quot;\nLimit Withdraw for Today is : $&quot;+(Business.MAXWITHDRAW-getWithdrawToday())+&quot;.&quot;);</span>
+<span class="fc" id="L54">        screen.displayMessageLine(&quot;\nWithdrawal Menu:&quot;);</span>
+<span class="fc" id="L55">        screen.displayMessageLine(&quot;1 - $20&quot;);</span>
+<span class="fc" id="L56">        screen.displayMessageLine(&quot;2 - $40&quot;);</span>
+<span class="fc" id="L57">        screen.displayMessageLine(&quot;3 - $60&quot;);</span>
+<span class="fc" id="L58">        screen.displayMessageLine(&quot;4 - $100&quot;);</span>
+<span class="fc" id="L59">        screen.displayMessageLine(&quot;5 - $200&quot;);</span>
+<span class="fc" id="L60">        screen.displayMessageLine(&quot;0 - Cancel transaction&quot;);</span>
+<span class="fc" id="L61">        screen.displayMessage(&quot;\nChoose a withdrawal amount: &quot;);</span>
          
 <span class="nc" id="L63">        return keypad.getInput(); // get user input through keypad   </span>
     }
     
     @Override
     public boolean isAvailableForWithdraw(double amount){
-<span class="nc bnc" id="L68" title="All 2 branches missed.">       return Business.MAXWITHDRAW &gt;= (this.getWithdrawToday()+amount);</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">       return Business.MAXWITHDRAW &gt;= (this.getWithdrawToday()+amount);</span>
     }
     @Override
     public boolean isAvailableForTransfer(double amount){
